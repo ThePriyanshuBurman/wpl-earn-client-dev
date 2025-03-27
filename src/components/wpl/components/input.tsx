@@ -23,7 +23,7 @@ export default function Input({
       type="text"
       value={value}
       placeholder={placeholder}
-      className={className || "bg-secondary_dark px-4 py-2 w-full rounded-lg text-sm border border-border_dark focus:outline-none"}
+      className={className || "bg-secondary_dark px-3 sm:px-4 md:px-5 py-2 sm:py-3 md:py-4 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl rounded-lg text-sm sm:text-base md:text-lg border border-border_dark focus:outline-none"}
       onInput={onInput}
     />
   );
@@ -62,23 +62,24 @@ export function PasswordInput({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
       <input
         type={showPassword ? "text" : "password"}
         value={value}
         placeholder={placeholder}
-        className="bg-secondary_dark px-4 py-2 w-full rounded-lg text-sm border border-border_dark focus:outline-none"
+        className="bg-secondary_dark px-3 sm:px-4 md:px-5 py-2 sm:py-3 md:py-4 w-full rounded-lg text-sm sm:text-base md:text-lg border border-border_dark focus:outline-none"
         onInput={onInput}
       />
       <button
         type="button"
         onClick={() => setShowPassword(!showPassword)}
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+        className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
       >
-        {showPassword ? <Eye size={"16"} /> : <EyeClosed size={"16"} />}
+        {showPassword ? <Eye size={"20"} /> : <EyeClosed size={"20"} />}
       </button>
     </div>
   );
+
 }
 
 export function OTPInput({ value, onInput }: { value: string; onInput: any }) {

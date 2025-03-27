@@ -102,12 +102,10 @@ export default function BlacklistSponsorModal({
 
   return (
     <Modal open={open} close={handleClose} title="BlackList Sponsor">
-      <div className="flex flex-col justify-between gap-8 w-[25vw] h-full">
+      <div className="flex flex-col justify-between gap-8 w-full max-w-[90vw] md:max-w-[50vw] lg:max-w-[30vw] h-full">
         <Input
-          placeholder="search sponsor"
-          onInput={(e: any) => {
-            handleSearch(e.target.value);
-          }}
+          placeholder="Search sponsor"
+          onInput={(e: any) => handleSearch(e.target.value)}
         />
 
         <div className="flex flex-col min-h-[200px] w-full">
@@ -129,19 +127,15 @@ export default function BlacklistSponsorModal({
 
                 <div className="flex flex-col gap-4 mt-6">
                   <div className="flex flex-col gap-1">
-                    <p className="text-sm text-secondary_text_dark">
-                      companyName
-                    </p>
+                    <p className="text-sm text-secondary_text_dark">Company Name</p>
                     <p>{result[0]?.companyName || "N/A"}</p>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <p className="text-sm text-secondary_text_dark">companyUrl</p>
+                    <p className="text-sm text-secondary_text_dark">Company URL</p>
                     <p>{result[0]?.companyUrl || "N/A"}</p>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <p className="text-sm text-secondary_text_dark">
-                      companyTwitter
-                    </p>
+                    <p className="text-sm text-secondary_text_dark">Company Twitter</p>
                     <p>{result[0]?.companyTwitter || "N/A"}</p>
                   </div>
                 </div>
@@ -151,7 +145,7 @@ export default function BlacklistSponsorModal({
                   name="reason"
                   id="reason"
                   rows={4}
-                  placeholder="Enter a detailed reason for blacklisting this sponsor (e.g., breach of platform policies, non-compliance with terms of service, unethical conduct, etc.). Please be specific."
+                  placeholder="Enter a detailed reason for blacklisting this sponsor..."
                   value={reason}
                   onInput={(e: any) => {
                     setReason(e.target.value);
@@ -162,27 +156,18 @@ export default function BlacklistSponsorModal({
                   } p-4 text-sm focus:outline-none resize-none`}
                 />
                 {reasonError && (
-                  <p className="text-sm text-red-500">
-                    Reason is required
-                  </p>
+                  <p className="text-sm text-red-500">Reason is required</p>
                 )}
               </div>
             </div>
           ) : (
-            <p className="text-sm text-secondary_text_dark">
-              No result found!
-            </p>
+            <p className="text-sm text-secondary_text_dark">No result found!</p>
           )}
         </div>
 
         <div className="flex items-center w-full gap-4">
-          <SecondaryButton onClick={handleClose}>
-            Close
-          </SecondaryButton>
-          <AlertButton 
-            onClick={handleBlacklistSponsor} 
-            loading={loading}
-          >
+          <SecondaryButton onClick={handleClose}>Close</SecondaryButton>
+          <AlertButton onClick={handleBlacklistSponsor} loading={loading}>
             Confirm Blacklist
           </AlertButton>
         </div>

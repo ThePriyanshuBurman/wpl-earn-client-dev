@@ -177,27 +177,25 @@ export default function PendingListingRequests({ refreshKPIs }: { refreshKPIs?: 
         }
         close={() => setOpenRejectListingModal(false)}
       />
-      <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-8">
+      <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-4 md:px-8">
         <div className="flex flex-col gap-4">
-          <p className="text-2xl font-polysansbulky gradient-text py-1.5">
+          <p className="text-lg md:text-2xl font-polysansbulky gradient-text py-1.5 text-center md:text-left">
             Listings Pending Requests
           </p>
         </div>
-
+  
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between w-full border-b border-border_dark">
+          <div className="flex flex-col md:flex-row items-center justify-between w-full border-b border-border_dark">
             <Tabs items={items} active={activeTab} onClick={setActiveTab} />
-            <div className="flex items-center gap-4">
-              <div className="w-[320px]">
-                <Input placeholder="Search by title or sponsor" />
-              </div>
+            <div className="w-full md:w-[320px] mt-3 md:mt-0">
+              <Input placeholder="Search by title or sponsor" />
             </div>
           </div>
-
+  
           <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
             {activeTab === "bounties" ? (
               <div>
-                <div className="flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+                <div className="hidden md:flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
                   <p className="w-full">Title</p>
                   <p className="w-full">Posted by</p>
                   <p className="w-full">Rewards</p>
@@ -213,7 +211,10 @@ export default function PendingListingRequests({ refreshKPIs }: { refreshKPIs?: 
                     </div>
                   ) : bountyTableData.length ? (
                     bountyTableData.map((c, i) => (
-                      <div className="flex items-center gap-4 w-full p-4 text-sm" key={i}>
+                      <div
+                        className="flex flex-col md:flex-row items-center gap-4 w-full p-4 text-sm"
+                        key={i}
+                      >
                         <p className="w-full truncate">{c.title}</p>
                         <p className="w-full truncate text-sky-500">
                           <Link
@@ -263,7 +264,7 @@ export default function PendingListingRequests({ refreshKPIs }: { refreshKPIs?: 
               </div>
             ) : (
               <div>
-                <div className="flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+                <div className="hidden md:flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
                   <p className="w-full">Title</p>
                   <p className="w-full">Organization</p>
                   <p className="w-full">Avg Grant Size</p>
@@ -279,7 +280,10 @@ export default function PendingListingRequests({ refreshKPIs }: { refreshKPIs?: 
                     </div>
                   ) : grantTableData.length ? (
                     grantTableData.map((c, i) => (
-                      <div className="flex items-center gap-4 w-full p-4 text-sm" key={i}>
+                      <div
+                        className="flex flex-col md:flex-row items-center gap-4 w-full p-4 text-sm"
+                        key={i}
+                      >
                         <p className="w-full truncate">{c.title}</p>
                         <p className="w-full truncate text-sky-500">
                           <Link
@@ -335,4 +339,4 @@ export default function PendingListingRequests({ refreshKPIs }: { refreshKPIs?: 
       </div>
     </>
   );
-}
+}  

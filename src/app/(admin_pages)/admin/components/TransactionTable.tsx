@@ -139,9 +139,9 @@ export default function TransactionTable() {
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full h-max pb-[2%] text-white py-4 px-8">
-      <div className="flex items-center justify-between">
-        <p className="text-2xl font-polysansbulky gradient-text py-1.5">Transactions</p>
+    <div className="flex flex-col gap-4 w-full h-max pb-[2%] text-white py-4 px-4 sm:px-8">
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <p className="text-xl sm:text-2xl font-polysansbulky gradient-text py-1.5">Transactions</p>
         <button
           onClick={fetchTransactions}
           className="p-2 rounded-full hover:bg-gray-700 transition-colors"
@@ -154,17 +154,17 @@ export default function TransactionTable() {
           />
         </button>
       </div>
-
-      <div className="flex flex-col w-full h-full bg-secondary_dark rounded-md">
-        <div className="flex items-center w-full p-4 border-b border-border_dark text-secondary_text_dark text-sm font-semibold">
-          <p className="w-3/12 pr-2">Transaction ID</p>
-          <p className="w-3/12 pl-6">From</p>
-          <p className="w-3/12 pl-1">To</p>
-          <p className="w-2/12 pl-1">Amount</p>
-          <p className="w-2/12">Status</p>
-          <p className="w-2/12">Date</p>
+  
+      <div className="flex flex-col w-full h-full bg-secondary_dark rounded-md overflow-x-auto">
+        <div className="flex items-center w-full p-4 border-b border-border_dark text-secondary_text_dark text-xs sm:text-sm font-semibold flex-wrap">
+          <p className="w-full sm:w-3/12 pr-2">Transaction ID</p>
+          <p className="w-full sm:w-3/12 pl-6">From</p>
+          <p className="w-full sm:w-3/12 pl-1">To</p>
+          <p className="w-full sm:w-2/12 pl-1">Amount</p>
+          <p className="w-full sm:w-2/12">Status</p>
+          <p className="w-full sm:w-2/12">Date</p>
         </div>
-
+  
         <div className="flex flex-col w-full font-polysansbulky overflow-auto max-h-[500px]">
           {loading ? (
             <div className="p-4 flex w-full">
@@ -174,9 +174,9 @@ export default function TransactionTable() {
             transactionData.map((transaction) => (
               <div
                 key={transaction.transactionId}
-                className="flex items-center w-full p-4 text-sm hover:bg-gray-800/50 border-b border-border_dark/50"
+                className="flex items-center w-full p-4 text-xs sm:text-sm hover:bg-gray-800/50 border-b border-border_dark/50 flex-wrap"
               >
-                <div className="w-3/12 pr-2">
+                <div className="w-full sm:w-3/12 pr-2">
                   <span
                     className="inline-block bg-gray-700 text-white px-2 py-1 rounded-md font-mono text-xs cursor-pointer truncate overflow-hidden text-ellipsis whitespace-nowrap"
                     title={transaction.transactionId}
@@ -185,7 +185,7 @@ export default function TransactionTable() {
                     {getTruncatedTransactionId(transaction.transactionId)}
                   </span>
                 </div>
-                <div className="w-3/12 pl-6 flex items-center gap-2">
+                <div className="w-full sm:w-3/12 pl-6 flex items-center gap-2">
                   {transaction.fromUser.image && imageUrls[transaction.fromUser.image] ? (
                     <img
                       src={imageUrls[transaction.fromUser.image]}
@@ -195,19 +195,9 @@ export default function TransactionTable() {
                   ) : (
                     <div className="h-6 w-6 rounded-full bg-gray-500" />
                   )}
-                  {hasNameAndImage(transaction.fromUser) ? (
-                    <span className="truncate">{getFromDisplay(transaction.fromUser)}</span>
-                  ) : (
-                    <span
-                      className="inline-block bg-gray-700 text-white px-2 py-1 rounded-md font-mono text-xs cursor-pointer truncate overflow-hidden text-ellipsis whitespace-nowrap"
-                      title={transaction.fromUser.email}
-                      onClick={() => copyToClipboard(transaction.fromUser.email, "From Email")}
-                    >
-                      {getFromDisplay(transaction.fromUser)}
-                    </span>
-                  )}
+                  <span className="truncate">{getFromDisplay(transaction.fromUser)}</span>
                 </div>
-                <div className="w-3/12 pl-1 flex items-center gap-2">
+                <div className="w-full sm:w-3/12 pl-1 flex items-center gap-2">
                   {typeof transaction.toUser !== "string" && transaction.toUser.image && imageUrls[transaction.toUser.image] ? (
                     <img
                       src={imageUrls[transaction.toUser.image]}
@@ -217,19 +207,9 @@ export default function TransactionTable() {
                   ) : (
                     ""
                   )}
-                  {typeof transaction.toUser !== "string" && hasNameAndImage(transaction.toUser) ? (
-                    <span className="truncate">{getToDisplay(transaction.toUser)}</span>
-                  ) : (
-                    <span
-                      className="inline-block bg-gray-700 text-white px-2 py-1 rounded-md font-mono text-xs cursor-pointer truncate overflow-hidden text-ellipsis whitespace-nowrap"
-                      title={getFullToValue(transaction.toUser)}
-                      onClick={() => copyToClipboard(getFullToValue(transaction.toUser), "To Address")}
-                    >
-                      {getToDisplay(transaction.toUser)}
-                    </span>
-                  )}
+                  <span className="truncate">{getToDisplay(transaction.toUser)}</span>
                 </div>
-                <p className="w-2/12 pl-0.5 flex items-center gap-2">
+                <p className="w-full sm:w-2/12 pl-0.5 flex items-center gap-2">
                   <img
                     src={
                       transaction.denomination === "USDC"
@@ -241,7 +221,7 @@ export default function TransactionTable() {
                   />
                   <span className="truncate">{transaction.amount} {transaction.denomination}</span>
                 </p>
-                <p className="w-2/12 text-xs font-normal truncate">
+                <p className="w-full sm:w-2/12 text-xs font-normal truncate">
                   <span
                     className={`px-2 py-1 rounded-md ${
                       transaction.status === "SUCCESS"
@@ -256,8 +236,8 @@ export default function TransactionTable() {
                     {transaction.status}
                   </span>
                 </p>
-                <p className="w-2/12 pl-0.5 truncate">
-                  {moment(new Date(transaction.createdAt)).format("DD MMM YY, HH:MM")}
+                <p className="w-full sm:w-2/12 pl-0.5 truncate">
+                  {moment(new Date(transaction.createdAt)).format("DD MMM YY, HH:mm")}
                 </p>
               </div>
             ))
@@ -270,4 +250,4 @@ export default function TransactionTable() {
       </div>
     </div>
   );
-}
+}  

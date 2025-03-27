@@ -19,19 +19,17 @@ export default function RejectSponsorModal({
 }) {
   return (
     <Modal open={open} close={close} title="Enter Rejection Detail">
-      <div className="flex flex-col gap-8 w-[25vw] h-full">
+      <div className="flex flex-col gap-6 w-full max-w-[90vw] sm:w-[60vw] md:w-[40vw] lg:w-[25vw] p-4">
         <textarea
-          name=""
-          id=""
           rows={6}
           onInput={(e: any) => {
             // @ts-ignore
             setRejectReason(e.target.value);
           }}
-          className="bg-secondary_dark rounded-md border border-border_dark p-4 text-sm focus:outline-none resize-none"
+          className="bg-secondary_dark rounded-md border border-border_dark p-4 text-sm focus:outline-none resize-none w-full"
         ></textarea>
-
-        <div className="flex items-center w-full gap-4">
+  
+        <div className="flex items-center justify-end w-full gap-4">
           <SecondaryButton onClick={close}>Close</SecondaryButton>
           <PrimaryButton onClick={success} loading={loading}>
             Reject Sponsor
@@ -40,4 +38,4 @@ export default function RejectSponsorModal({
       </div>
     </Modal>
   );
-}
+}  

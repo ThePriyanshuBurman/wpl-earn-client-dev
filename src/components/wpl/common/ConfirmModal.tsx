@@ -19,9 +19,9 @@ export default function ConfirmModal({
 }) {
   return (
     <Modal open={open} close={close} title="Please confirm">
-      <div className="flex flex-col gap-8 w-[25vw] h-full">
-        <p>{text}</p>
-        <div className="flex items-center w-full gap-4">
+      <div className="flex flex-col gap-8 max-w-[90vw] md:w-[25vw] min-h-[200px] h-full">
+        <p className="text-center sm:text-left">{text}</p>
+        <div className="flex flex-wrap items-center w-full gap-4 justify-center sm:justify-start">
           <SecondaryButton onClick={close}>Close</SecondaryButton>
           <PrimaryButton onClick={success} loading={loading}>
             Confirm
@@ -30,4 +30,4 @@ export default function ConfirmModal({
       </div>
     </Modal>
   );
-}
+}  

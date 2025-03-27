@@ -16,14 +16,14 @@ export default function ConnectToCopperxModal({
 
   return (
     <Modal open={open} close={close} title="Connect to Copperx">
-      <div className="w-[350px]">
+      <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
         <div className="flex flex-col gap-5">
-          <p className="text-sm text-secondary_text_dark">
+          <p className="text-sm sm:text-base text-secondary_text_dark text-center">
             Enter the code sent to{" "}
-            <span className="text-primary_text_dark text-[15px]">
+            <span className="text-primary_text_dark text-[15px] sm:text-base">
               {userDetails?.email}
             </span>{" "}
-            to <br /> Connect your wallet
+            to <br className="hidden sm:block" /> Connect your wallet
           </p>
           <OTPInput
             value={otp}
@@ -31,14 +31,12 @@ export default function ConnectToCopperxModal({
               setOTP(e.target.value);
             }}
           />
-          <p className="flex items-center gap-1 text-sm text-secondary_text_dark">
-            {" "}
-          </p>
+          <p className="flex items-center gap-1 text-sm text-secondary_text_dark"></p>
         </div>
-        <PrimaryButton>
+        <PrimaryButton className="w-full sm:w-auto mx-auto flex justify-center">
           <p>Connect</p>
         </PrimaryButton>
       </div>
     </Modal>
   );
-}
+}  

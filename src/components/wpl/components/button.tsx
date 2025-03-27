@@ -22,7 +22,7 @@ export function SecondaryButton({
       disabled={disabled || loading}
       className={
         className ||
-        "flex items-center text-nowrap text-center gap-3 bg-secondary_dark text-primary_text_dark border-2 border-border_dark duration-200 text-sm w-full py-2.5 px-4 rounded-lg disabled:cursor-not-allowed hover:shadow hover:shadow-green-500"
+        "flex items-center text-nowrap text-center gap-3 bg-secondary_dark text-primary_text_dark border-2 border-border_dark duration-200 text-sm sm:text-base md:text-lg w-full py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-lg disabled:cursor-not-allowed hover:shadow hover:shadow-green-500"
       }
     >
       <div className="flex items-center gap-2 mx-auto">
@@ -104,7 +104,7 @@ export function PrimaryButton({
       onClick={onClick}
       disabled={disabled || loading}
       className={cn(
-        "flex items-center text-nowrap text-center gap-3 font-medium border-2 border-primary_dark hover:border-border_dark duration-200 text-sm w-full py-2.5 px-4 text-black rounded-xl disabled:cursor-not-allowed bg-gradient-to-br from-[#4CD2B2] to-[#9EE47A] hover:from-[#9EE47A] hover:to-[#4CD2B2] hover:drop-shadow-md hover:shadow hover:shadow-green-500",
+        "flex items-center text-nowrap text-center gap-3 font-medium border-2 border-primary_dark hover:border-border_dark duration-200 text-sm sm:text-base md:text-lg w-full py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 text-black rounded-xl disabled:cursor-not-allowed bg-gradient-to-br from-[#4CD2B2] to-[#9EE47A] hover:from-[#9EE47A] hover:to-[#4CD2B2] hover:drop-shadow-md hover:shadow hover:shadow-green-500",
         className
       )}
     >
@@ -118,4 +118,5 @@ export function PrimaryButton({
       </div>
     </button>
   );
+
 }

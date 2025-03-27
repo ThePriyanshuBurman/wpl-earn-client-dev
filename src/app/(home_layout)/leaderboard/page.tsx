@@ -8,9 +8,10 @@ export default function Page() {
           <span className="gradient-text">WPL</span> Leaderboard
         </p>
 
-        <div className="w-[70%]">
+        <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[70%] mx-auto">
           <LeaderBoardTable />
-        </div>
+      </div>
+
       </div>
     </div>
   );

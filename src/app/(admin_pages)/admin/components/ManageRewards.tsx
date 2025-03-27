@@ -219,23 +219,23 @@ export default function ManageRewards() {
         sendPayment={sendPayment}
       />
 
-      <div className="flex flex-col gap-8 w-full h-max relative py-4 px-8">
+      <div className="flex flex-col gap-8 w-full h-max relative py-4 px-4 sm:px-6 md:px-8">
         {!isCopperxAccountExists && (
           <ConnectToCopperX isCopperxCredsExists={() => loadInitialData()} />
         )}
 
         <div className="flex flex-col gap-4 w-full">
           <div className="flex items-center justify-between">
-            <p className="text-2xl font-polysansbulky gradient-text py-1.5">
+            <p className="text-xl sm:text-2xl font-polysansbulky gradient-text py-1.5">
               Manage Rewards
             </p>
           </div>
 
-          <div className="grid grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
             <Card className="col-span-1">
               <div className="flex flex-col gap-1">
                 <p className="text-sm font-normal text-gray-300">Balance</p>
-                <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+                <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                   ${copperxWalletBalance.netWorth}
                 </p>
               </div>
@@ -243,7 +243,7 @@ export default function ManageRewards() {
             <Card className="col-span-1">
               <div className="flex flex-col gap-1">
                 <p className="text-sm font-normal text-gray-300">Total Amount Rewarded</p>
-                <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+                <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                   ${totalDisbursed.toFixed(2)}
                 </p>
               </div>
@@ -256,8 +256,8 @@ export default function ManageRewards() {
             Send Rewards
           </p>
 
-          <div className="flex w-full gap-16">
-            <div className="flex flex-col gap-8 w-[40%]">
+          <div className="flex flex-col lg:flex-row w-full gap-6 lg:gap-16">
+            <div className="flex flex-col gap-8 w-full lg:w-[40%]">
               <div className="flex flex-col gap-2">
                 <p className="font-medium">Purpose code</p>
                 <SelectWpl
@@ -276,10 +276,7 @@ export default function ManageRewards() {
                   <p className="font-medium">Recipient</p>
                   <div className="flex items-center gap-4 text-sm">
                     <button
-                      onClick={() => setRecipients(prev => [
-                        ...prev,
-                        { id: Math.floor(1000 + Math.random() * 9000), amount: undefined },
-                      ])}
+                      onClick={() => setRecipients(prev => [...prev, { id: Math.floor(1000 + Math.random() * 9000), amount: undefined }])}
                       className="flex items-center gap-2 bg-secondary_dark px-3 py-1 rounded-lg border-border_dark"
                     >
                       Add more <PlusIcon size={14} />
@@ -292,19 +289,18 @@ export default function ManageRewards() {
                     </button>
                   </div>
                 </div>
-
                 <div className="flex flex-col gap-3">
                   {recipients.map((recipient) => (
                     <div key={recipient.id} className="flex flex-col gap-3" ref={amountOptionsRef}>
-                      <div className="flex items-center gap-3">
-                        <div className="w-[70%]">
+                      <div className="flex flex-col sm:flex-row items-center gap-3">
+                        <div className="w-full sm:w-[70%]">
                           <Input
                             value={recipient.recipient || ""}
                             placeholder="email/wallet address"
                             onInput={(e: any) => handleRecipientChange(recipient.id, e.target.value)}
                           />
                         </div>
-                        <div className="flex items-center gap-2 w-[30%]">
+                        <div className="flex items-center gap-2 w-full sm:w-[30%]">
                           <NumberInput
                             value={recipient.amount !== undefined ? recipient.amount.toString() : ""}
                             placeholder="amount"
@@ -321,86 +317,17 @@ export default function ManageRewards() {
                           </button>
                         </div>
                       </div>
-                      {selectedRecipient === recipient.id && showAmountOptions && (
-                        <div className="flex w-full gap-3">
-                          {[100, 200, 500, 1000].map(amount => (
-                            <button
-                              key={amount}
-                              onClick={() => handleAmountChange(recipient.id, amount.toString())}
-                              className="bg-secondary_dark px-3 py-1 rounded-md text-sm w-full text-center cursor-pointer"
-                            >
-                              {amount} {currency}
-                            </button>
-                          ))}
-                        </div>
-                      )}
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col items-center gap-4 w-[40%]">
-              <div className="flex flex-col gap-2 w-full">
-                <p className="font-medium">Pay in</p>
-                <div className="flex gap-2 items-center px-4 border border-border_dark py-2 rounded-md bg_secondary_dark">
-                  <img
-                    src={currency === "USDC" ? "/images/png/usdc.png" : "/images/png/strk-icon.png"}
-                    className="h-4 w-auto"
-                    alt=""
-                  />
-                  <select
-                    value={currency}
-                    className="bg-transparent focus-visible:outline-none text-sm w-full"
-                    onChange={(e) => setCurrency(e.target.value)}
-                  >
-                    <option value="USDC">USDC</option>
-                    <option value="STRK">STRK</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2 bg-secondary_dark w-full p-2 rounded-lg">
-                <div className="flex text-center bg-primary_dark rounded-md w-full py-10">
-                  <div className="mx-auto flex items-end gap-2 text-4xl">
-                    <img
-                      src={currency === "USDC" ? "/images/png/usdc.png" : "/images/png/strk-icon.png"}
-                      className="h-8 w-auto mb-0.5"
-                      alt=""
-                    />
-                    <span className="font-polysansbulky">{calculateTotalAmount().toFixed(2)}</span>
-                    <span className="text-secondary_text_dark text-3xl">{currency}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2 bg-secondary_dark w-full h-max p-2 rounded-lg">
-                <div className="flex flex-col gap-2 text-center rounded-md w-full">
-                  <div className="flex items-center justify-between w-full bg-primary_dark px-3 py-1.5 text-sm rounded-t-md">
-                    <p>Current Balance</p>
-                    <p className="font-polysansbulky">
-                      {(currency === "USDC" ? copperxWalletBalance.USDCWallet : copperxWalletBalance.STRKWallet)} {currency}
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between w-full bg-primary_dark px-3 py-1.5 text-sm">
-                    <p>Allocated</p>
-                    <p className="font-polysansbulky">
-                      - {calculateTotalAmount().toFixed(2)} {currency}
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-between w-full bg-primary_dark px-3 py-1.5 text-sm rounded-b-md">
-                    <p>Final Balance</p>
-                    <p className="font-polysansbulky">
-                      {((currency === "USDC" ? copperxWalletBalance.USDCWallet : copperxWalletBalance.STRKWallet) - calculateTotalAmount()).toFixed(2)} {currency}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
+            <div className="flex flex-col items-center gap-4 w-full lg:w-[40%]">
               <PrimaryButton onClick={handleOpenConfirmPaymentModal} loading={paymentLoading}>
                 <p>Send Reward $</p>
               </PrimaryButton>
-              <p className="text-sm text-secondary_text_dark">
+              <p className="text-sm text-secondary_text_dark text-center">
                 After you send payment we'll notify the recipient via email
               </p>
             </div>

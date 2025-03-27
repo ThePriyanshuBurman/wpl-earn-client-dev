@@ -58,12 +58,12 @@ export default function Notification() {
     getUserNotifications();
   }, []);
   return (
-    <div className="flex w-[50%] h-full mx-auto">
-      <div className="flex flex-col gap-6 pt-4 p-8 w-full h-full">
-        <p className="text-2xl font-polysansbulky gradient-text py-1.5">
+    <div className="flex w-full sm:w-[80%] md:w-[70%] lg:w-[50%] h-full mx-auto">
+      <div className="flex flex-col gap-6 pt-4 p-4 sm:p-6 md:p-8 w-full h-full">
+        <p className="text-xl sm:text-2xl font-polysansbulky gradient-text py-1.5">
           Manage Notifications
         </p>
-
+  
         {loading ? (
           <div className="flex p-4 items-center">
             <PageLoading />
@@ -73,13 +73,13 @@ export default function Notification() {
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center gap-2">
                 <p>Total</p>
-                <p className="bg-secondary_dark px-2 py-0.5 rounded-md text-sm">
+                <p className="bg-secondary_dark px-2 py-0.5 rounded-md text-xs sm:text-sm">
                   {notifications?.length}
                 </p>
               </div>
             </div>
-
-            <div className="flex flex-col gap-2 max-h-[500px] w-full pr-4 overflow-y-auto">
+  
+            <div className="flex flex-col gap-2 max-h-[500px] w-full pr-2 sm:pr-4 overflow-y-auto">
               {notifications?.map((n: any, i: number) => {
                 return (
                   <Link
@@ -90,7 +90,7 @@ export default function Notification() {
                     }}
                   >
                     <div
-                      className={`flex items-start gap-4 rounded-lg p-2 cursor-pointer ${
+                      className={`flex items-start gap-3 sm:gap-4 rounded-lg p-2 cursor-pointer ${
                         n?.viewed
                           ? "bg-primary_dark border border-border_dark"
                           : "bg-secondary_dark"
@@ -104,7 +104,7 @@ export default function Notification() {
                       ].includes(n?.header) ? (
                         <img
                           src="/images/png/approved.png"
-                          className="h-8"
+                          className="h-6 sm:h-8"
                           alt=""
                         />
                       ) : [
@@ -114,24 +114,24 @@ export default function Notification() {
                         ].includes(n?.header) ? (
                         <img
                           src="/images/png/reject.png"
-                          className="h-8"
+                          className="h-6 sm:h-8"
                           alt=""
                         />
                       ) : (
                         <img
                           src="/images/png/trophy.png"
-                          className="h-8"
+                          className="h-6 sm:h-8"
                           alt=""
                         />
                       )}
                       <div className="flex flex-col gap-1 w-full">
-                        <div className="flex items-center justify-between w-full ">
-                          <p>{n?.header}</p>
+                        <div className="flex items-center justify-between w-full">
+                          <p className="text-sm sm:text-base">{n?.header}</p>
                           <p className="text-xs text-secondary_text_dark">
                             {moment(new Date(n?.createdAt))?.fromNow()}
                           </p>
                         </div>
-                        <p className="text-sm text-secondary_text_dark">
+                        <p className="text-xs sm:text-sm text-secondary_text_dark">
                           {n?.description}
                         </p>
                       </div>
@@ -143,7 +143,7 @@ export default function Notification() {
           </div>
         ) : (
           <div className="flex items-center w-full p-4">
-            <p className="">No notifications!</p>
+            <p className="text-sm sm:text-base">No notifications!</p>
           </div>
         )}
       </div>

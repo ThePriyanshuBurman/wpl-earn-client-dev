@@ -42,7 +42,7 @@ export default function UploadCSVModal({
   return (
     <Modal open={open} close={close} title="Upload CSV">
       <div
-        className="flex items-center h-[40vh] w-[30vw] border border-border_dark border-dashed rounded-md"
+        className="flex items-center justify-center h-[40vh] w-[90vw] md:w-[60vw] lg:w-[30vw] border border-border_dark border-dashed rounded-md p-4"
         onDragOver={(e) => {
           setDragOver(true);
           e.preventDefault();
@@ -71,20 +71,20 @@ export default function UploadCSVModal({
             // @ts-ignore
             const Dragedfile = e.dataTransfer.files[0];
             handleFileUploadLocalDrag(Dragedfile);
-          } else alert("Please select  file");
+          } else alert("Please select a file");
           // @ts-ignore
           e.dataTransfer.clearData();
         }}
       >
-        <div className="flex flex-col gap-4 mx-auto">
-          <img src="/images/png/csv.png" alt="" className="h-32 mx-auto" />
-
+        <div className="flex flex-col gap-4 mx-auto text-center">
+          <img src="/images/png/csv.png" alt="CSV" className="h-24 sm:h-32 mx-auto" />
+  
           {selectedFile ? (
             <div className="flex flex-col gap-4 items-center">
               <div className="flex items-center gap-2">
-                <p className="">{selectedFile.name}</p>
+                <p className="text-sm sm:text-base">{selectedFile.name}</p>
                 <button
-                  className=""
+                  className="p-1 bg-gray-200 hover:bg-gray-300 rounded-full"
                   onClick={() => {
                     setDragOver(false);
                     setSelectedFile(undefined);
@@ -93,16 +93,16 @@ export default function UploadCSVModal({
                   <XIcon size="14" />
                 </button>
               </div>
-              <div className="w-[200px]">
+              <div className="w-[150px] sm:w-[200px]">
                 <PrimaryButton onClick={() => uploadCSV(selectedFile)}>
                   <p>Upload</p>
                 </PrimaryButton>
               </div>
             </div>
           ) : (
-            <div className="flex items-center flex-col gap-1">
-              <p className="text-sm text-secondary_text_dark">
-                Drag your File here, or
+            <div className="flex flex-col gap-2">
+              <p className="text-xs sm:text-sm text-secondary_text_dark">
+                Drag your file here, or{" "}
                 <input
                   id="csv"
                   type="file"
@@ -112,18 +112,16 @@ export default function UploadCSVModal({
                 />
                 <label
                   htmlFor="csv"
-                  className="hover:underline text-kazamPurple-600 cursor-pointer ml-1 text-sky-500"
+                  className="hover:underline text-sky-500 cursor-pointer ml-1"
                 >
                   Choose a file
                 </label>
               </p>
-              <p className="text-xs text-secondary_text_dark">
-                Only CSV file are allowed.
-              </p>
+              <p className="text-xs text-secondary_text_dark">Only CSV files are allowed.</p>
             </div>
           )}
         </div>
       </div>
     </Modal>
   );
-}
+}  

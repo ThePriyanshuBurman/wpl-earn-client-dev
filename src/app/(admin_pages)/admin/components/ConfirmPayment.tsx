@@ -68,13 +68,13 @@ export default function ConfirmPaymentModal({
 
   return (
     <Modal open={open} close={close}>
-      <div className="flex flex-col gap-8 w-[25vw] h-max">
-        <img src="/images/png/wallet.png" alt="" className="h-auto w-[80px]" />
-
-        <div className="flex flex-col gap-4">
-          <p className="text-sm text-secondary_text_dark">
+      <div className="flex flex-col gap-6 md:gap-8 w-[90vw] sm:w-[50vw] md:w-[30vw] lg:w-[25vw] h-max p-4 sm:p-6">
+        <img src="/images/png/wallet.png" alt="" className="h-auto w-[60px] sm:w-[80px] mx-auto" />
+  
+        <div className="flex flex-col gap-3 sm:gap-4 text-center">
+          <p className="text-xs sm:text-sm text-secondary_text_dark">
             Enter the code sent to
-            <span className="text-primary_text_dark text-[15px] ml-1">
+            <span className="text-primary_text_dark text-[13px] sm:text-[15px] ml-1">
               {userDetails?.email}
             </span>{" "}
             to <br /> send rewards.
@@ -86,16 +86,14 @@ export default function ConfirmPaymentModal({
             }}
           />
         </div>
-
+  
         <>
-          <PrimaryButton loading={loading} onClick={handleVerifyOTP}>
+          <PrimaryButton loading={loading} onClick={handleVerifyOTP} className="w-full md:w-max">
             <p>Verify</p>
           </PrimaryButton>
           <button
-            onClick={() => {
-              getCopperxOTP();
-            }}
-            className="w-max text-sm mx-auto hover:underline text-secondary_text_dark"
+            onClick={getCopperxOTP}
+            className="w-full md:w-max text-xs sm:text-sm mx-auto hover:underline text-secondary_text_dark"
           >
             {resendOTPloading ? "Loading..." : "Resend OTP"}
           </button>
@@ -103,4 +101,4 @@ export default function ConfirmPaymentModal({
       </div>
     </Modal>
   );
-}
+}  

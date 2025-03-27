@@ -127,33 +127,31 @@ export default function ({ refreshKPIs }: { refreshKPIs?: () => void }) {
         }
         close={() => setOpenRejectSponsorModal(false)}
       />
-      <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-8">
+      <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-4 sm:px-6 md:px-8">
         <div className="flex flex-col gap-4">
-          <p className="text-2xl font-polysansbulky gradient-text py-1.5">
+          <p className="text-xl sm:text-2xl font-polysansbulky gradient-text py-1.5">
             Sponsors Pending Requests
           </p>
         </div>
-
+  
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between w-full border-b border-border_dark">
+          <div className="flex flex-wrap items-center justify-between w-full border-b border-border_dark gap-4">
             <Tabs items={items} active={activeTab} onClick={setActiveTab} />
-            <div className="flex items-center gap-4">
-              <div className="w-[320px]">
-                <Input placeholder="search" />
-              </div>
+            <div className="w-full sm:w-[320px]">
+              <Input placeholder="search" />
             </div>
           </div>
-
+  
           <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
-            <div className="flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
-              <p className="w-full">Company name</p>
-              <p className="w-full">Company url</p>
-              <p className="w-full">Company twitter</p>
-              <p className="w-full">Application Date</p>
-              <p className="w-full">Details</p>
-              <p className="w-full">Action</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+              <p className="truncate">Company Name</p>
+              <p className="truncate">Company URL</p>
+              <p className="truncate">Twitter</p>
+              <p className="truncate">Application Date</p>
+              <p className="truncate">Details</p>
+              <p className="truncate">Action</p>
             </div>
-
+  
             <div className="flex flex-col gap-4 w-full font-polysansbulky">
               {loading ? (
                 <div className="p-4 flex w-full">
@@ -163,34 +161,27 @@ export default function ({ refreshKPIs }: { refreshKPIs?: () => void }) {
                 tableData.map((c, i) => {
                   return (
                     <div
-                      className="flex items-center gap-4 w-full p-4 text-sm"
+                      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 w-full p-4 text-sm"
                       key={i}
                     >
-                      <p className="w-full truncate">{c.companyName}</p>
-                      <p className="w-full truncate">{c.companyUrl}</p>
-                      <p className="w-full truncate">{c.companyTwitter}</p>
-                      <p className="w-full">
-                        {moment(new Date(c.createdAt)).format("DD MMM YY")}
-                      </p>
-
-                      <div className="w-full flex">
-                        <Link
-                          href={`${paths.sponsor_details}/${c.id}`}
-                          target="_blank"
-                        >
-                          <button className="text-sky-500 hover:underline">
-                            View
-                          </button>
+                      <p className="truncate">{c.companyName}</p>
+                      <p className="truncate">{c.companyUrl}</p>
+                      <p className="truncate">{c.companyTwitter}</p>
+                      <p>{moment(new Date(c.createdAt)).format("DD MMM YY")}</p>
+  
+                      <div className="flex">
+                        <Link href={`${paths.sponsor_details}/${c.id}`} target="_blank">
+                          <button className="text-sky-500 hover:underline">View</button>
                         </Link>
                       </div>
-
-                      <div className="w-full flex items-center gap-4 text-xs">
+  
+                      <div className="flex items-center gap-2 text-xs">
                         <button
                           onClick={() => {
                             setSelectedSponsor(c);
                             setOpenConfirmModal(true);
                           }}
-                          className="w-max text-green-500 border border-green-500 rounded-lg px-2 py-1"
+                          className="text-green-500 border border-green-500 rounded-lg px-2 py-1"
                         >
                           Approve
                         </button>
@@ -199,7 +190,7 @@ export default function ({ refreshKPIs }: { refreshKPIs?: () => void }) {
                             setSelectedSponsor(c);
                             setOpenRejectSponsorModal(true);
                           }}
-                          className="w-max text-red-500 border border-red-500 rounded-lg px-2 py-1"
+                          className="text-red-500 border border-red-500 rounded-lg px-2 py-1"
                         >
                           Reject
                         </button>
@@ -218,4 +209,4 @@ export default function ({ refreshKPIs }: { refreshKPIs?: () => void }) {
       </div>
     </>
   );
-}
+}  

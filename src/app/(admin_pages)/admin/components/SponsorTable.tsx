@@ -93,61 +93,72 @@ export default function () {
   }, [searchTerm, status]); // Trigger on search term or status change
 
   return (
-    <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-8">
+    <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-4 sm:px-6 md:px-8">
       <div className="flex flex-col gap-4">
-        <p className="text-2xl font-polysansbulky gradient-text py-1.5">
+        <p className="text-xl sm:text-2xl font-polysansbulky gradient-text py-1.5">
           All Sponsors
         </p>
-
-        <div className="grid grid-cols-5 gap-4">
-          <Card className="col-span-1">
+  
+        {/* Grid Responsiveness */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+          <Card>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-normal text-gray-300">Total Sponsors</p>
-              <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+              <p className="text-xs sm:text-sm font-normal text-gray-300">
+                Total Sponsors
+              </p>
+              <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                 {adminKPIs?.totalSponsors}
               </p>
             </div>
           </Card>
           <Card>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-normal text-gray-300">Verified Sponsors</p>
-              <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+              <p className="text-xs sm:text-sm font-normal text-gray-300">
+                Verified Sponsors
+              </p>
+              <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                 {adminKPIs?.verifiedSponsors}
               </p>
             </div>
           </Card>
           <Card>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-normal text-gray-300">Non Verified Sponsors</p>
-              <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+              <p className="text-xs sm:text-sm font-normal text-gray-300">
+                Non Verified Sponsors
+              </p>
+              <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                 {adminKPIs?.notVerifiedSponsors}
               </p>
             </div>
           </Card>
           <Card>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-normal text-gray-300">Request Pending</p>
-              <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+              <p className="text-xs sm:text-sm font-normal text-gray-300">
+                Request Pending
+              </p>
+              <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                 {adminKPIs?.pendingVerification}
               </p>
             </div>
           </Card>
           <Card>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-normal text-gray-300">Blacklisted Sponsors</p>
-              <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+              <p className="text-xs sm:text-sm font-normal text-gray-300">
+                Blacklisted Sponsors
+              </p>
+              <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                 {adminKPIs?.blacklistedSponsors}
               </p>
             </div>
           </Card>
         </div>
       </div>
-
+  
       <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between w-full border-b border-border_dark">
+        <div className="flex flex-wrap items-center justify-between w-full border-b border-border_dark gap-4">
           <Tabs items={items} active={activeTab} onClick={setActiveTab} />
-          <div className="flex items-center gap-4">
-            <div className="w-[180px]">
+          <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+            <div className="w-full sm:w-[180px]">
               <SelectWpl
                 value={status}
                 options={statusOptions}
@@ -157,7 +168,7 @@ export default function () {
                 placeholder="Select Status"
               />
             </div>
-            <div className="w-[320px]">
+            <div className="w-full sm:w-[320px]">
               <Input
                 placeholder="Search by company name, URL, or Twitter"
                 value={searchTerm}
@@ -166,9 +177,10 @@ export default function () {
             </div>
           </div>
         </div>
-
-        <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
-          <div className="flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+  
+        {/* Responsive Table */}
+        <div className="flex flex-col w-full h-full overflow-x-auto bg-secondary_dark rounded-md">
+          <div className="min-w-[600px] flex items-center gap-4 w-full text-xs sm:text-sm text-secondary_text_dark p-4 border-b border-border_dark">
             <p className="w-full">Company name</p>
             <p className="w-full">Company url</p>
             <p className="w-full">Company twitter</p>
@@ -176,7 +188,7 @@ export default function () {
             <p className="w-full">Status</p>
             <p className="w-full">Action</p>
           </div>
-
+  
           <div className="flex flex-col gap-4 w-full font-polysansbulky">
             {loading ? (
               <div className="p-4 flex w-full">
@@ -186,7 +198,7 @@ export default function () {
               tableData.map((c, i) => {
                 return (
                   <div
-                    className="flex items-center gap-4 w-full p-4 text-sm"
+                    className="min-w-[600px] flex items-center gap-4 w-full p-4 text-xs sm:text-sm"
                     key={i}
                   >
                     <p className="w-full truncate">{c.companyName}</p>
@@ -210,7 +222,7 @@ export default function () {
                         </span>
                       )}
                     </p>
-
+  
                     <div className="w-full flex">
                       <Link
                         href={`${paths.sponsor_details}/${c.id}`}
@@ -234,4 +246,4 @@ export default function () {
       </div>
     </div>
   );
-}
+}  
