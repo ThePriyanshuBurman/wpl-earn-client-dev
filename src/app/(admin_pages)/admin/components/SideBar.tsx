@@ -9,20 +9,23 @@ import {
   List,
   UsersRound,
   FileClock,
+  Menu,
+  X
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function SideBar({
   activeSideBar,
   setActiveSideBar,
-  refreshKPIs, // New prop to trigger KPI refresh from parent
+  refreshKPIs,
 }: {
   activeSideBar: string;
   setActiveSideBar: any;
-  refreshKPIs?: () => void; // Optional callback to refresh KPIs
+  refreshKPIs?: () => void;
 }) {
   const [showSponsorOptions, setShowSponsorOptions] = useState(false);
   const [showListingOptions, setShowListingOptions] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [adminKPIs, setAdminKPIs] = useState({
     sponsors: 0,
     listings: 0,
@@ -51,15 +54,14 @@ export default function SideBar({
     getAdminKpis();
   }, []);
 
-  // Expose a method to refresh KPIs when called
   useEffect(() => {
     if (refreshKPIs) {
       getAdminKpis();
     }
   }, [refreshKPIs]);
 
-  return (
-    <div className="flex flex-col p-4 gap-2 w-[20%] h-full text-sm border-r border-border_dark">
+  const SidebarContent = () => (
+    <>
       <div className="flex flex-col gap-2 w-full">
         <button
           onClick={() => {
@@ -106,9 +108,7 @@ export default function SideBar({
               Blacklist Sponsor
             </button>
           </div>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
 
       <div className="flex flex-col gap-2 w-full">
@@ -145,9 +145,7 @@ export default function SideBar({
               </span>
             </button>
           </div>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
 
       <button
@@ -177,6 +175,33 @@ export default function SideBar({
         <FileClock size={"14"} />
         Transaction History
       </button>
-    </div>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile Menu Button */}
+      <button 
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="lg:hidden fixed top-2 right-4 z-50 p-2 rounded-md bg-green-600/10 hover:bg-green-600/20 transition-all duration-300 transform hover:scale-105"
+      >
+        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      {/* Mobile Sidebar */}
+      <div className={`
+        lg:hidden fixed inset-0 z-40 bg-background_dark/95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <div className="flex flex-col p-4 gap-2 w-full h-full text-sm pt-16 bg-background_dark/80">
+          <SidebarContent />
+        </div>
+      </div>
+
+      {/* Desktop Sidebar */}
+      <div className="hidden lg:flex flex-col p-4 gap-2 w-[20%] h-full text-sm border-r border-border_dark">
+        <SidebarContent />
+      </div>
+    </>
   );
 }

@@ -63,37 +63,63 @@ const ReviewCard = ({
   img: string;
 }) => {
   return (
-    <figure
-      className={cn(
-        "relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
-        // light styles
-        "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-        // dark styles
-        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
-      )}
-    >
-      <div className="flex flex-row items-center gap-2">
-        <img
-          className="rounded-full"
-          width="32"
-          height="32"
-          alt=""
-          src={profileImg}
-        />
-        <div className="flex flex-col">
-          <figcaption className="text-sm font-medium dark:text-white">
-            {name}
-          </figcaption>
-          <p className="text-xs font-medium dark:text-white/40">{username}</p>
+    <div className="group/card relative">
+      <div className="relative transition-transform duration-700 ease-out [transform-style:preserve-3d] hover:[transform:rotateY(180deg)] cursor-pointer h-full">
+        {/* Front of card */}
+        <figure
+          className={cn(
+            "relative h-full w-64 overflow-hidden rounded-xl border p-4 [backface-visibility:hidden]",
+            // light styles
+            "border-gray-950/[.1] bg-secondary_dark hover:secondary_dark/[.05]",
+            // dark styles
+            "dark:border-gray-50/[.1] bg-secondary_dark dark:hover:secondary_dark/[.15]"
+          )}
+        >
+          <div className="flex flex-row items-center gap-2">
+            <div className="flex flex-col">
+              <figcaption className="text-sm font-medium dark:text-white">
+                {name}
+              </figcaption>
+              <p className="text-xs font-medium dark:text-white/40">{username}</p>
+            </div>
+          </div>
+
+          <blockquote className="mt-2 text-sm">{body}</blockquote>
+
+          <div className="mt-3 relative">
+            <img src={img} alt="wolf" className="rounded-md" />
+            <div className="absolute inset-0 bg-emerald-500/20 rounded-md"></div>
+          </div>
+
+          <div className="absolute inset-0 bg-emerald-500/10 rounded-xl pointer-events-none"></div>
+        </figure>
+
+        {/* Back of card */}
+        <div 
+          className={cn(
+            "absolute inset-0 h-full w-64 rounded-xl border p-4 [transform:rotateY(180deg)] [backface-visibility:hidden]",
+            "border-gray-950/[.1] bg-secondary_dark",
+            "dark:border-gray-50/[.1] bg-secondary_dark"
+          )}
+        >
+          <div className="flex flex-col gap-4">
+            <h2 className="text-2xl font-bold dark:text-white">{name}</h2>
+            <div className="w-full h-[1px] bg-gray-500"></div>
+            <div className="flex flex-col gap-2 text-sm dark:text-white">
+              <div className="flex flex-col gap-1 items-start">
+                <span className="font-medium text-xl text-[#4FFFDF]">Rank</span>
+                <span className="text-sm text-white font-semibold">#11</span>
+              </div>
+              <div className="flex flex-col gap-1 items-start">
+                <span className="font-medium text-xl text-[#4FFFDF]">Points</span>
+                <span className="text-sm text-white font-semibold">1,250</span>
+              </div>
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-emerald-500/10 rounded-xl pointer-events-none"></div>
         </div>
       </div>
-
-      <blockquote className="mt-2 text-sm">{body}</blockquote>
-
-      <div className="mt-3">
-        <img src={img} alt="wolf" className="rounded-md" />
-      </div>
-    </figure>
+    </div>
   );
 };
 
@@ -105,11 +131,13 @@ export default function MarqueeDemo() {
           <ReviewCard key={review.username} {...review} />
         ))}
       </Marquee>
-      <Marquee reverse pauseOnHover className="[--duration:20s]">
-        {secondRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
-        ))}
-      </Marquee>
+      <div className="hidden md:block">
+        <Marquee reverse pauseOnHover className="[--duration:20s]">
+          {secondRow.map((review) => (
+            <ReviewCard key={review.username} {...review} />
+          ))}
+        </Marquee>
+      </div>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
       <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
     </div>
