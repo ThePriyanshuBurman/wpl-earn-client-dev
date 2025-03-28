@@ -63,8 +63,8 @@ export default function Page() {
     });
   };
   return (
-    <div className="flex  py-[4%] w-full">
-      <div className="flex flex-col gap-6 w-[40%] h-full mx-auto text-white">
+    <div className="flex p-[4%] w-full">
+      <div className="flex flex-col gap-6 w-full max-w-full sm:w-[70%] md:w-[60%] lg:w-[40%] h-full mx-auto text-white">
         <Link href={paths.sponsor_dashboard}>
           <BackButton />
         </Link>
@@ -141,31 +141,29 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-col gap-2 w-full">
-          <p className="text-sm">Select Prize currency</p>
+          <p className="text-sm text-white">Select Prize Currency</p>
 
-          <div className="flex gap-2 items-center px-4 border border-border_dark h-full py-2 rounded-md bg-secondary_dark">
+          <div className="flex items-center px-4 py-2 border border-border_dark rounded-md bg-secondary_dark">
             <img
               src={
                 curreny === "USDC"
                   ? "/images/png/usdc.png"
                   : "/images/png/strk-icon.png"
               }
-              className="h-4 w-auto"
-              alt=""
+              className="h-5 w-auto"
+              alt="Currency Icon"
             />
+
             <select
-              name=""
-              id=""
-              className="bg-transparent focus-visible:outline-none text-sm w-full"
-              onChange={(e) => {
-                setCurreny(e.target.value);
-              }}
+              className="bg-transparent focus:outline-none text-sm w-full cursor-pointer appearance-none text-white px-2"
+              onChange={(e) => setCurreny(e.target.value)}
             >
-              <option value="USDC">USDC</option>
-              <option value="STRK">STRK</option>
+              <option value="USDC" className="bg-secondary_dark text-white">USDC</option>
+              <option value="STRK" className="bg-secondary_dark text-white">STRK</option>
             </select>
           </div>
         </div>
+
 
         <div className="flex flex-col gap-2 w-full">
           <p className="text-sm">Average Grant size</p>
@@ -186,7 +184,7 @@ export default function Page() {
             <input
               type="number"
               placeholder="enter amount"
-              className="bg-transparent  py-2 focus:outline-none"
+              className="bg-transparent py-2 focus:outline-none"
               onInput={(e) => {
                 setGrantDetails({
                   ...grantDetails,
@@ -217,7 +215,7 @@ export default function Page() {
             <input
               type="number"
               placeholder="enter amount"
-              className="bg-transparent  py-2 focus:outline-none"
+              className="bg-transparent py-2 focus:outline-none"
               onInput={(e) => {
                 setGrantDetails({
                   ...grantDetails,
@@ -232,24 +230,24 @@ export default function Page() {
         <div className="flex flex-col gap-2">
           <p className="text-sm">Average response time</p>
 
-          <div className="flex items-center gap-4 bg-secondary_dark border border-border_dark rounded-md">
-            <div className="flex gap-2 items-center px-4 border-r border-border_dark h-full">
-              <select
-                name=""
-                id=""
-                className="bg-transparent focus-visible:outline-none text-sm"
-              >
-                <option value="hours">Hours</option>
-                <option value="week">weeks</option>
-              </select>
-            </div>
+          <div className="flex items-center bg-secondary_dark border border-border_dark rounded-md px-4 py-2">
+            <select
+              name=""
+              id=""
+              className="bg-transparent focus:outline-none text-sm cursor-pointer appearance-none px-2 w-max text-white"
+            >
+              <option value="hours" className="bg-secondary_dark text-white">Hours</option>
+              <option value="week" className="bg-secondary_dark text-white">Weeks</option>
+            </select>
+
             <input
               type="number"
-              placeholder=""
-              className="bg-transparent  py-2 focus:outline-none"
+              placeholder="Enter time"
+              className="bg-transparent py-1 px-2 focus:outline-none w-full text-sm text-white border-l border-border_dark"
             />
           </div>
         </div>
+
 
         <div className="flex flex-col gap-2 w-full">
           <p className="text-sm">What's the Grant about?</p>
@@ -307,4 +305,5 @@ export default function Page() {
       </div>
     </div>
   );
+
 }

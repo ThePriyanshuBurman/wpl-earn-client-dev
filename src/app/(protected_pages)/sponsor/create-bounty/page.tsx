@@ -263,12 +263,12 @@ export default function Page() {
         }}
         text="Are you sure! you want to publish?"
       />
-      <div className="flex flex-col gap-8 pt-[2%] py-[4%] w-[80%] mx-auto">
+      <div className="flex flex-col gap-8 pt-[2%] py-[4%] w-[90%] sm:w-[80%] mx-auto">
         <Link href={paths.sponsor_dashboard}>
           <BackButton />
         </Link>
-        <div className="flex gap-12 w-full h-full mx-auto text-white">
-          <div className="flex flex-col gap-6 w-[70%]">
+        <div className="flex flex-col sm:flex-row gap-12 w-full h-full mx-auto text-white">
+          <div className="flex flex-col gap-6 w-full sm:w-[70%]">
             <div className="flex flex-col gap-2">
               <RequiredLable text="Bounty Logo" />
               <ImageInput onInput={handleImageUpload} />
@@ -344,30 +344,27 @@ export default function Page() {
               </PrimaryButton>
             </div>
           </div>
-          <div className="flex flex-col gap-6 w-[30%]">
+          <div className="flex flex-col gap-6 w-full sm:w-[30%]">
             <div className="flex flex-col gap-2">
               <RequiredLable text="Rewards" />
               <div className="flex items-center gap-4 bg-secondary_dark border border-border_dark rounded-lg">
-                <div className="flex gap-2 items-center px-4 border-r border-border_dark h-full">
+                <div className="flex gap-2 items-center px-4 border-r border-border_dark h-full bg-secondary_dark rounded-lg">
                   <img
-                    src={
-                      curreny === "USDC"
-                        ? "/images/png/usdc.png"
-                        : "/images/png/strk-icon.png"
-                    }
-                    className="h-4 w-auto"
+                    src={curreny === "USDC" ? "/images/png/usdc.png" : "/images/png/strk-icon.png"}
+                    className="h-5 w-auto"
                     alt=""
                   />
                   <select
                     name=""
                     id=""
-                    className="bg-transparent focus-visible:outline-none text-sm"
+                    className="bg-transparent focus:outline-none text-sm px-2 py-1 border border-border_dark rounded-md cursor-pointer hover:bg-gray-700 transition duration-200"
                     onChange={handleCurrencyChange}
                   >
-                    <option value="USDC">USDC</option>
-                    <option value="STRK">STRK</option>
+                    <option value="USDC" className="bg-secondary_dark text-white">USDC</option>
+                    <option value="STRK" className="bg-secondary_dark text-white">STRK</option>
                   </select>
                 </div>
+
                 <input
                   type="number"
                   placeholder="enter amount"
@@ -585,4 +582,5 @@ export default function Page() {
       </div>
     </>
   );
+
 }

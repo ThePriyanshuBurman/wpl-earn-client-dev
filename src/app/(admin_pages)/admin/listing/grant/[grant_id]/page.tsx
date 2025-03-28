@@ -170,22 +170,22 @@ export default function GrantDetails() {
         success={() => handleGrantStatus({ status: ACTIONS.REJECT, grant_id })}
         close={() => setOpenRejectModal(false)}
       />
-      <div className="flex flex-col gap-6 mt-6 px-8 w-full text-primary_text_dark z-20">
+      <div className="flex flex-col gap-6 mt-6 px-8 sm:px-6 md:px-8 lg:px-10 xl:px-12 w-full text-primary_text_dark z-20">
         <Link href="../../">
           <BackButton />
         </Link>
-
+  
         {loading ? (
           <div className="flex mx-auto mt-12">
             <PageLoading />
           </div>
         ) : Object.keys(grantDetails).length ? (
           <div className="max-w-6xl mx-auto w-full">
-            <div className="flex gap-10 w-full">
+            <div className="flex flex-col sm:flex-row gap-10 w-full">
               {/* Main Content */}
-              <div className="flex flex-col gap-6 w-[70%]">
+              <div className="flex flex-col gap-6 sm:w-[70%] w-full">
                 {/* Header */}
-                <div className="flex items-center gap-6">
+                <div className="flex flex-col sm:flex-row gap-6 items-center">
                   <img
                     src={grantLogoUrl || "/images/placeholder-avatar.png"}
                     alt={`${grantDetails.title} logo`}
@@ -217,7 +217,7 @@ export default function GrantDetails() {
                     </div>
                   </div>
                 </div>
-
+  
                 {/* Grant Details */}
                 <div className="flex flex-col gap-6">
                   {/* Organization Description */}
@@ -225,13 +225,13 @@ export default function GrantDetails() {
                     <p className="font-polysansbulky text-xl text-white">Organization Description</p>
                     <p className="text-white text-base">{grantDetails.orgDescription || "No description available"}</p>
                   </div>
-
+  
                   {/* Grant Description */}
                   <div className="flex flex-col gap-2">
                     <p className="font-polysansbulky text-xl text-white">Grant Description</p>
                     <p className="text-white text-base">{grantDetails.grantDescription || "No description available"}</p>
                   </div>
-
+  
                   {/* Skills Needed */}
                   <div className="flex flex-col gap-2">
                     <p className="font-polysansbulky text-xl text-white">Skills Needed</p>
@@ -244,7 +244,7 @@ export default function GrantDetails() {
                     </div>
                   </div>
                 </div>
-
+  
                 {/* Actions */}
                 {grantDetails.state === "REQUEST_APPROVAL" && (
                   <div className="flex items-center gap-4 mt-4">
@@ -263,14 +263,14 @@ export default function GrantDetails() {
                   </div>
                 )}
               </div>
-
+  
               {/* Sidebar */}
-              <div className="flex w-[30%]">
+              <div className="flex sm:w-[30%] w-full">
                 <div className="flex flex-col gap-4 bg-secondary_dark p-4 rounded-lg border border-border_dark w-full relative overflow-hidden">
                   <div className="flex items-center justify-between">
                     <p className="font-polysansbulky text-xl gradient-text">Prizes</p>
                   </div>
-
+  
                   <div className="flex items-center justify-between text-base text-secondary_text_dark">
                     <div className="flex items-center gap-2">
                       <span className="font-polysansbulky text-white">0</span>
@@ -281,7 +281,7 @@ export default function GrantDetails() {
                       <span>Recipients</span>
                     </div>
                   </div>
-
+  
                   <div className="flex flex-col gap-2">
                     <p className="text-sm text-white">Skills Needed</p>
                     <div className="flex flex-wrap gap-2">
@@ -292,12 +292,12 @@ export default function GrantDetails() {
                       )) || "N/A"}
                     </div>
                   </div>
-
+  
                   <div className="flex flex-col gap-2">
                     <p className="text-sm text-white">Avg. Response Time</p>
                     <p className="text-white text-base">{grantDetails.responseTime / 3600} hours</p>
                   </div>
-
+  
                   <div className="flex flex-col gap-2">
                     <p className="text-sm text-white">Avg. Grant Size</p>
                     <div className="flex items-center gap-2">
@@ -310,10 +310,12 @@ export default function GrantDetails() {
                         className="h-5 w-auto"
                         alt=""
                       />
-                      <p className="font-medium text-white text-base">{grantDetails.avgGrantSize} {grantDetails.prizeCurrency}</p>
+                      <p className="font-medium text-white text-base">
+                        {grantDetails.avgGrantSize} {grantDetails.prizeCurrency}
+                      </p>
                     </div>
                   </div>
-
+  
                   <div className="flex flex-col gap-2">
                     <p className="text-sm text-white">Approved So Far</p>
                     <div className="flex items-center gap-2">
@@ -326,10 +328,12 @@ export default function GrantDetails() {
                         className="h-5 w-auto"
                         alt=""
                       />
-                      <p className="font-medium text-white text-base">{grantDetails.approvedAmount} {grantDetails.prizeCurrency}</p>
+                      <p className="font-medium text-white text-base">
+                        {grantDetails.approvedAmount} {grantDetails.prizeCurrency}
+                      </p>
                     </div>
                   </div>
-
+  
                   <BorderBeam
                     size={40}
                     initialOffset={20}
@@ -348,4 +352,4 @@ export default function GrantDetails() {
       </div>
     </>
   );
-}
+}  

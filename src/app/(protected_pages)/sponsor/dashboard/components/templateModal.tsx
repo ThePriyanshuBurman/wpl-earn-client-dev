@@ -34,58 +34,53 @@ export default function TemplateModal({
       name: "UI/UX Design",
     },
   ];
-
+   
   return (
     <Modal open={open} close={close}>
-      <div className="flex flex-col gap-5 w-full h-max">
-        <div>
-          <p>Start with Templates</p>
+      <div className="flex flex-col gap-6 w-full h-max p-4 sm:p-6 md:p-8">
+        {/* Title Section */}
+        <div className="text-center md:text-left">
+          <p className="text-lg md:text-xl font-semibold">Start with Templates</p>
           <p className="text-sm text-gray-400">
             Go live in 2 mins by using our existing template
           </p>
         </div>
-
-        <div className="grid grid-cols-3 gap-8">
+  
+        {/* Template Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {templates.map((t, i) => (
             <div
-              className="flex flex-col w-[300px] h-max bg-secondary_dark border border-border_dark rounded-md"
               key={i}
+              className="flex flex-col w-full sm:max-w-[320px] h-max bg-secondary_dark border border-border_dark rounded-md"
             >
-              {/* <img
-                src="/images/png/cover.png"
-                className="h-[120px] object-cover rounded-t-md"
-                alt=""
-              /> */}
-
+              {/* Image Section */}
               <div className="flex items-center h-[120px] bg-green-200/10 rounded-t-md">
                 <div className="mx-auto">
-                  <img
-                    src="/images/png/programming.png"
-                    className="h-[50px]"
-                    alt=""
-                  />
+                  <img src="/images/png/programming.png" className="h-[50px]" alt="" />
                 </div>
               </div>
-
+  
+              {/* Content Section */}
               <div className="flex flex-col gap-4 p-4">
-                <p>{t.name}</p>
-
-                <div className="flex gap-4 items-center w-full text-sm">
-                  <SecondaryButton>
+                <p className="text-center md:text-left">{t.name}</p>
+  
+                {/* Buttons Section */}
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4 items-center w-full text-sm">
+                  <SecondaryButton className="w-full sm:w-auto">
                     <div className="flex items-center gap-2 mx-auto">
-                      <Eye size={"14"} />
+                      <Eye size={14} />
                       Preview
                     </div>
                   </SecondaryButton>
-
+  
                   <SecondaryButton
+                    className="w-full sm:w-auto"
                     onClick={() => {
                       setOpenCreateBountyModal(false);
-                      // router.push(paths.create_bounty);
                     }}
                   >
                     <div className="flex items-center gap-2 mx-auto">
-                      <BookCopy size={"14"} />
+                      <BookCopy size={14} />
                       Use
                     </div>
                   </SecondaryButton>
@@ -97,4 +92,4 @@ export default function TemplateModal({
       </div>
     </Modal>
   );
-}
+}  

@@ -62,28 +62,28 @@ export default function Listings() {
   ];
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="w-full flex items-center justify-between border-b border-border_dark">
-        <div className="flex items-center gap-8 text-sm cursor-pointer">
-          <div className="py-4 px-6 border-b border-[#46CFB6]">
+    <div className="flex flex-col gap-6 w-full p-4 md:p-6">
+      <div className="w-full flex flex-col md:flex-row items-center justify-between border-b border-border_dark gap-4 md:gap-0">
+        <div className="flex items-center gap-4 md:gap-8 text-sm cursor-pointer w-full md:w-auto justify-center md:justify-start">
+          <div className="py-3 px-4 md:py-4 md:px-6 border-b border-[#46CFB6]">
             <p>To Review</p>
           </div>
-          <p>Completed</p>
+          <p className="text-secondary_text_dark">Completed</p>
         </div>
-
-        <div className="flex items-center gap-4">
-          <button className="flex items-center gap-2 text-sm bg-[#0c1517] border border-border_dark rounded-lg px-4 py-2">
+  
+        <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto justify-center md:justify-end">
+          <button className="flex items-center gap-2 text-sm bg-[#0c1517] border border-border_dark rounded-lg px-3 md:px-4 py-2 w-full md:w-auto">
             Filters
             <ListFilter size={"13"} />
           </button>
         </div>
       </div>
-
+  
       <div className="flex flex-col gap-4">
         {bountyList.map((d: any, i) => {
           return <ListCardDarkFlip data={d} key={i} index={i} />;
         })}
       </div>
     </div>
-  );
+  );  
 }

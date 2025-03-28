@@ -16,11 +16,11 @@ export default function CreateListingModal({
 
   return (
     <Modal open={open} close={close}>
-      <div className="flex gap-12 h-full w-[50vw]">
-        <div className="flex flex-col justify-between w-full">
-          <img src="/images/png/bounty-img.png" alt="" />
+      <div className="flex flex-col md:flex-row gap-6 md:gap-12 h-full w-[90vw] md:w-[50vw] p-4 md:p-6">
+        <div className="flex flex-col justify-between w-full text-center md:text-left">
+          <img src="/images/png/bounty-img.png" alt="Bounty" className="w-full max-w-xs mx-auto md:mx-0" />
           <div className="flex flex-col gap-2">
-            <p className="font-polysansbulky gradient-text">
+            <p className="font-polysansbulky gradient-text text-lg md:text-xl">
               Host a Work Competition
             </p>
             <p className="text-sm text-secondary_text_dark">
@@ -29,24 +29,26 @@ export default function CreateListingModal({
             </p>
           </div>
           <Link href={paths.create_bounty}>
-            <PrimaryButton>
+            <PrimaryButton className="w-full md:w-auto">
               <div>Create A Bounty</div>
             </PrimaryButton>
           </Link>
         </div>
-        <div className="h-full border-[0.5px] border-border_dark"></div>
-
-        <div className="flex flex-col gap-8 w-full">
-          <img src="/images/png/grant-img.png" alt="" />
+        
+        <div className="hidden md:block h-full border-[0.5px] border-border_dark"></div>
+        <div className="block md:hidden w-full border-t-[0.5px] border-border_dark my-4"></div>
+  
+        <div className="flex flex-col gap-6 w-full text-center md:text-left">
+          <img src="/images/png/grant-img.png" alt="Grant" className="w-full max-w-xs mx-auto md:mx-0" />
           <div className="flex flex-col gap-2">
-            <p className="font-polysansbulky gradient-text">Create A Grant</p>
+            <p className="font-polysansbulky gradient-text text-lg md:text-xl">Create A Grant</p>
             <p className="text-sm text-secondary_text_dark">
               All participants complete your scope of work, and the best
               submission(s) are rewarded. Get multiple options to choose from.
             </p>
           </div>
           <Link href={paths.create_grant}>
-            <PrimaryButton>
+            <PrimaryButton className="w-full md:w-auto">
               <div>Create A Grant</div>
             </PrimaryButton>
           </Link>
@@ -54,4 +56,4 @@ export default function CreateListingModal({
       </div>
     </Modal>
   );
-}
+}  
