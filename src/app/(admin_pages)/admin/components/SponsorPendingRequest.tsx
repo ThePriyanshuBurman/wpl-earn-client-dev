@@ -161,7 +161,7 @@ export default function ({ refreshKPIs }: { refreshKPIs?: () => void }) {
                 tableData.map((c, i) => {
                   return (
                     <div
-                      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 w-full p-4 text-sm"
+                      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 w-full p-4 text-sm items-center"
                       key={i}
                     >
                       <p className="truncate">{c.companyName}</p>
@@ -169,13 +169,13 @@ export default function ({ refreshKPIs }: { refreshKPIs?: () => void }) {
                       <p className="truncate">{c.companyTwitter}</p>
                       <p>{moment(new Date(c.createdAt)).format("DD MMM YY")}</p>
   
-                      <div className="flex">
+                      <div className="flex justify-center">
                         <Link href={`${paths.sponsor_details}/${c.id}`} target="_blank">
                           <button className="text-sky-500 hover:underline">View</button>
                         </Link>
                       </div>
   
-                      <div className="flex items-center gap-2 text-xs">
+                      <div className="flex flex-wrap items-center gap-2 text-xs justify-center">
                         <button
                           onClick={() => {
                             setSelectedSponsor(c);

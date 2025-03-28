@@ -42,7 +42,7 @@ export default function UploadCSVModal({
   return (
     <Modal open={open} close={close} title="Upload CSV">
       <div
-        className="flex items-center justify-center h-[40vh] w-[90vw] md:w-[60vw] lg:w-[30vw] border border-border_dark border-dashed rounded-md p-4"
+        className="flex items-center justify-center w-full max-w-full md:max-w-[60vw] lg:max-w-[30vw] h-auto border border-border_dark border-dashed rounded-md p-4"
         onDragOver={(e) => {
           setDragOver(true);
           e.preventDefault();
@@ -66,18 +66,15 @@ export default function UploadCSVModal({
         onDrop={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          // @ts-ignore
           if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            // @ts-ignore
             const Dragedfile = e.dataTransfer.files[0];
             handleFileUploadLocalDrag(Dragedfile);
           } else alert("Please select a file");
-          // @ts-ignore
           e.dataTransfer.clearData();
         }}
       >
-        <div className="flex flex-col gap-4 mx-auto text-center">
-          <img src="/images/png/csv.png" alt="CSV" className="h-24 sm:h-32 mx-auto" />
+        <div className="flex flex-col gap-4 mx-auto text-center w-full">
+          <img src="/images/png/csv.png" alt="CSV" className="h-20 sm:h-24 md:h-28 mx-auto" />
   
           {selectedFile ? (
             <div className="flex flex-col gap-4 items-center">
@@ -100,7 +97,7 @@ export default function UploadCSVModal({
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <p className="text-xs sm:text-sm text-secondary_text_dark">
                 Drag your file here, or{" "}
                 <input

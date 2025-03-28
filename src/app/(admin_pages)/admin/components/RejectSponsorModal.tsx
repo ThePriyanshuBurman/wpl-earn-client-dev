@@ -19,7 +19,7 @@ export default function RejectSponsorModal({
 }) {
   return (
     <Modal open={open} close={close} title="Enter Rejection Detail">
-      <div className="flex flex-col gap-6 w-full max-w-[90vw] sm:w-[60vw] md:w-[40vw] lg:w-[25vw] p-4">
+      <div className="flex flex-col gap-6 w-full max-w-[95vw] sm:max-w-[80vw] md:max-w-[60vw] lg:max-w-[40vw] xl:max-w-[30vw] p-4">
         <textarea
           rows={6}
           onInput={(e: any) => {
@@ -37,5 +37,5 @@ export default function RejectSponsorModal({
         </div>
       </div>
     </Modal>
-  );
+  );  
 }  

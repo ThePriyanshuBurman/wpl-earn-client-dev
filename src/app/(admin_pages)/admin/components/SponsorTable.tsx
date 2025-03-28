@@ -158,7 +158,7 @@ export default function () {
         <div className="flex flex-wrap items-center justify-between w-full border-b border-border_dark gap-4">
           <Tabs items={items} active={activeTab} onClick={setActiveTab} />
           <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-            <div className="w-full sm:w-[180px]">
+            <div className="w-full sm:w-[180px] max-w-full">
               <SelectWpl
                 value={status}
                 options={statusOptions}
@@ -168,7 +168,7 @@ export default function () {
                 placeholder="Select Status"
               />
             </div>
-            <div className="w-full sm:w-[320px]">
+            <div className="w-full sm:w-[320px] max-w-full">
               <Input
                 placeholder="Search by company name, URL, or Twitter"
                 value={searchTerm}

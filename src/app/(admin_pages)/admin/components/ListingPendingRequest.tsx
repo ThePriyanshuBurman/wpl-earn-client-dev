@@ -177,6 +177,7 @@ export default function PendingListingRequests({ refreshKPIs }: { refreshKPIs?: 
         }
         close={() => setOpenRejectListingModal(false)}
       />
+  
       <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-4 md:px-8">
         <div className="flex flex-col gap-4">
           <p className="text-lg md:text-2xl font-polysansbulky gradient-text py-1.5 text-center md:text-left">
@@ -192,148 +193,121 @@ export default function PendingListingRequests({ refreshKPIs }: { refreshKPIs?: 
             </div>
           </div>
   
-          <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
-            {activeTab === "bounties" ? (
-              <div>
-                <div className="hidden md:flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
-                  <p className="w-full">Title</p>
-                  <p className="w-full">Posted by</p>
-                  <p className="w-full">Rewards</p>
-                  <p className="w-full">End Date</p>
-                  <p className="w-full">Created At</p>
-                  <p className="w-full">Details</p>
-                  <p className="w-full">Action</p>
-                </div>
-                <div className="flex flex-col gap-4 w-full font-polysansbulky">
-                  {loading ? (
-                    <div className="p-4 flex w-full">
-                      <PageLoading />
-                    </div>
-                  ) : bountyTableData.length ? (
-                    bountyTableData.map((c, i) => (
-                      <div
-                        className="flex flex-col md:flex-row items-center gap-4 w-full p-4 text-sm"
-                        key={i}
-                      >
-                        <p className="w-full truncate">{c.title}</p>
-                        <p className="w-full truncate text-sky-500">
-                          <Link
-                            href={`${paths.sponsor_public_profile}/${c?.sponsor?.companyUserName}`}
-                            target="_blank"
-                            className="hover:underline"
-                          >
-                            {c?.sponsor?.companyName}
-                          </Link>
-                        </p>
-                        <p className="w-full truncate">
-                          {c.rewards} {c.denomination}
-                        </p>
-                        <p className="w-full">{moment(c.endDate).format("DD MMM YY")}</p>
-                        <p className="w-full">{moment(c.createdAt).format("DD MMM YY")}</p>
-                        <div className="w-full flex">
-                          <Link href={`${paths.bounty_details}/${c.id}`} target="_blank">
-                            <button className="text-sky-500 hover:underline">View</button>
-                          </Link>
-                        </div>
-                        <div className="w-full flex items-center gap-4 text-xs">
-                          <button
-                            onClick={() => {
-                              setSelectedBounty(c);
-                              setOpenConfirmModal(true);
-                            }}
-                            className="w-max text-green-500 border border-green-500 rounded-lg px-2 py-1"
-                          >
-                            Approve
-                          </button>
-                          <button
-                            onClick={() => {
-                              setSelectedBounty(c);
-                              setOpenRejectListingModal(true);
-                            }}
-                            className="w-max text-red-500 border border-red-500 rounded-lg px-2 py-1"
-                          >
-                            Reject
-                          </button>
-                        </div>
+          {/* Added Overflow Scroll for Responsive Table */}
+          <div className="overflow-x-auto">
+            <div className="flex flex-col w-full h-full bg-secondary_dark rounded-md min-w-[600px]">
+              {activeTab === "bounties" ? (
+                <div>
+                  <div className="hidden md:flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+                    <p className="w-full">Title</p>
+                    <p className="w-full">Posted by</p>
+                    <p className="w-full">Rewards</p>
+                    <p className="w-full">End Date</p>
+                    <p className="w-full">Created At</p>
+                    <p className="w-full">Details</p>
+                    <p className="w-full">Action</p>
+                  </div>
+  
+                  <div className="flex flex-col gap-4 w-full font-polysansbulky">
+                    {loading ? (
+                      <div className="p-4 flex w-full">
+                        <PageLoading />
                       </div>
-                    ))
-                  ) : (
-                    <div className="p-4 flex w-full">No Data found!!</div>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div className="hidden md:flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
-                  <p className="w-full">Title</p>
-                  <p className="w-full">Organization</p>
-                  <p className="w-full">Avg Grant Size</p>
-                  <p className="w-full">Approved Amount</p>
-                  <p className="w-full">Created At</p>
-                  <p className="w-full">Details</p>
-                  <p className="w-full">Action</p>
-                </div>
-                <div className="flex flex-col gap-4 w-full font-polysansbulky">
-                  {loading ? (
-                    <div className="p-4 flex w-full">
-                      <PageLoading />
-                    </div>
-                  ) : grantTableData.length ? (
-                    grantTableData.map((c, i) => (
-                      <div
-                        className="flex flex-col md:flex-row items-center gap-4 w-full p-4 text-sm"
-                        key={i}
-                      >
-                        <p className="w-full truncate">{c.title}</p>
-                        <p className="w-full truncate text-sky-500">
-                          <Link
-                            href={`${paths.sponsor_public_profile}/${c?.sponsor?.companyUserName}`}
-                            target="_blank"
-                            className="hover:underline"
-                          >
-                            {c.orgHandle}
-                          </Link>
-                        </p>
-                        <p className="w-full truncate">
-                          {c.avgGrantSize} {c.prizeCurrency}
-                        </p>
-                        <p className="w-full truncate">
-                          {c.approvedAmount} {c.prizeCurrency}
-                        </p>
-                        <p className="w-full">{moment(c.createdAt).format("DD MMM YY")}</p>
-                        <div className="w-full flex">
-                          <Link href={`${paths.grants_details}/${c.id}`} target="_blank">
-                            <button className="text-sky-500 hover:underline">View</button>
-                          </Link>
+                    ) : bountyTableData.length ? (
+                      bountyTableData.map((c, i) => (
+                        <div className="flex flex-col md:flex-row items-center gap-4 w-full p-4 text-sm" key={i}>
+                          <p className="w-full truncate">{c.title}</p>
+                          <p className="w-full truncate text-sky-500">
+                            <Link href={`${paths.sponsor_public_profile}/${c?.sponsor?.companyUserName}`} target="_blank" className="hover:underline">
+                              {c?.sponsor?.companyName}
+                            </Link>
+                          </p>
+                          <p className="w-full truncate">{c.rewards} {c.denomination}</p>
+                          <p className="w-full">{moment(c.endDate).format("DD MMM YY")}</p>
+                          <p className="w-full">{moment(c.createdAt).format("DD MMM YY")}</p>
+                          <div className="w-full flex">
+                            <Link href={`${paths.bounty_details}/${c.id}`} target="_blank">
+                              <button className="text-sky-500 hover:underline">View</button>
+                            </Link>
+                          </div>
+                          <div className="w-full flex items-center gap-4 text-xs">
+                            <button
+                              onClick={() => { setSelectedBounty(c); setOpenConfirmModal(true); }}
+                              className="w-max text-green-500 border border-green-500 rounded-lg px-2 py-1"
+                            >
+                              Approve
+                            </button>
+                            <button
+                              onClick={() => { setSelectedBounty(c); setOpenRejectListingModal(true); }}
+                              className="w-max text-red-500 border border-red-500 rounded-lg px-2 py-1"
+                            >
+                              Reject
+                            </button>
+                          </div>
                         </div>
-                        <div className="w-full flex items-center gap-4 text-xs">
-                          <button
-                            onClick={() => {
-                              setSelectedGrant(c);
-                              setOpenConfirmModal(true);
-                            }}
-                            className="w-max text-green-500 border border-green-500 rounded-lg px-2 py-1"
-                          >
-                            Approve
-                          </button>
-                          <button
-                            onClick={() => {
-                              setSelectedGrant(c);
-                              setOpenRejectListingModal(true);
-                            }}
-                            className="w-max text-red-500 border border-red-500 rounded-lg px-2 py-1"
-                          >
-                            Reject
-                          </button>
-                        </div>
+                      ))
+                    ) : (
+                      <div className="p-4 flex w-full">No Data found!!</div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div className="hidden md:flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+                    <p className="w-full">Title</p>
+                    <p className="w-full">Organization</p>
+                    <p className="w-full">Avg Grant Size</p>
+                    <p className="w-full">Approved Amount</p>
+                    <p className="w-full">Created At</p>
+                    <p className="w-full">Details</p>
+                    <p className="w-full">Action</p>
+                  </div>
+  
+                  <div className="flex flex-col gap-4 w-full font-polysansbulky">
+                    {loading ? (
+                      <div className="p-4 flex w-full">
+                        <PageLoading />
                       </div>
-                    ))
-                  ) : (
-                    <div className="p-4 flex w-full">No Data found!!</div>
-                  )}
+                    ) : grantTableData.length ? (
+                      grantTableData.map((c, i) => (
+                        <div className="flex flex-col md:flex-row items-center gap-4 w-full p-4 text-sm" key={i}>
+                          <p className="w-full truncate">{c.title}</p>
+                          <p className="w-full truncate text-sky-500">
+                            <Link href={`${paths.sponsor_public_profile}/${c?.sponsor?.companyUserName}`} target="_blank" className="hover:underline">
+                              {c.orgHandle}
+                            </Link>
+                          </p>
+                          <p className="w-full truncate">{c.avgGrantSize} {c.prizeCurrency}</p>
+                          <p className="w-full truncate">{c.approvedAmount} {c.prizeCurrency}</p>
+                          <p className="w-full">{moment(c.createdAt).format("DD MMM YY")}</p>
+                          <div className="w-full flex">
+                            <Link href={`${paths.grants_details}/${c.id}`} target="_blank">
+                              <button className="text-sky-500 hover:underline">View</button>
+                            </Link>
+                          </div>
+                          <div className="w-full flex items-center gap-4 text-xs">
+                            <button
+                              onClick={() => { setSelectedGrant(c); setOpenConfirmModal(true); }}
+                              className="w-max text-green-500 border border-green-500 rounded-lg px-2 py-1"
+                            >
+                              Approve
+                            </button>
+                            <button
+                              onClick={() => { setSelectedGrant(c); setOpenRejectListingModal(true); }}
+                              className="w-max text-red-500 border border-red-500 rounded-lg px-2 py-1"
+                            >
+                              Reject
+                            </button>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="p-4 flex w-full">No Data found!!</div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -20,17 +20,17 @@ export default function GrantTable({
     console.log({ grantTableData });
   });
   return (
-    <div className="flex flex-col w-full h-full bg-secondary_dark rounded-md overflow-auto">
+    <div className="flex flex-col w-full h-full bg-secondary_dark rounded-md overflow-x-auto">
       <div className="flex flex-wrap items-center w-full p-4 border-b border-border_dark text-secondary_text_dark text-sm md:text-base">
-        <p className="w-1/2 md:w-1/6 text-center">Title</p>
-        <p className="w-1/2 md:w-1/6 text-center">Organization</p>
-        <p className="w-1/2 md:w-1/6 text-center">Avg Grant Size</p>
-        <p className="w-1/2 md:w-1/6 text-center">Approved Amount</p>
-        <p className="w-1/2 md:w-1/6 text-center">Details</p>
-        <p className="w-1/2 md:w-1/6 text-center">Action</p>
+        <p className="w-1/2 md:w-1/6 min-w-[120px] text-center whitespace-nowrap">Title</p>
+        <p className="w-1/2 md:w-1/6 min-w-[120px] text-center whitespace-nowrap">Organization</p>
+        <p className="w-1/2 md:w-1/6 min-w-[120px] text-center whitespace-nowrap">Avg Grant Size</p>
+        <p className="w-1/2 md:w-1/6 min-w-[120px] text-center whitespace-nowrap">Approved Amount</p>
+        <p className="w-1/2 md:w-1/6 min-w-[120px] text-center whitespace-nowrap">Details</p>
+        <p className="w-1/2 md:w-1/6 min-w-[120px] text-center whitespace-nowrap">Action</p>
       </div>
   
-      <div className="flex flex-col gap-2 w-full font-polysansbulky overflow-auto">
+      <div className="flex flex-col gap-2 w-full font-polysansbulky overflow-x-auto">
         {loading ? (
           <div className="p-4 flex w-full justify-center">
             <PageLoading />
@@ -42,8 +42,8 @@ export default function GrantTable({
                 className="flex flex-wrap items-center w-full p-4 text-xs md:text-sm text-center"
                 key={i}
               >
-                <p className="w-1/2 md:w-1/6 truncate">{c.title}</p>
-                <p className="w-1/2 md:w-1/6 truncate text-sky-500">
+                <p className="w-1/2 md:w-1/6 min-w-[120px] truncate">{c.title}</p>
+                <p className="w-1/2 md:w-1/6 min-w-[120px] truncate text-sky-500">
                   <Link
                     href={`${paths.sponsor_public_profile}/${c?.sponsor?.companyUserName}`}
                     target="_blank"
@@ -52,7 +52,7 @@ export default function GrantTable({
                     {c.orgHandle}
                   </Link>
                 </p>
-                <p className="w-1/2 md:w-1/6 flex items-center justify-center gap-2 truncate">
+                <p className="w-1/2 md:w-1/6 min-w-[120px] flex items-center justify-center gap-2 truncate">
                   <img
                     src={
                       c?.prizeCurrency === "USDC"
@@ -64,7 +64,7 @@ export default function GrantTable({
                   />
                   {c.avgGrantSize} {c?.prizeCurrency}
                 </p>
-                <p className="w-1/2 md:w-1/6 flex items-center justify-center gap-2 truncate">
+                <p className="w-1/2 md:w-1/6 min-w-[120px] flex items-center justify-center gap-2 truncate">
                   <img
                     src={
                       c?.prizeCurrency === "USDC"
@@ -76,10 +76,10 @@ export default function GrantTable({
                   />
                   {c.approvedAmount} {c?.prizeCurrency}
                 </p>
-                <div className="w-1/2 md:w-1/6">
+                <div className="w-1/2 md:w-1/6 min-w-[120px]">
                   <button className="text-sky-500 hover:underline">View</button>
                 </div>
-                <div className="w-1/2 md:w-1/6 flex justify-center gap-2">
+                <div className="w-1/2 md:w-1/6 min-w-[120px] flex justify-center gap-2">
                   {["ACCEPTED", "REJECTED"].includes(c.state) ? (
                     "--"
                   ) : (

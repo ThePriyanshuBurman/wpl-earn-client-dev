@@ -40,18 +40,20 @@ export default function GrantCard({
 
   return (
     <div
-      className="w-full h-max bg-[#0c1517] border border-[#172527] rounded-lg"
+      className="w-full max-w-sm mx-auto h-max bg-[#0c1517] border border-[#172527] rounded-lg"
       key={index}
     >
+      {/* Image */}
       <img
         src={grantLogo}
-        className="rounded-t-lg h-[250px] w-full object-cover"
+        className="rounded-t-lg h-[200px] sm:h-[250px] w-full object-cover"
         alt=""
       />
-
+  
+      {/* Content */}
       <div className="flex flex-col gap-6 p-4">
-        <div className="flex flex-col gap-2 ">
-          <p className="text-lg">{data?.title}</p>
+        <div className="flex flex-col gap-2">
+          <p className="text-base sm:text-lg">{data?.title}</p>
           <p className="flex items-center gap-2 text-sm">
             <img
               src={
@@ -65,9 +67,10 @@ export default function GrantCard({
             {data?.avgGrantSize} {data?.prizeCurrency}
           </p>
         </div>
-
+  
+        {/* Button */}
         <Link href={`${paths.grants}/${data.id}`} target="_blank">
-          <button className="relative border border-[#46cfb6] hover:bg-[#46cfb6] transition-all hover:text-black py-2 rounded-lg w-full">
+          <button className="relative border border-[#46cfb6] hover:bg-[#46cfb6] transition-all hover:text-black py-2 sm:py-3 rounded-lg w-full">
             <BorderBeam
               size={40}
               initialOffset={20}
@@ -84,4 +87,4 @@ export default function GrantCard({
       </div>
     </div>
   );
-}
+}  

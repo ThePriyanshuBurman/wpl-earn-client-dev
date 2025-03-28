@@ -102,44 +102,48 @@ export default function BlacklistSponsorModal({
 
   return (
     <Modal open={open} close={handleClose} title="BlackList Sponsor">
-      <div className="flex flex-col justify-between gap-8 w-full max-w-[90vw] md:max-w-[50vw] lg:max-w-[30vw] h-full">
+      <div className="flex flex-col justify-between gap-6 w-full max-w-[95vw] sm:max-w-[75vw] md:max-w-[50vw] lg:max-w-[35vw] h-full overflow-y-auto p-4">
+        {/* Search Input */}
         <Input
           placeholder="Search sponsor"
           onInput={(e: any) => handleSearch(e.target.value)}
         />
-
+  
+        {/* Content Section */}
         <div className="flex flex-col min-h-[200px] w-full">
           {loading ? (
             <PageLoading />
           ) : result?.length ? (
             <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-4 relative">
+              <div className="relative p-2 border border-border_dark rounded-lg bg-secondary_dark">
                 {/* View Profile Button */}
                 <a
                   href={`${paths.sponsor_public_profile}/${result[0].companyUserName}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute top-0 right-0 flex items-center gap-1 px-2 py-1 rounded-md border border-border_dark text-sm hover:bg-secondary_dark transition-all"
+                  className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 rounded-md border border-border_dark text-xs sm:text-sm hover:bg-secondary transition-all"
                 >
                   <Eye className="w-4 h-4" />
                   View Profile
                 </a>
-
+  
                 <div className="flex flex-col gap-4 mt-6">
                   <div className="flex flex-col gap-1">
-                    <p className="text-sm text-secondary_text_dark">Company Name</p>
-                    <p>{result[0]?.companyName || "N/A"}</p>
+                    <p className="text-xs sm:text-sm text-secondary_text_dark">Company Name</p>
+                    <p className="text-sm">{result[0]?.companyName || "N/A"}</p>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <p className="text-sm text-secondary_text_dark">Company URL</p>
-                    <p>{result[0]?.companyUrl || "N/A"}</p>
+                    <p className="text-xs sm:text-sm text-secondary_text_dark">Company URL</p>
+                    <p className="text-sm break-all">{result[0]?.companyUrl || "N/A"}</p>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <p className="text-sm text-secondary_text_dark">Company Twitter</p>
-                    <p>{result[0]?.companyTwitter || "N/A"}</p>
+                    <p className="text-xs sm:text-sm text-secondary_text_dark">Company Twitter</p>
+                    <p className="text-sm break-all">{result[0]?.companyTwitter || "N/A"}</p>
                   </div>
                 </div>
               </div>
+  
+              {/* Reason Textarea */}
               <div className="flex flex-col gap-1">
                 <textarea
                   name="reason"
@@ -153,19 +157,18 @@ export default function BlacklistSponsorModal({
                   }}
                   className={`bg-secondary_dark rounded-md border ${
                     reasonError ? "border-red-500" : "border-border_dark"
-                  } p-4 text-sm focus:outline-none resize-none`}
+                  } p-3 text-sm focus:outline-none resize-none`}
                 />
-                {reasonError && (
-                  <p className="text-sm text-red-500">Reason is required</p>
-                )}
+                {reasonError && <p className="text-sm text-red-500">Reason is required</p>}
               </div>
             </div>
           ) : (
-            <p className="text-sm text-secondary_text_dark">No result found!</p>
+            <p className="text-sm text-secondary_text_dark text-center">No result found!</p>
           )}
         </div>
-
-        <div className="flex items-center w-full gap-4">
+  
+        {/* Action Buttons */}
+        <div className="flex flex-wrap justify-center sm:justify-start w-full gap-3">
           <SecondaryButton onClick={handleClose}>Close</SecondaryButton>
           <AlertButton onClick={handleBlacklistSponsor} loading={loading}>
             Confirm Blacklist
@@ -174,4 +177,4 @@ export default function BlacklistSponsorModal({
       </div>
     </Modal>
   );
-}
+}  

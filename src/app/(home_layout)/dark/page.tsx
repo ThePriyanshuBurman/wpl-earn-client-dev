@@ -169,71 +169,73 @@ export default function New() {
         <Particles className="absolute inset-0 z-0" quantity={100} ease={80} color={"#3de273"} refresh />
   
         {/* REORDERED SECTION */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full px-[8%] z-20 space-y-12 md:space-y-0">
-          {/* Left Section */}
-          <div className="space-y-6">
-            {/* Total Value Earned */}
-            <div className="bg-[#0c1517] border border-[#172527] backdrop-blur-sm p-4 rounded-lg">
-              <p className="text-sm font-normal text-gray-300">Total Value Earned</p>
-              <p className="text-xl font-[550] gradient-text">$23,44,2220</p>
-            </div>
-  
-            {/* How it Works */}
-            <div className="bg-[#0c1517] border border-[#172527] backdrop-blur-sm p-4 rounded-lg space-y-6">
-              <p className="font-medium text-lg">How it works</p>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-4">
-                  <div className="p-2 rounded-full bg-[#31353E] mx-auto w-max">
-                    <CircleUserRound size="22" className="text-[#3de273]" />
-                  </div>
-                  <div className="p-2 rounded-full bg-[#31353E] mx-auto w-max">
-                    <SparklesIcon size="22" className="text-[#3de273]" />
-                  </div>
-                  <div className="p-2 rounded-full bg-[#31353E] mx-auto w-max">
-                    <Wallet size="22" className="text-[#3de273]" />
-                  </div>
-                </div>
-                <div className="space-y-4 text-sm">
-                  <p className="font-semibold">Create your Profile</p>
-                  <p className="text-gray-400 text-xs">by telling us about yourself</p>
-                  <p className="font-semibold">Participate in Bounties & Projects</p>
-                  <p className="text-gray-400 text-xs">to build proof of work</p>
-                  <p className="font-semibold">Get Paid for Your Work</p>
-                  <p className="text-gray-400 text-xs">in global standards</p>
-                </div>
-              </div>
-            </div>
-  
-            {/* Recent Activity */}
-            <div className="bg-[#0c1517] border border-[#172527] backdrop-blur-sm p-4 rounded-lg">
-              <p className="font-medium text-lg">Recent Activity</p>
-              <AnimatedListDark />
-            </div>
+        {/* REORDERED SECTION */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full px-4 sm:px-8 md:px-[8%] z-20">
+  {/* Left Section */}
+  <div className="space-y-6">
+    {/* Total Value Earned */}
+    <div className="bg-[#0c1517] border border-[#172527] backdrop-blur-sm p-4 rounded-lg">
+      <p className="text-sm font-normal text-gray-300">Total Value Earned</p>
+      <p className="text-xl font-semibold gradient-text">$23,44,2220</p>
+    </div>
+
+    {/* How it Works */}
+    <div className="bg-[#0c1517] border border-[#172527] backdrop-blur-sm p-4 rounded-lg space-y-6">
+      <p className="font-medium text-lg">How it works</p>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-4">
+          <div className="p-2 rounded-full bg-[#31353E] mx-auto w-max">
+            <CircleUserRound size="22" className="text-[#3de273]" />
           </div>
-  
-          {/* Listings Section */}
-          <div className="md:col-span-2">
-            <div className="space-y-6">
-              <div className="w-full border-b border-[#172527]">
-                <div className="grid grid-cols-3 text-center text-sm cursor-pointer">
-                  <div className="py-4 border-b border-[#46CFB6]">Live</div>
-                  <p>All</p>
-                  <p>Completed</p>
-                </div>
-                <button className="w-full text-center bg-[#0c1517] border border-[#172527] rounded-lg px-4 py-2 mt-4">
-                  Filters
-                </button>
-              </div>
-  
-              {/* List Items */}
-              <div className="space-y-4">
-                {bountyList.map((d: any, i) => (
-                  <ListCardDarkFlip data={d} key={i} index={i} />
-                ))}
-              </div>
-            </div>
+          <div className="p-2 rounded-full bg-[#31353E] mx-auto w-max">
+            <SparklesIcon size="22" className="text-[#3de273]" />
+          </div>
+          <div className="p-2 rounded-full bg-[#31353E] mx-auto w-max">
+            <Wallet size="22" className="text-[#3de273]" />
           </div>
         </div>
+        <div className="space-y-4 text-sm">
+          <p className="font-semibold">Create your Profile</p>
+          <p className="text-gray-400 text-xs">by telling us about yourself</p>
+          <p className="font-semibold">Participate in Bounties & Projects</p>
+          <p className="text-gray-400 text-xs">to build proof of work</p>
+          <p className="font-semibold">Get Paid for Your Work</p>
+          <p className="text-gray-400 text-xs">in global standards</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Recent Activity */}
+    <div className="bg-[#0c1517] border border-[#172527] backdrop-blur-sm p-4 rounded-lg">
+      <p className="font-medium text-lg">Recent Activity</p>
+      <AnimatedListDark />
+    </div>
+  </div>
+
+  {/* Listings Section */}
+  <div className="md:col-span-2">
+    <div className="space-y-6">
+      <div className="w-full border-b border-[#172527]">
+        <div className="grid grid-cols-3 text-center text-sm cursor-pointer">
+          <div className="py-4 border-b border-[#46CFB6]">Live</div>
+          <p>All</p>
+          <p>Completed</p>
+        </div>
+        <button className="w-full text-center bg-[#0c1517] border border-[#172527] rounded-lg px-4 py-2 mt-4">
+          Filters
+        </button>
+      </div>
+
+      {/* List Items */}
+      <div className="space-y-4">
+        {bountyList.map((d: any, i) => (
+          <ListCardDarkFlip data={d} key={i} index={i} />
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
       </div>
     </>
   );
