@@ -9,23 +9,27 @@ import {
   List,
   UsersRound,
   FileClock,
-  Menu,
   X
 } from "lucide-react";
 import { useEffect, useState } from "react";
+
+interface SideBarProps {
+  activeSideBar: string;
+  setActiveSideBar: (value: string) => void;
+  refreshKPIs?: () => void;
+  isOpen: boolean;
+  onClose: () => void;
+}
 
 export default function SideBar({
   activeSideBar,
   setActiveSideBar,
   refreshKPIs,
-}: {
-  activeSideBar: string;
-  setActiveSideBar: any;
-  refreshKPIs?: () => void;
-}) {
+  isOpen,
+  onClose
+}: SideBarProps) {
   const [showSponsorOptions, setShowSponsorOptions] = useState(false);
   const [showListingOptions, setShowListingOptions] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [adminKPIs, setAdminKPIs] = useState({
     sponsors: 0,
     listings: 0,
@@ -180,20 +184,29 @@ export default function SideBar({
 
   return (
     <>
-      {/* Mobile Menu Button */}
-      <button 
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-2 right-4 z-50 p-2 rounded-md bg-green-600/10 hover:bg-green-600/20 transition-all duration-300 transform hover:scale-105"
-      >
-        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={onClose}
+        />
+      )}
 
       {/* Mobile Sidebar */}
-      <div className={`
-        lg:hidden fixed inset-0 z-40 bg-background_dark/95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out
-        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-      `}>
-        <div className="flex flex-col p-4 gap-2 w-full h-full text-sm pt-16 bg-background_dark/80">
+      <div
+        className={`
+          lg:hidden fixed inset-y-0 left-0 w-[80%] max-w-[300px] bg-primary_dark z-50
+          transform transition-transform duration-300 ease-in-out
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 p-2 hover:bg-green-600/10 rounded-md"
+        >
+          <X size={24} />
+        </button>
+        <div className="h-full overflow-y-auto pt-16 px-4">
           <SidebarContent />
         </div>
       </div>

@@ -42,9 +42,10 @@ export function UserCardDark({ activity, i }: { activity: any; i: number }) {
         className="h-[50px] w-[50px] object-cover rounded-md"
       /> */}
       <img
-        src="/images/png/avatar2.png"
+        src={activity?.imageUrl ? activity.imageUrl : "/images/png/avatar2.png"}
         alt=""
         className="h-[50px] w-[50px] object-cover rounded-md"
+        onError={(e) => { e.currentTarget.src = "/images/png/avatar2.png"; }}
       />
 
       <div className="flex flex-col w-full">
