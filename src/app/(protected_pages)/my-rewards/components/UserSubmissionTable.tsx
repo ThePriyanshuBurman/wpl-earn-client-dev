@@ -86,66 +86,73 @@ export default function () {
         open={openMessageInfoModal}
         close={() => setOpenMessageInfoModal(false)}
       />
+      
       <div className="flex flex-col gap-4 z-20 w-full text-white mt-4">
-        <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
-          <div className="flex items-center w-full gap-6 p-4 border-b text-secondary_text_dark border-border_dark text-sm">
-            <p className="w-full">Title</p>
-            <p className="w-full">Posted by</p>
-            <p className="w-full">Rewards</p>
-            <p className="w-full">Duration</p>
-            <p className="w-full">Status</p>
-            <p className="w-full">Submitted at</p>
+        {/* Enable horizontal scrolling on small screens */}
+        <div className="overflow-x-auto bg-secondary_dark rounded-md">
+          {/* Table Header */}
+          <div className="flex items-center w-full gap-x-2 sm:gap-6 p-4 border-b text-secondary_text_dark border-border_dark text-xs sm:text-sm">
+            <p className="w-2/5 sm:w-1/4 truncate">Title</p>
+            <p className="w-1/5 sm:w-1/6 truncate">Posted by</p>
+            <p className="w-1/5 sm:w-1/6 truncate">Rewards</p>
+            <p className="hidden sm:block w-1/6 truncate">Duration</p>
+            <p className="w-1/5 sm:w-1/6 truncate">Status</p>
+            <p className="w-1/5 sm:w-1/6 truncate">Submitted at</p>
           </div>
-
+  
+          {/* Table Content */}
           <div className="flex flex-col gap-2 w-full">
-            {cryptoBounties.map((c, i) => {
-              return (
-                <div
-                  className="flex items-center w-full p-4 gap-4 text-sm font-medium"
-                  key={i}
-                >
-                  <p className="w-full truncate font-polysansbulky">
-                    {c.title}
+            {cryptoBounties.map((c, i) => (
+              <div
+                className="flex items-center w-full p-4 gap-x-2 sm:gap-4 text-xs sm:text-sm font-medium"
+                key={i}
+              >
+                {/* Title */}
+                <p className="w-2/5 sm:w-1/4 truncate font-polysansbulky">{c.title}</p>
+  
+                {/* Posted By */}
+                <p className="w-1/5 sm:w-1/6 truncate">{c.postedBy}</p>
+  
+                {/* Rewards */}
+                <p className="w-1/5 sm:w-1/6 flex items-center gap-2 truncate font-polysansbulky">
+                  <img src="/images/png/usdc.png" className="h-4" alt="USDC" />
+                  {c.rewards}
+                </p>
+  
+                {/* Duration (Hidden on extra small screens) */}
+                <p className="hidden sm:block w-1/6 truncate">{c.duration}</p>
+  
+                {/* Status */}
+                <div className="flex items-center gap-2 w-1/5 sm:w-1/6">
+                  <p className={`px-2 py-1 rounded-lg w-max min-w-[90px] text-center truncate
+                    ${
+                      c.status === "completed"
+                        ? "text-green-500 bg-green-600/10"
+                        : c.status === "ongoing"
+                        ? "text-sky-500 bg-sky-600/10"
+                        : c.status === "pending"
+                        ? "text-gray-300 bg-gray-600/20"
+                        : "text-red-500 bg-red-600/10"
+                    }`}
+                  >
+                    {c.status}
                   </p>
-                  <p className="w-full truncate">{c.postedBy}</p>
-                  <p className="w-full flex items-center gap-2 truncate font-polysansbulky">
-                    <img src="/images/png/usdc.png" className="h-4" alt="" />
-                    {c.rewards}
-                  </p>
-                  <p className="w-full truncate">{c.duration}</p>
-                  <div className="flex items-center gap-2 w-full">
-                    {c.status === "completed" ? (
-                      <p className="px-2 py-1 rounded-lg w-max truncate text-green-500 bg-green-600/10">
-                        {c.status}
-                      </p>
-                    ) : c.status === "ongoing" ? (
-                      <p className="px-2 py-1 rounded-lg w-max truncate text-sky-500 bg-sky-600/10">
-                        {c.status}
-                      </p>
-                    ) : c.status === "pending" ? (
-                      <p className="px-2 py-1 rounded-lg w-max truncate text-gray-300 bg-gray-600/20">
-                        {c.status}
-                      </p>
-                    ) : (
-                      <p className="px-2 py-1 rounded-lg w-max truncate text-red-500 bg-red-600/10">
-                        {c.status}
-                      </p>
-                    )}
-                    {c.status === "rejected" ? (
-                      <button onClick={() => setOpenMessageInfoModal(true)}>
-                        <Info size={"14"} />
-                      </button>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  <p className="w-full truncate">24th Feb 2025</p>
+  
+                  {/* Info Button for Rejected Bounties */}
+                  {c.status === "rejected" && (
+                    <button onClick={() => setOpenMessageInfoModal(true)}>
+                      <Info size="14" />
+                    </button>
+                  )}
                 </div>
-              );
-            })}
+  
+                {/* Submitted At */}
+                <p className="w-1/5 sm:w-1/6 truncate">24th Feb 2025</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </>
   );
-}
+}  

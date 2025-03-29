@@ -47,11 +47,11 @@ export default function Page() {
       {loading ? (
         <PageLoading />
       ) : (
-        <div className="flex flex-col gap-6 w-[30%]">
-          {/* <Link href={paths.bounties}> */}
+        <div className="flex flex-col gap-6 w-full max-w-sm md:max-w-md lg:max-w-lg px-4">
+          {/* Back Button */}
           <BackButton onClick={() => history.back()} />
-          {/* </Link> */}
-
+  
+          {/* Notification Image */}
           {[
             NotificationStates.BOUNTY_VERIFIED,
             NotificationStates.SPONSOR_VERIFIED,
@@ -60,8 +60,8 @@ export default function Page() {
           ].includes(notificationDetails?.header) ? (
             <img
               src="/images/png/approved.png"
-              className="w-[50px] h-auto mx-auto"
-              alt=""
+              className="w-12 h-12 md:w-14 md:h-14 mx-auto"
+              alt="Approved"
             />
           ) : [
               NotificationStates.SPONOSOR_NOT_VERIFIED,
@@ -70,26 +70,31 @@ export default function Page() {
             ].includes(notificationDetails?.header) ? (
             <img
               src="/images/png/reject.png"
-              className="w-[50px] h-auto mx-auto"
-              alt=""
+              className="w-12 h-12 md:w-14 md:h-14 mx-auto"
+              alt="Rejected"
             />
           ) : (
             <img
               src="/images/png/trophy.png"
-              className="w-[50px] h-auto mx-auto"
-              alt=""
+              className="w-12 h-12 md:w-14 md:h-14 mx-auto"
+              alt="Trophy"
             />
           )}
-          <div className="flex items-center w-full justify-between">
-            <p>{notificationDetails?.header}</p>
-
+  
+          {/* Notification Header & Timestamp */}
+          <div className="flex flex-col md:flex-row items-center w-full justify-between text-center md:text-left">
+            <p className="text-sm md:text-base font-medium">{notificationDetails?.header}</p>
             <p className="text-xs text-secondary_text_dark">
               {moment(new Date(notificationDetails?.createdAt))?.fromNow()}
             </p>
           </div>
-          <p>{notificationDetails?.description}</p>
+  
+          {/* Notification Description */}
+          <p className="text-sm md:text-base text-center md:text-left">
+            {notificationDetails?.description}
+          </p>
         </div>
       )}
     </div>
   );
-}
+}  

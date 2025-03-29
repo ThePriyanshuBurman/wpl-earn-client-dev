@@ -17,37 +17,45 @@ export default function ConfirmActionModal({
 }) {
   return (
     <Modal open={open} close={close}>
-      <div className="flex flex-col gap-8 w-[25vw] h-full">
-        <div className="flex flex-col gap-6">
-          <p>
+      <div className="flex flex-col gap-6 md:gap-8 w-[90vw] max-w-md h-full">
+        {/* Confirmation Text */}
+        <div className="flex flex-col gap-4 md:gap-6">
+          <p className="text-sm md:text-base">
             Are you sure you want to{" "}
             {actionType === "withdraw" ? "withdraw" : "delete"} this listing?
           </p>
           <div className="flex flex-col gap-2">
-            <p className="text-sm text-secondary_text_dark">
+            <p className="text-xs md:text-sm text-secondary_text_dark">
               {actionType === "withdraw"
                 ? "Withdrawing this listing will remove it from active consideration, but you can resubmit it later if needed."
                 : "Deleting this listing will permanently remove it from the platform, and this action cannot be undone."}
             </p>
-            <p className="text-sm text-secondary_text_dark">
+            <p className="text-xs md:text-sm text-secondary_text_dark">
               Please confirm your choice below. If you have any questions, feel
               free to reach out to support.
             </p>
           </div>
         </div>
+  
+        {/* Checkbox */}
         <div className="flex items-center gap-2">
           <input type="checkbox" name="confirm" id="confirm" />
-          <p>I understand the consequences</p>
+          <p className="text-xs md:text-sm">I understand the consequences</p>
         </div>
-        <div className="flex items-center w-full gap-4">
-          <SecondaryButton onClick={close}>
+  
+        {/* Buttons */}
+        <div className="flex flex-wrap md:flex-nowrap items-center w-full gap-2 md:gap-4">
+          <SecondaryButton onClick={close} className="w-full md:w-auto">
             <p>Cancel</p>
           </SecondaryButton>
-          <PrimaryButton onClick={success} className="flex items-center text-nowrap text-center gap-3 font-medium border-2 border-primary_dark hover:border-border_dark duration-200 text-sm w-full py-2.5 px-4 text-white rounded-xl disabled:cursor-not-allowed bg-gradient-to-br from-[#e35353] to-[#f74d4d] hover:from-[#f74d4d] hover:to-[#e35353] hover:drop-shadow-md hover:shadow hover:shadow-red-500">
+          <PrimaryButton
+            onClick={success}
+            className="flex items-center justify-center text-nowrap text-center gap-3 font-medium border-2 border-primary_dark hover:border-border_dark duration-200 text-xs md:text-sm w-full md:w-auto py-2 px-4 text-white rounded-xl disabled:cursor-not-allowed bg-gradient-to-br from-[#e35353] to-[#f74d4d] hover:from-[#f74d4d] hover:to-[#e35353] hover:drop-shadow-md hover:shadow hover:shadow-red-500"
+          >
             <p>{actionType === "withdraw" ? "Withdraw" : "Delete"}</p>
           </PrimaryButton>
         </div>
       </div>
     </Modal>
   );
-}
+}  

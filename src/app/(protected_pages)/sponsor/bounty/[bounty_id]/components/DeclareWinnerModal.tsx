@@ -65,24 +65,28 @@ export default function ({
 
   return (
     <Modal open={open} close={close}>
-      <div className="flex flex-col gap-4 w-[35vw]">
+      <div className="flex flex-col gap-6 md:gap-8 w-[90vw] max-w-lg">
+        {/* Trophy Image */}
         <img
           src="/images/png/trophy.png"
-          className="w-20 h-auto mx-auto"
+          className="w-16 md:w-20 h-auto mx-auto"
           alt=""
         />
+  
+        {/* Title & Description */}
         <div className="flex flex-col gap-2 text-center">
-          <p className="font-polysansbulky text-[20px]">
+          <p className="font-polysansbulky text-lg md:text-xl">
             Reorder submissions as per rank
           </p>
-          <p className="text-secondary_text_dark text-sm">
-            Hold and drag a submission to move it around. Remember to rank
-            people in descending order.
+          <p className="text-secondary_text_dark text-xs md:text-sm">
+            Hold and drag a submission to move it around. Remember to rank people
+            in descending order.
           </p>
         </div>
-
+  
+        {/* Ranking List */}
         <div className="bg-secondary_dark rounded-md border border-border_dark">
-          <div className="grid grid-cols-9 text-sm text-secondary_text_dark p-2 border-b border-border_dark">
+          <div className="grid grid-cols-9 text-xs md:text-sm text-secondary_text_dark p-2 border-b border-border_dark">
             <div></div>
             <p className="col-span-2">Rank</p>
             <p className="col-span-3">Name</p>
@@ -94,15 +98,21 @@ export default function ({
             setSelectedUsers={setSelectedUsers}
           />
         </div>
-        <div className="flex items-center gap-4">
-          <SecondaryButton onClick={close}>
+  
+        {/* Buttons */}
+        <div className="flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-4">
+          <SecondaryButton onClick={close} className="w-full md:w-auto">
             <p>Close</p>
           </SecondaryButton>
-          <PrimaryButton onClick={handleDeclareWinners} loading={loading}>
+          <PrimaryButton
+            onClick={handleDeclareWinners}
+            loading={loading}
+            className="w-full md:w-auto"
+          >
             <p>Declare Winner's</p>
           </PrimaryButton>
         </div>
       </div>
     </Modal>
   );
-}
+}  

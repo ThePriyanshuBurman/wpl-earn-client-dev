@@ -130,62 +130,65 @@ export default function SponsorListing() {
         close={() => setOpenCreateListingModal(false)}
       />
       <div className="flex w-full h-full">
-        <div className="flex flex-col gap-6 pt-4 p-8 w-full h-full">
+        <div className="flex flex-col gap-6 pt-4 px-4 md:px-8 w-full h-full">
           <div className="flex flex-col gap-4">
-            <div className="flex w-full items-center justify-between">
-              <p className="text-2xl font-polysansbulky gradient-text">
+            <div className="flex flex-col md:flex-row w-full items-center md:justify-between gap-4">
+              <p className="text-lg sm:text-2xl font-polysansbulky gradient-text text-center md:text-left">
                 Hey {userDetails?.sponsor?.companyName}, keep up the participation rate!
               </p>
-              <div className="w-max">
-                <PrimaryButton onClick={() => setOpenCreateListingModal(true)}>
+              <div className="w-full md:w-max">
+                <PrimaryButton
+                  className="w-full md:w-auto"
+                  onClick={() => setOpenCreateListingModal(true)}
+                >
                   <Plus size={"14"} />
                   <p>Create New Listing</p>
                 </PrimaryButton>
               </div>
             </div>
-
-            <div className="grid grid-cols-5 gap-4">
-              <Card className="col-span-1">
+  
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Card>
                 <div className="flex flex-col gap-1">
-                  <p className="text-sm font-normal text-gray-300">Total</p>
-                  <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+                  <p className="text-xs sm:text-sm font-normal text-gray-300">Total</p>
+                  <p className="text-xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                     {sponsorKPIs.total}
                   </p>
                 </div>
               </Card>
               <Card>
                 <div className="flex flex-col gap-1">
-                  <p className="text-sm font-normal text-gray-300">Ongoing</p>
-                  <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+                  <p className="text-xs sm:text-sm font-normal text-gray-300">Ongoing</p>
+                  <p className="text-xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                     {sponsorKPIs.ongoing}
                   </p>
                 </div>
               </Card>
               <Card>
                 <div className="flex flex-col gap-1">
-                  <p className="text-sm font-normal text-gray-300">Pending</p>
-                  <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+                  <p className="text-xs sm:text-sm font-normal text-gray-300">Pending</p>
+                  <p className="text-xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                     {sponsorKPIs.pending}
                   </p>
                 </div>
               </Card>
               <Card>
                 <div className="flex flex-col gap-1">
-                  <p className="text-sm font-normal text-gray-300">Completed</p>
-                  <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+                  <p className="text-xs sm:text-sm font-normal text-gray-300">Completed</p>
+                  <p className="text-xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                     {sponsorKPIs.completed}
                   </p>
                 </div>
               </Card>
             </div>
           </div>
-
+  
           <div className="flex flex-col">
             <p className="font-polysansbulky">My Listings</p>
-            <div className="flex items-center justify-between w-full border-b border-border_dark">
+            <div className="flex flex-wrap items-center justify-between w-full border-b border-border_dark gap-4">
               <Tabs items={items} active={activeTab} onClick={setActiveTab} />
-              <div className="flex items-center gap-4">
-                <div className="w-[180px]">
+              <div className="flex flex-wrap gap-4 w-full md:w-auto">
+                <div className="w-full sm:w-[180px]">
                   <SelectWpl
                     value={listingStatus}
                     options={statusOptions}
@@ -193,7 +196,7 @@ export default function SponsorListing() {
                     placeholder="Select Status"
                   />
                 </div>
-                <div className="w-[320px]">
+                <div className="w-full sm:w-[320px]">
                   <Input
                     placeholder="Search by listing title"
                     value={searchTerm}
@@ -202,15 +205,17 @@ export default function SponsorListing() {
                 </div>
               </div>
             </div>
-            {activeTab === "bounties" ? (
-              <BountyTable loading={loading} bountyTableData={bountyTableData} />
-            ) : (
-              <GrantTable loading={loading} grantTableData={grantTableData} />
-            )}
-
+            <div className="overflow-auto">
+              {activeTab === "bounties" ? (
+                <BountyTable loading={loading} bountyTableData={bountyTableData} />
+              ) : (
+                <GrantTable loading={loading} grantTableData={grantTableData} />
+              )}
+            </div>
+  
             {/* Pagination Controls */}
             {totalPages > 1 && (
-              <div className="flex justify-between items-center p-4">
+              <div className="flex flex-col sm:flex-row justify-between items-center p-4 gap-4">
                 <button
                   onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
                   disabled={page === 1}
@@ -218,7 +223,7 @@ export default function SponsorListing() {
                 >
                   Previous
                 </button>
-                <p>
+                <p className="text-sm sm:text-base">
                   Page {page} of {totalPages}
                 </p>
                 <button
@@ -235,4 +240,4 @@ export default function SponsorListing() {
       </div>
     </>
   );
-}
+}  

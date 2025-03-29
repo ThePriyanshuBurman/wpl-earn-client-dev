@@ -133,72 +133,87 @@ export default function ({ bounty_id }: { bounty_id?: string }) {
         close={() => setOpenShortlistSubmissionModal(false)}
         getBountySubmission={getBountySubmission}
       />
+  
       <div className="flex flex-col gap-4 w-full">
-        <div className="flex items-center w-full justify-between pl-2">
-          <p className="font-polysansbulky text-lg text-white">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row items-center justify-between pl-2 gap-4">
+          <p className="font-polysansbulky text-base md:text-lg text-white">
             All Submission ({submissionUsers?.length})
           </p>
-          <div className="w-[320px]">
-            <Input placeholder="search" />
+  
+          {/* Search Input */}
+          <div className="w-full md:w-[320px]">
+            <Input placeholder="Search" className="w-full" />
           </div>
         </div>
-        <div className="flex flex-col gap-4 z-20 w-full text-white border text-sm border-border_dark rounded-md">
-          <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
-            <div className="grid grid-cols-7 gap-5 text-secondary_text_dark items-center w-full p-4 border-b border-border_dark">
-              <p className="w-full truncate col-span-1">Name</p>
-              <p className="w-full truncate col-span-2">Proof Of Work(PoW)</p>
-              <p className="w-full truncate col-span-2">Submitted at</p>
-              <p className="w-full truncate col-span-2 pl-2.5">Action</p>
+  
+        {/* Submissions Table */}
+        <div className="flex flex-col gap-4 w-full text-white border text-xs md:text-sm border-border_dark rounded-md">
+          <div className="flex flex-col w-full h-full overflow-x-auto bg-secondary_dark rounded-md">
+            {/* Table Header */}
+            <div className="grid grid-cols-1 sm:grid-cols-7 gap-4 text-secondary_text_dark items-center w-full p-4 border-b border-border_dark">
+              <p className="col-span-1">Name</p>
+              <p className="col-span-2">Proof Of Work (PoW)</p>
+              <p className="col-span-2">Submitted at</p>
+              <p className="col-span-2">Action</p>
             </div>
-
+  
+            {/* Table Body */}
             <div className="flex flex-col gap-2 w-full">
               {loading ? (
                 <div className="p-4">
                   <PageLoading />
                 </div>
               ) : submissionUsers?.length ? (
-                submissionUsers?.map((submission: any, i: number) => {
+                submissionUsers.map((submission: any, i: number) => {
                   return (
                     <div
-                      className={`grid grid-cols-7 gap-8 items-center w-full p-4 text-sm ${
+                      className={`grid grid-cols-1 sm:grid-cols-7 gap-4 items-center w-full p-4 text-xs md:text-sm ${
                         !submission?.viewed ? "bg-green-500/10" : ""
                       }`}
                       key={i}
                     >
-                      <div className="w-full flex items-center col-span-1 gap-2">
+                      {/* Name Column */}
+                      <div className="flex items-center col-span-1 gap-2">
                         {submission?.user?.logoUrl ? (
                           <img
                             src={submission.user.logoUrl}
                             alt={`${submission.user.firstName}'s logo`}
-                            className="h-4 w-4 rounded-full object-cover"
+                            className="h-5 w-5 rounded-full object-cover"
                           />
                         ) : (
-                          <div className="h-4 w-4 rounded-full bg-gray-500" /> // Placeholder if no logo
+                          <div className="h-5 w-5 rounded-full bg-gray-500" />
                         )}
-                        <p className="w-full truncate">
-                          <Link
-                            href={`${paths.user_public_profile}/${submission?.user?.userName}`}
-                            target="_blank"
-                            className="hover:underline text-sky-500"
-                          >
-                            {submission?.user?.firstName}
-                          </Link>
-                        </p>
+                        <Link
+                          href={`${paths.user_public_profile}/${submission?.user?.userName}`}
+                          target="_blank"
+                          className="hover:underline text-sky-500 truncate"
+                        >
+                          {submission?.user?.firstName}
+                        </Link>
                       </div>
-                      <a
-                        href={submission?.pow[0]}
-                        target="_blank"
-                        className="w-full truncate col-span-2 text-sky-500 hover:underline"
-                      >
-                        {submission?.pow[0] || "--"}
-                      </a>
-                      <p className="w-full truncate col-span-2">
+  
+                      {/* Proof of Work */}
+                      <p className="truncate col-span-2 break-words">
+                        <a
+                          href={submission?.pow?.[0]}
+                          target="_blank"
+                          className="text-sky-500 hover:underline"
+                        >
+                          {submission?.pow?.[0] || "--"}
+                        </a>
+                      </p>
+  
+                      {/* Submission Date */}
+                      <p className="truncate col-span-2">
                         {moment(new Date(submission?.updatedAt)).format("DD MMM YYYY")}
                       </p>
-                      <div className="flex items-center w-full">
+  
+                      {/* Action Button */}
+                      <div className="flex justify-end col-span-2">
                         <button
                           onClick={() => handleViewSubmission({ submission })}
-                          className="text-nowrap col-span-2 text-sky-500 hover:underline"
+                          className="text-sky-500 hover:underline"
                         >
                           View Submission
                         </button>
@@ -207,7 +222,7 @@ export default function ({ bounty_id }: { bounty_id?: string }) {
                   );
                 })
               ) : (
-                <div className="p-4">
+                <div className="p-4 text-center">
                   <p>No data found!!</p>
                 </div>
               )}
@@ -217,4 +232,4 @@ export default function ({ bounty_id }: { bounty_id?: string }) {
       </div>
     </>
   );
-}
+}  

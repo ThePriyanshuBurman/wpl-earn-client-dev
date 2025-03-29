@@ -75,9 +75,9 @@ export default function ResetPasswordModal({
 
   return (
     <Modal open={open} close={close} title="Reset Password">
-      <div className="flex flex-col gap-8 w-[25vw]">
+      <div className="flex flex-col gap-8 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg px-4 md:px-6">
         <div className="flex flex-col gap-3">
-          <p className="text-sm text-secondary_text_dark">
+          <p className="text-sm text-secondary_text_dark text-center sm:text-left">
             Enter the code sent to{" "}
             <span className="text-primary_text_dark text-[15px]">
               {userDetails?.email}
@@ -90,7 +90,7 @@ export default function ResetPasswordModal({
               setOTP(e.target.value);
             }}
           />
-          <p className="flex items-center gap-1 text-sm text-secondary_text_dark">
+          <p className="flex flex-col sm:flex-row items-center gap-1 text-sm text-secondary_text_dark text-center sm:text-left">
             Didn't get code?
             <button
               disabled={loading}
@@ -108,7 +108,7 @@ export default function ResetPasswordModal({
             </button>
           </p>
         </div>
-
+  
         <div className="flex flex-col gap-2">
           <p>New Password</p>
           <PasswordInput
@@ -119,8 +119,8 @@ export default function ResetPasswordModal({
             }}
           />
         </div>
-
-        <div className="flex items-center gap-4">
+  
+        <div className="flex flex-col sm:flex-row items-center gap-4">
           <SecondaryButton onClick={close}>Close</SecondaryButton>
           <PrimaryButton
             onClick={handleResetPassword}
@@ -132,4 +132,4 @@ export default function ResetPasswordModal({
       </div>
     </Modal>
   );
-}
+}  

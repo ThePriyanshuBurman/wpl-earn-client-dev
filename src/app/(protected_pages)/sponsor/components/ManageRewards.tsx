@@ -129,33 +129,36 @@ export default function ManageRewards() {
 
   return (
     <>
-      <div className="flex w-full h-full">
+      <div className="flex w-full h-full overflow-x-auto">
         {loading ? (
           <div className="flex mx-auto">
             <PageLoading />
           </div>
         ) : (
           <>
-            <div className="flex flex-col gap-6 pt-4 p-8 w-full h-full relative">
+            <div className="flex flex-col gap-6 pt-4 p-4 sm:p-6 md:p-8 w-full h-full relative">
               {!isCopperxAccountExists ? (
                 <ConnectToCopperX isCopperxCredsExists={isCopperxCredsExists} />
               ) : (
                 ""
               )}
+  
+              {/* Manage Rewards Section */}
               <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
-                  <p className="text-2xl font-polysansbulky gradient-text py-1.5">
+                  <p className="text-xl sm:text-2xl font-polysansbulky gradient-text py-1.5">
                     Manage Rewards
                   </p>
                 </div>
-
-                <div className="grid grid-cols-5 gap-4">
+  
+                {/* Responsive Grid for Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                   <Card className="col-span-1">
                     <div className="flex flex-col gap-1">
                       <p className="text-sm font-normal text-gray-300">
                         Wallet Balance
                       </p>
-                      <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+                      <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                         ${copperxWalletBalance.netWorth}
                       </p>
                     </div>
@@ -165,11 +168,13 @@ export default function ManageRewards() {
                       <p className="text-sm font-normal text-gray-300">
                         Total Rewarded
                       </p>
-                      <p className="text-3xl font-polysansbulky font-[550] gradient-text">
+                      <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                         ${totalDisbursed}
                       </p>
                     </div>
                   </Card>
+  
+                  {/* Keep Commented Parts */}
                   {/* <Card>
                     <div className="flex flex-col gap-1">
                       <p className="text-sm font-normal text-gray-300">
@@ -193,31 +198,25 @@ export default function ManageRewards() {
                   </Card> */}
                 </div>
               </div>
-
+  
+              {/* My Listings Section */}
               <div className="flex flex-col">
                 {/* <p className="font-polysansbulky">My Listings</p> */}
-                <div className="flex items-center justify-between w-full border-b border-border_dark">
-                  <Tabs
-                    items={items}
-                    active={activeTab}
-                    onClick={setActiveTab}
-                  />
-                  <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center justify-between w-full border-b border-border_dark gap-4">
+                  <Tabs items={items} active={activeTab} onClick={setActiveTab} />
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                     {/* <div className="w-[180px]">
                       <SelectWpl
                         options={statusOptions}
                         placeholder="Select Status"
                       />
                     </div> */}
-                    <div className="w-[320px]">
+                    <div className="w-full sm:w-[280px] md:w-[320px]">
                       <Input placeholder="search" />
                     </div>
                   </div>
                 </div>
-                <MyActivityTable
-                  loading={loading}
-                  bountyTableData={bountyTableData}
-                />
+                <MyActivityTable loading={loading} bountyTableData={bountyTableData} />
               </div>
             </div>
           </>
@@ -225,4 +224,4 @@ export default function ManageRewards() {
       </div>
     </>
   );
-}
+}  

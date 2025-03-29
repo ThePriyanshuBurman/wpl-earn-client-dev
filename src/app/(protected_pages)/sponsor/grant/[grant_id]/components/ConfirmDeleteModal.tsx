@@ -17,19 +17,19 @@ export default function ConfirmActionModal({
 }) {
   return (
     <Modal open={open} close={close}>
-      <div className="flex flex-col gap-8 w-[25vw] h-full">
+      <div className="flex flex-col gap-8 max-w-[90vw] sm:w-[50vw] md:w-[40vw] lg:w-[25vw] h-full p-4">
         <div className="flex flex-col gap-6">
-          <p>
+          <p className="text-sm sm:text-base">
             Are you sure you want to{" "}
             {actionType === "withdraw" ? "withdraw" : "delete"} this listing?
           </p>
           <div className="flex flex-col gap-2">
-            <p className="text-sm text-secondary_text_dark">
+            <p className="text-xs sm:text-sm text-secondary_text_dark">
               {actionType === "withdraw"
                 ? "Withdrawing this listing will remove it from active consideration, but you can resubmit it later if needed."
                 : "Deleting this listing will permanently remove it from the platform, and this action cannot be undone."}
             </p>
-            <p className="text-sm text-secondary_text_dark">
+            <p className="text-xs sm:text-sm text-secondary_text_dark">
               Please confirm your choice below. If you have any questions, feel
               free to reach out to support.
             </p>
@@ -37,9 +37,9 @@ export default function ConfirmActionModal({
         </div>
         <div className="flex items-center gap-2">
           <input type="checkbox" name="confirm" id="confirm" />
-          <p>I understand the consequences</p>
+          <p className="text-xs sm:text-sm">I understand the consequences</p>
         </div>
-        <div className="flex items-center w-full gap-4">
+        <div className="flex flex-wrap sm:flex-nowrap items-center w-full gap-4">
           <SecondaryButton onClick={close}>
             <p>Cancel</p>
           </SecondaryButton>
@@ -50,4 +50,4 @@ export default function ConfirmActionModal({
       </div>
     </Modal>
   );
-}
+}  

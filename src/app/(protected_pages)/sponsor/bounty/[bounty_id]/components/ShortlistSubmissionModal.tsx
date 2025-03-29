@@ -56,31 +56,41 @@ export default function ShortlistSubmissionModal({
 
   return (
     <Modal open={open} close={close} title="Submission Info">
-      <div className="flex flex-col gap-8 w-[25vw] h-full">
+      <div className="flex flex-col gap-6 md:gap-8 w-[90vw] max-w-md">
+        {/* Proof of Work */}
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <p className="text-sm text-secondary_text_dark">Proof of work</p>
-            <p className="text-sky-500 hover:underline cursor-pointer">
+            <p className="text-xs md:text-sm text-secondary_text_dark">
+              Proof of work
+            </p>
+            <p className="text-sky-500 hover:underline cursor-pointer break-all">
               <a href={data?.pow?.[0]} target="_blank">
                 {data?.pow?.[0]}
               </a>
             </p>
           </div>
+  
+          {/* Description */}
           <div className="flex flex-col gap-1">
-            <p className="text-sm text-secondary_text_dark">Description</p>
-            <p className="">{data?.description || "--"}</p>
+            <p className="text-xs md:text-sm text-secondary_text_dark">
+              Description
+            </p>
+            <p className="text-xs md:text-sm">{data?.description || "--"}</p>
           </div>
         </div>
-        <div className="flex items-center w-max ml-auto">
+  
+        {/* Buttons */}
+        <div className="flex w-full justify-end">
           {type === "edit" ? (
             <PrimaryButton
               loading={loading}
               onClick={handleShortlistSubmission}
+              className="w-full md:w-auto"
             >
               ShortList Submission
             </PrimaryButton>
           ) : (
-            <SecondaryButton onClick={close}>
+            <SecondaryButton onClick={close} className="w-full md:w-auto">
               <p>Close</p>
             </SecondaryButton>
           )}
@@ -88,4 +98,4 @@ export default function ShortlistSubmissionModal({
       </div>
     </Modal>
   );
-}
+}  

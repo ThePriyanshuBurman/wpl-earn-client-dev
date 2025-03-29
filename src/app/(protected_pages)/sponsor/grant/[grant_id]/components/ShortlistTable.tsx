@@ -133,58 +133,57 @@ export default function ({
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <div className="flex items-center w-full justify-between pl-2">
+      {/* Header with Search Bar */}
+      <div className="flex flex-wrap items-center justify-between pl-2">
         <p className="font-polysansbulky text-lg text-white">
-          Shortlisted Submissions (6)
+          Shortlisted Submissions ({bountySubmissions.length})
         </p>
-
-        <div className="w-[320px]">
-          <Input placeholder="search" />
+        <div className="w-full sm:w-[320px]">
+          <Input placeholder="Search" />
         </div>
       </div>
-      <div className="flex flex-col gap-4 z-20 w-full text-white border text-sm border-border_dark rounded-md">
+  
+      {/* Submission Table */}
+      <div className="flex flex-col gap-4 w-full text-white border text-sm border-border_dark rounded-md">
         <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
-          <div className="grid grid-cols-7 gap-5 text-secondary_text_dark items-center w-full p-4 border-b border-border_dark">
-            <p className="w-full truncate"></p>
+          {/* Table Header */}
+          <div className="grid grid-cols-3 sm:grid-cols-7 gap-3 sm:gap-5 text-secondary_text_dark items-center w-full p-4 border-b border-border_dark">
+            <p className="hidden sm:block"></p>
             <p className="w-full truncate col-span-2">Name</p>
-            <p className="w-full truncate col-span-2">Proof Of Work(PoW)</p>
-            <p className="w-full truncate col-span-2">Submitted at</p>
-            {/* <p className="w-full truncate col-span-2">Share your work</p> */}
+            <p className="w-full truncate col-span-2">Proof Of Work (PoW)</p>
+            <p className="w-full truncate col-span-2">Submitted At</p>
           </div>
-
+  
+          {/* Table Rows */}
           <div className="flex flex-col gap-2 w-full">
-            {bountySubmissions.map((b, i) => {
-              return (
-                <div
-                  className="grid grid-cols-7  gap-4 items-center w-full p-4 text-sm"
-                  key={i}
-                >
-                  <div className="flex items-center gap-3 w-full">
-                    <input
-                      type="checkbox"
-                      className="bg-transparent"
-                      name=""
-                      id=""
-                      checked={
-                        selectedUers.filter((u) => u.uid === b.uid)?.length
-                          ? true
-                          : false
-                      }
-                      onChange={(e) => handleCheckbox(e, b)}
-                    />
-                  </div>
-                  <div className="w-full flex items-center col-span-2 gap-2">
-                    <img src={b.avatar} alt="" className="h-4 rounded" />
-                    <p className="w-full truncate ">{b.name}</p>
-                  </div>
-                  <p className="w-full truncate col-span-2">{b.workLink}</p>
-                  <p className="w-full truncate col-span-2">24th Feb 2025</p>
+            {bountySubmissions.map((b, i) => (
+              <div
+                className="grid grid-cols-3 sm:grid-cols-7 gap-3 sm:gap-4 items-center w-full p-4 text-sm"
+                key={i}
+              >
+                <div className="flex items-center gap-3 w-full">
+                  <input
+                    type="checkbox"
+                    className="cursor-pointer"
+                    checked={!!selectedUers.find((u) => u.uid === b.uid)}
+                    onChange={(e) => handleCheckbox(e, b)}
+                  />
                 </div>
-              );
-            })}
+                <div className="w-full flex items-center col-span-2 gap-2">
+                  <img
+                    src={b.avatar}
+                    alt=""
+                    className="h-6 w-6 rounded-full object-cover"
+                  />
+                  <p className="w-full truncate">{b.name}</p>
+                </div>
+                <p className="w-full truncate col-span-2 break-all">{b.workLink}</p>
+                <p className="w-full truncate col-span-2">24th Feb 2025</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
-}
+}  
