@@ -54,94 +54,75 @@ export default function () {
     getPresignedUrl({ key: userDetails?.image });
   }, [userDetails]);
   return (
-    <div className="flex flex-col py-[10%] w-full h-screen text-primary_text_dark relative">
+    <div className="flex flex-col py-[10%] w-full min-h-screen text-primary_text_dark relative px-4">
       {loading ? (
         <div className="flex mx-auto">
           <PageLoading />
         </div>
       ) : Object.keys(userDetails)?.length ? (
-        <div className="mx-auto flex flex-col gap-4  w-[40vw] bg-secondary_dark p-6 rounded-md border border-border_dark h-max">
+        <div className="mx-auto flex flex-col gap-4 w-full max-w-md bg-secondary_dark p-4 sm:p-6 rounded-md border border-border_dark h-max">
+          {/* Avatar */}
           <img
             src={userAvatar}
-            className="h-[80px] w-[80px] rounded-lg"
+            className="h-16 w-16 sm:h-[80px] sm:w-[80px] rounded-lg mx-auto"
             alt=""
           />
-
-          <div className="flex flex-col">
-            <p className="font-polysansbulky">
+  
+          {/* User Info */}
+          <div className="flex flex-col text-center">
+            <p className="font-polysansbulky text-lg sm:text-xl">
               {userDetails?.firstName} {userDetails?.lastName}
             </p>
-            <p className="text-sm text-secondary_text_dark">
+            <p className="text-xs sm:text-sm text-secondary_text_dark">
               {userDetails?.userName || "--"}
             </p>
           </div>
-
+  
+          {/* User Bio */}
           <div className="flex flex-col">
-            <p className="text-sm text-secondary_text_dark">User Bio</p>
-            <p>{userDetails?.bio || "--"}</p>
+            <p className="text-xs sm:text-sm text-secondary_text_dark">User Bio</p>
+            <p className="text-sm">{userDetails?.bio || "--"}</p>
           </div>
-
-          <div className="flex items-center gap-4">
+  
+          {/* Stats */}
+          <div className="flex justify-between text-center text-xs sm:text-sm">
             <p>
-              12{" "}
-              <span className="text-sm text-gray-500">Projects Completed</span>{" "}
+              12 <span className="text-gray-500">Projects Completed</span>
             </p>
             <p>
-              $322.00 <span className="text-sm text-gray-500">Earned</span>{" "}
+              $322.00 <span className="text-gray-500">Earned</span>
             </p>
           </div>
-
+  
+          {/* Contact Section */}
           <div className="flex flex-col gap-4 border-t border-[#172527] pt-4">
-            <p>Contact</p>
-
+            <p className="text-sm sm:text-base font-semibold">Contact</p>
+  
             <div className="flex flex-col gap-2">
-              <div className="flex items-center justify-between  text-sm text-gray-500">
-                <div className="flex items-center gap-2">
-                  <img
-                    src="/images/svg/discord.svg"
-                    className="h-4 w-4"
-                    alt=""
-                  />
-                  <p>Discord</p>
+              {[
+                { icon: "/images/svg/discord.svg", label: "Discord", value: userDetails?.discord },
+                { icon: "/images/svg/telegram.svg", label: "Telegram", value: userDetails?.telegram },
+                { icon: "/images/svg/gmail.svg", label: "Email", value: userDetails?.email },
+              ].map(({ icon, label, value }, index) => (
+                <div key={index} className="flex items-center justify-between text-xs sm:text-sm text-gray-500">
+                  <div className="flex items-center gap-2">
+                    <img src={icon} className="h-4 w-4" alt="" />
+                    <p>{label}</p>
+                  </div>
+                  <div className="flex items-center gap-2 cursor-pointer">
+                    <p className="text-white truncate max-w-[150px] sm:max-w-none">{value}</p>
+                    <MoveUpRight size={14} />
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 cursor-pointer">
-                  <p className="text-white">{userDetails?.discord}</p>
-                  <MoveUpRight size={"14"} />
-                </div>
-              </div>
-              <div className="flex items-center justify-between  text-sm text-gray-500">
-                <div className="flex items-center gap-2">
-                  <img
-                    src="/images/svg/telegram.svg"
-                    className="h-4 w-4"
-                    alt=""
-                  />
-                  <p>Telegram</p>
-                </div>
-                <div className="flex items-center gap-2 cursor-pointer">
-                  <p className="text-white">{userDetails?.telegram}</p>
-                  <MoveUpRight size={"14"} />
-                </div>
-              </div>
-              <div className="flex items-center justify-between  text-sm text-gray-500">
-                <div className="flex items-center gap-2">
-                  <img src="/images/svg/gmail.svg" className="h-4 w-4" alt="" />
-                  <p>Email</p>
-                </div>
-                <div className="flex items-center gap-2 cursor-pointer">
-                  <p className="text-white">{userDetails?.email}</p>
-                  <MoveUpRight size={"14"} />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       ) : (
-        <div className="mx-auto flex flex-col gap-4  w-[40vw] bg-secondary_dark p-4 rounded-md border border-border_dark h-max">
-          {/* <img src="/images/jpg/404.jpg" alt="" /> */}
+        <div className="mx-auto flex flex-col gap-4 w-full max-w-md bg-secondary_dark p-4 rounded-md border border-border_dark h-max">
           <p className="mx-auto font-polysansbulky">No User Found</p>
         </div>
       )}
     </div>
   );
-}
+}  

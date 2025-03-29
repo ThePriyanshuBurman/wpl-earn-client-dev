@@ -102,18 +102,20 @@ export default function BlacklistedSponsors() {
         text="Are you sure you want to whitelist this sponsor? This action will allow them to post listings again."
         loading={whitelistLoading}
       />
-      <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-4 sm:px-8 lg:px-12"> {/* Modify padding for responsiveness */}
-        <div className="flex items-center justify-between ">
-          <p className="text-xl sm:text-2xl font-polysansbulky gradient-text py-1.5"> {/* Adjust font size for responsiveness */}
+      <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-4 sm:px-8 lg:px-12">
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+          <p className="text-xl sm:text-2xl font-polysansbulky gradient-text py-1.5">
             Blacklisted Sponsors List
           </p>
-          <div className="w-max">
+          <div className="w-full sm:w-max">
             <PrimaryButton onClick={() => setOpenBlacklistSponsorModal(true)}>
               <p>BlackList Sponsor</p>
             </PrimaryButton>
           </div>
         </div>
-
+  
+        {/* Description Section */}
         <div>
           <p>Note :</p>
           <p className="text-sm text-secondary_text_dark">
@@ -124,54 +126,59 @@ export default function BlacklistedSponsors() {
             consideration and is irreversible.
           </p>
         </div>
-
+  
+        {/* Tabs & Search Section */}
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between w-full border-b border-border_dark">
+          <div className="flex flex-col sm:flex-row items-center justify-between w-full border-b border-border_dark gap-4">
             <Tabs items={items} active={activeTab} onClick={setActiveTab} />
-            <div className="flex items-center gap-4 w-full sm:w-auto"> {/* Allow search input to be responsive */}
-              <div className="w-full sm:w-[320px]"> {/* Use full width for small screens */}
-                <Input placeholder="search" />
-              </div>
+            <div className="w-full sm:w-auto">
+              <Input placeholder="search" className="w-full sm:w-[320px]" />
             </div>
           </div>
-
-          <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
-            <div className="flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
-              <p className="flex-1">Company name</p> {/* Use flex for dynamic sizing */}
+  
+          {/* Table Container - Scrollable on Small Screens */}
+          <div className="w-full h-full overflow-x-auto bg-secondary_dark rounded-md">
+            {/* Table Header */}
+            <div className="min-w-[600px] flex items-center gap-4 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+              <p className="flex-1">Company name</p>
               <p className="flex-1">Company url</p>
               <p className="flex-1">Company twitter</p>
               <p className="flex-1">Blacklisted Date</p>
               <p className="flex-1">Reason</p>
-              <p className="flex-1">Action</p>
+              <p className="flex-1 text-right">Action</p>
             </div>
-
-            <div className="flex flex-col gap-4 w-full font-polysansbulky">
+  
+            {/* Table Content */}
+            <div className="min-w-[600px] flex flex-col gap-4 w-full font-polysansbulky">
               {loading ? (
                 <div className="p-4 flex w-full">
                   <PageLoading />
                 </div>
               ) : tableData?.length ? (
-                tableData.map((c, i) => {
-                  return (
-                    <div
-                      className="flex items-center gap-4 w-full p-4 text-sm"
-                      key={i}
-                    >
-                      <p className="flex-1 truncate">{c.companyName}</p>
-                      <p className="flex-1 truncate">{c.companyUrl}</p>
-                      <p className="flex-1 truncate">{c.companyTwitter}</p>
-                      <p className="flex-1">
-                        {moment(new Date(c.updatedAt)).format(
-                          "DD MMM YY hh:mm:ss"
-                        )}
-                      </p>
-                      <p className="flex-1 truncate">Documents is pending</p>
-                      <div className="flex-1 flex items-center justify-end gap-4 text-xs"> {/* Adjust positioning */}
-                        <button onClick={() => handleWhitelistClick(c.id)} className="w-max text-green-500 border border-green-500 rounded-lg py-1 hover:bg-green-500 hover:text-white transition-colors p-1">Whitelist</button> 
-                      </div>
+                tableData.map((c, i) => (
+                  <div
+                    className="flex items-center gap-4 w-full p-4 text-sm"
+                    key={i}
+                  >
+                    <p className="flex-1 truncate">{c.companyName}</p>
+                    <p className="flex-1 truncate">{c.companyUrl}</p>
+                    <p className="flex-1 truncate">{c.companyTwitter}</p>
+                    <p className="flex-1">
+                      {moment(new Date(c.updatedAt)).format(
+                        "DD MMM YY hh:mm:ss"
+                      )}
+                    </p>
+                    <p className="flex-1 truncate">Documents is pending</p>
+                    <div className="flex-1 flex items-center justify-end gap-4 text-xs">
+                      <button
+                        onClick={() => handleWhitelistClick(c.id)}
+                        className="w-max text-green-500 border border-green-500 rounded-lg py-1 hover:bg-green-500 hover:text-white transition-colors p-1"
+                      >
+                        Whitelist
+                      </button>
                     </div>
-                  );
-                })
+                  </div>
+                ))
               ) : (
                 <div className="p-4 flex w-full">
                   <p>No Data found!!</p>
@@ -183,4 +190,4 @@ export default function BlacklistedSponsors() {
       </div>
     </>
   );
-}
+}  

@@ -170,30 +170,32 @@ export default function BountyDetails() {
         success={() => handleBountyStatus({ status: ACTIONS.REJECT, bounty_id })}
         close={() => setOpenRejectModal(false)}
       />
-      <div className="flex flex-col gap-6 mt-6 px-8 w-full text-primary_text_dark z-20">
+      <div className="flex flex-col gap-6 mt-6 px-4 sm:px-6 lg:px-8 w-full text-primary_text_dark z-20">
         <Link href="../../">
           <BackButton />
         </Link>
-
+  
         {loading ? (
           <div className="flex mx-auto mt-12">
             <PageLoading />
           </div>
         ) : Object.keys(bountyDetails).length ? (
           <div className="max-w-6xl mx-auto w-full">
-            <div className="flex gap-10 w-full">
+            <div className="flex flex-wrap gap-10 w-full">
               {/* Main Content */}
-              <div className="flex flex-col gap-6 w-[70%]">
+              <div className="flex flex-col gap-6 w-full lg:w-[70%]">
                 {/* Header */}
                 <div className="flex items-center gap-6">
                   <img
                     src={bountyLogoUrl || "/images/placeholder-avatar.png"}
                     alt={`${bountyDetails.title} logo`}
-                    className="h-16 w-16 rounded-lg object-cover border border-border_dark"
+                    className="h-16 w-16 max-w-full h-auto rounded-lg object-cover border border-border_dark"
                   />
                   <div className="flex flex-col gap-2">
-                    <p className="font-polysansbulky text-3xl text-white">{bountyDetails.title || "Unknown Bounty"}</p>
-                    <div className="flex items-center divide-x divide-secondary_text_dark text-base">
+                    <p className="font-polysansbulky text-2xl sm:text-3xl text-white">
+                      {bountyDetails.title || "Unknown Bounty"}
+                    </p>
+                    <div className="flex flex-wrap items-center divide-x divide-secondary_text_dark text-sm sm:text-base">
                       <div className="flex items-center gap-2 text-secondary_text_dark pr-4">
                         <p className="flex items-center gap-2">
                           by{" "}
@@ -217,23 +219,25 @@ export default function BountyDetails() {
                     </div>
                   </div>
                 </div>
-
+  
                 {/* Bounty Details */}
                 <div className="flex flex-col gap-6">
                   {/* Description */}
                   <div className="flex flex-col gap-2">
-                    <p className="font-polysansbulky text-xl text-white">Details</p>
+                    <p className="font-polysansbulky text-lg sm:text-xl text-white">Details</p>
                     <div
-                      className="text-white text-base"
+                      className="text-white text-sm sm:text-base"
                       dangerouslySetInnerHTML={{
-                        __html: bountyDetails.description?.replace(/\\n/g, "<br>").replace(/"/g, "") || "No description available",
+                        __html:
+                          bountyDetails.description?.replace(/\\n/g, "<br>").replace(/"/g, "") ||
+                          "No description available",
                       }}
                     />
                   </div>
-
+  
                   {/* Skills Needed */}
                   <div className="flex flex-col gap-2">
-                    <p className="font-polysansbulky text-xl text-white">Skills Needed</p>
+                    <p className="font-polysansbulky text-lg sm:text-xl text-white">Skills Needed</p>
                     <div className="flex flex-wrap gap-2">
                       {bountyDetails.skills?.map((skill: string, i: number) => (
                         <p key={i} className="px-3 py-1 rounded-lg bg-primary_dark text-sm text-white">
@@ -243,31 +247,31 @@ export default function BountyDetails() {
                     </div>
                   </div>
                 </div>
-
+  
                 {/* Actions */}
                 {bountyDetails.state === "REQUEST_APPROVAL" && (
                   <div className="flex items-center gap-4 mt-4">
                     <button
                       onClick={() => setOpenConfirmModal(true)}
-                      className="px-6 py-2 bg-green-600/10 text-green-500 border border-green-500 rounded-lg hover:bg-green-600/20 transition-colors font-medium text-base"
+                      className="px-4 sm:px-6 py-2 bg-green-600/10 text-green-500 border border-green-500 rounded-lg hover:bg-green-600/20 transition-colors font-medium text-sm sm:text-base"
                     >
                       Approve
                     </button>
                     <button
                       onClick={() => setOpenRejectModal(true)}
-                      className="px-6 py-2 bg-red-600/10 text-red-500 border border-red-500 rounded-lg hover:bg-red-600/20 transition-colors font-medium text-base"
+                      className="px-4 sm:px-6 py-2 bg-red-600/10 text-red-500 border border-red-500 rounded-lg hover:bg-red-600/20 transition-colors font-medium text-sm sm:text-base"
                     >
                       Reject
                     </button>
                   </div>
                 )}
               </div>
-
+  
               {/* Sidebar */}
-              <div className="flex w-[30%]">
+              <div className="flex w-full lg:w-[30%]">
                 <div className="flex flex-col gap-4 bg-secondary_dark p-4 rounded-lg border border-border_dark w-full relative overflow-hidden">
                   <div className="flex items-center justify-between">
-                    <p className="font-polysansbulky text-xl gradient-text">Prizes</p>
+                    <p className="font-polysansbulky text-lg sm:text-xl gradient-text">Prizes</p>
                     <div className="flex items-center gap-2 bg-primary_dark border border-border_dark px-3 py-1 rounded-lg">
                       <img
                         src={
@@ -283,33 +287,7 @@ export default function BountyDetails() {
                       </p>
                     </div>
                   </div>
-
-                  {bountyDetails.rewardMap && (
-                    <div className="flex gap-3 bg-primary_dark rounded-md p-3">
-                      <div className="flex flex-col w-max py-2">
-                        {bountyDetails.rewardMap.map((_: any, i: number) => (
-                          <div key={i} className="flex flex-col items-center">
-                            <div className="p-1 rounded-full bg-secondary_text_dark"></div>
-                            {i < bountyDetails.rewardMap.length - 1 && (
-                              <div className="border-r-[0.25px] w-max h-[5vh] mx-auto"></div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                      <div className="flex flex-col gap-[3vh] w-max my-auto">
-                        {bountyDetails.rewardMap.map((reward: number, i: number) => (
-                          <div className="flex items-center gap-2 text-base text-white" key={i}>
-                            <img src={`/images/png/medal${i + 1}.png`} alt="" className="h-5 w-auto" />
-                            <p className="font-semibold">
-                              {i + 1}
-                              {i + 1 === 1 ? "st" : i + 1 === 2 ? "nd" : "rd"} {reward} {bountyDetails.denomination}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
+  
                   <div className="flex flex-col gap-2">
                     <p className="text-sm text-white">Skills Needed</p>
                     <div className="flex flex-wrap gap-2">
@@ -320,7 +298,7 @@ export default function BountyDetails() {
                       )) || "N/A"}
                     </div>
                   </div>
-
+  
                   <BorderBeam
                     size={40}
                     initialOffset={20}
@@ -333,10 +311,10 @@ export default function BountyDetails() {
           </div>
         ) : (
           <div className="flex flex-col items-center w-full mt-12">
-            <p className="text-xl font-polysansbulky text-white">No Bounty Found</p>
+            <p className="text-lg sm:text-xl font-polysansbulky text-white">No Bounty Found</p>
           </div>
         )}
       </div>
     </>
   );
-}
+}  

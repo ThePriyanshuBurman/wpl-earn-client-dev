@@ -69,21 +69,21 @@ export default function SponsorPublicProfile() {
   };
 
   return (
-    <div className="flex flex-col py-[10%] w-full h-screen text-primary_text_dark relative overflow-hidden">
+    <div className="flex flex-col py-[10%] w-full min-h-screen text-primary_text_dark relative overflow-hidden px-4">
       {/* Subtle background animation */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-secondary_dark/20 to-transparent"
         animate={{ opacity: [0.5, 0.8, 0.5] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
-
+  
       {loading ? (
         <div className="flex mx-auto">
           <PageLoading />
         </div>
       ) : Object.keys(sponsorDetails)?.length ? (
         <motion.div
-          className="mx-auto flex flex-col gap-6 w-[40vw] bg-secondary_dark p-6 rounded-md border border-border_dark h-max shadow-lg relative z-10"
+          className="mx-auto flex flex-col gap-6 w-full max-w-[90vw] md:w-[60vw] lg:w-[40vw] bg-secondary_dark p-4 md:p-6 rounded-md border border-border_dark h-max shadow-lg relative z-10"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -104,10 +104,10 @@ export default function SponsorPublicProfile() {
               <p className="text-xs text-green-300 font-polysansbulky">Verified</p>
             </motion.div>
           )}
-
+  
           {/* Avatar with hover effect */}
           <motion.div
-            className="relative"
+            className="relative flex justify-center"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
@@ -117,16 +117,16 @@ export default function SponsorPublicProfile() {
               alt={`${sponsorDetails?.companyName} logo`}
             />
           </motion.div>
-
+  
           {/* Company Name Header */}
           <motion.h1
-            className="text-2xl font-polysansbulky text-primary_text_dark"
+            className="text-xl md:text-2xl font-polysansbulky text-primary_text_dark text-center"
             variants={itemVariants}
           >
             {sponsorDetails?.companyName}
           </motion.h1>
-
-          <div className="grid grid-cols-2 gap-4">
+  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <motion.div className="flex flex-col" variants={itemVariants}>
               <p className="text-sm text-secondary_text_dark">Username</p>
               <p className="font-medium">{sponsorDetails?.companyUserName}</p>
@@ -149,7 +149,7 @@ export default function SponsorPublicProfile() {
                 }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium hover:scale-105 transition-transform flex items-center gap-1 group"
+                className="font-medium hover:scale-105 transition-transform flex items-center gap-1 group break-all"
               >
                 {sponsorDetails?.companyUrl || "N/A"}
                 {sponsorDetails?.companyUrl && (
@@ -163,7 +163,7 @@ export default function SponsorPublicProfile() {
                 href={`https://twitter.com/${sponsorDetails?.companyTwitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium hover:scale-105 transition-transform flex items-center gap-1 group"
+                className="font-medium hover:scale-105 transition-transform flex items-center gap-1 group break-all"
               >
                 {sponsorDetails?.companyTwitter
                   ? `@${sponsorDetails.companyTwitter}`
@@ -174,11 +174,11 @@ export default function SponsorPublicProfile() {
               </a>
             </motion.div>
             <motion.div
-              className="flex flex-col col-span-2"
+              className="flex flex-col col-span-1 md:col-span-2"
               variants={itemVariants}
             >
               <p className="text-sm text-secondary_text_dark">Company Bio</p>
-              <p className="font-medium break-words">
+              <p className="font-medium break-words text-sm md:text-base">
                 {sponsorDetails?.companyBio || "No bio available"}
               </p>
             </motion.div>
@@ -186,16 +186,16 @@ export default function SponsorPublicProfile() {
         </motion.div>
       ) : (
         <motion.div
-          className="mx-auto flex flex-col gap-4 w-[40vw] bg-secondary_dark p-4 rounded-md border border-border_dark h-max shadow-lg"
+          className="mx-auto flex flex-col gap-4 w-full max-w-[90vw] md:w-[60vw] lg:w-[40vw] bg-secondary_dark p-4 rounded-md border border-border_dark h-max shadow-lg"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="mx-auto font-polysansbulky text-lg">
+          <p className="mx-auto font-polysansbulky text-lg text-center">
             No Sponsor Found
           </p>
         </motion.div>
       )}
     </div>
   );
-}
+}  

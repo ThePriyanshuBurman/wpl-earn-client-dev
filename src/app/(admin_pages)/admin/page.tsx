@@ -19,31 +19,43 @@ export default function Page() {
   };
 
   return (
-    <div className="flex w-full h-full relative">
-      <SideBar
-        activeSideBar={activeSideBar}
-        setActiveSideBar={setActiveSideBar}
-        refreshKPIs={refreshKPIs}
-      />
-      <div className="flex w-full h-full overflow-auto">
-        {activeSideBar === "all_sponsors" ? (
-          <SponsorTable />
-        ) : activeSideBar === "pending_request" ? (
-          <SponsorPendingRequest refreshKPIs={refreshKPIs} />
-        ) : activeSideBar === "blacklisted_sponsor" ? (
-          <BlacklistedSponsor />
-        ) : activeSideBar === "manage_listings" ? (
-          <ListingTable refreshKPIs={refreshKPIs} />
-        ) : activeSideBar === "pending_listings" ? (
-          <ListingPendingRequest refreshKPIs={refreshKPIs} />
-        ) : activeSideBar === "rewards" ? (
-          <ManageRewards />
-        ) : activeSideBar === "transaction_history" ? (
-          <TransactionTable />
-        ) : (
-          ""
-        )}
+    <div className="flex flex-col md:flex-row w-full h-full min-h-screen">
+      {/* Mobile Overlay */}
+      {Boolean(activeSideBar) && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          onClick={() => setActiveSideBar("")}
+        />
+      )}
+  
+      {/* Sidebar */}
+      <div className={`hidden md:flex ${activeSideBar ? "block md:block" : "md:flex"}`}>
+        <SideBar activeSideBar={activeSideBar} setActiveSideBar={setActiveSideBar} refreshKPIs={refreshKPIs} />
+      </div>
+  
+      {/* Main Content */}
+      <div className="flex-1 w-full h-full overflow-auto min-w-0 p-4">
+        {(() => {
+          switch (activeSideBar) {
+            case "all_sponsors":
+              return <SponsorTable />;
+            case "pending_request":
+              return <SponsorPendingRequest refreshKPIs={refreshKPIs} />;
+            case "blacklisted_sponsor":
+              return <BlacklistedSponsor />;
+            case "manage_listings":
+              return <ListingTable refreshKPIs={refreshKPIs} />;
+            case "pending_listings":
+              return <ListingPendingRequest refreshKPIs={refreshKPIs} />;
+            case "rewards":
+              return <ManageRewards />;
+            case "transaction_history":
+              return <TransactionTable />;
+            default:
+              return <p className="text-center text-gray-500">Select an option from the sidebar</p>;
+          }
+        })()}
       </div>
     </div>
   );
-}
+}  
