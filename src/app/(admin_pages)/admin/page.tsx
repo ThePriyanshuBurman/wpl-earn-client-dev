@@ -44,8 +44,7 @@ export default function Page() {
 
       {/* Main Content */}
       <div
-        className={`flex w-full h-full overflow-auto transition-all duration-300 mt-[8vh] 
-          ${isSidebarOpen ? "lg:ml-64" : "ml-0 lg:ml-64"}`} // This now matches the sidebar width
+        className={`flex w-full h-full overflow-auto transition-all duration-300 mt-[1vh] `} // This now matches the sidebar width
       >
         {activeSideBar === "all_sponsors" ? (
           <SponsorTable />
