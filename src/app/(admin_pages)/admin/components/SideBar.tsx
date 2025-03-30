@@ -9,25 +9,20 @@ import {
   List,
   UsersRound,
   FileClock,
+  Menu,
   X
 } from "lucide-react";
 import { useEffect, useState } from "react";
-
-interface SideBarProps {
-  activeSideBar: string;
-  setActiveSideBar: (value: string) => void;
-  refreshKPIs?: () => void;
-  isOpen: boolean;
-  onClose: () => void;
-}
 
 export default function SideBar({
   activeSideBar,
   setActiveSideBar,
   refreshKPIs,
-  isOpen,
-  onClose
-}: SideBarProps) {
+}: {
+  activeSideBar: string;
+  setActiveSideBar: any;
+  refreshKPIs?: () => void;
+}) {
   const [showSponsorOptions, setShowSponsorOptions] = useState(false);
   const [showListingOptions, setShowListingOptions] = useState(false);
   const [adminKPIs, setAdminKPIs] = useState({
@@ -81,13 +76,13 @@ export default function SideBar({
           }`}
         >
           <div className="flex items-center gap-2">
-            <UsersRound size={"14"} />
-            Manage Sponsor
+            <UsersRound size={"16"} /> {/* Increased icon size for better visibility */}
+            <span className="text-sm sm:text-base">Manage Sponsor</span> {/* Responsive font size */}
           </div>
-          {showSponsorOptions ? <ChevronUp size={"14"} /> : <ChevronDown size={"14"} />}
+          {showSponsorOptions ? <ChevronUp size={"16"} /> : <ChevronDown size={"16"} />}
         </button>
         {showSponsorOptions ? (
-          <div className="flex flex-col pl-10">
+          <div className="flex flex-col pl-6 sm:pl-10"> {/* Reduced padding-left for mobile */}
             <button
               onClick={() => {
                 setActiveSideBar("pending_request");
@@ -96,8 +91,8 @@ export default function SideBar({
                 activeSideBar === "pending_request" ? "text-[#46cfb6]" : ""
               }`}
             >
-              Pending Requests{" "}
-              <span className="text-sm bg-green-600/10 text-white px-2 py-0.5 rounded-md">
+              <span className="text-sm sm:text-base">Pending Requests</span>
+              <span className="text-xs sm:text-sm bg-green-600/10 text-white px-2 py-0.5 rounded-md">
                 {adminKPIs.sponsors}
               </span>
             </button>
@@ -109,12 +104,12 @@ export default function SideBar({
                 activeSideBar === "blacklisted_sponsor" ? "text-[#46cfb6]" : ""
               }`}
             >
-              Blacklist Sponsor
+              <span className="text-sm sm:text-base">Blacklist Sponsor</span>
             </button>
           </div>
         ) : null}
       </div>
-
+  
       <div className="flex flex-col gap-2 w-full">
         <button
           onClick={() => {
@@ -128,13 +123,13 @@ export default function SideBar({
           }`}
         >
           <div className="flex items-center gap-2">
-            <List size={"14"} />
-            Manage Listings
+            <List size={"16"} />
+            <span className="text-sm sm:text-base">Manage Listings</span>
           </div>
-          {showListingOptions ? <ChevronUp size={"14"} /> : <ChevronDown size={"14"} />}
+          {showListingOptions ? <ChevronUp size={"16"} /> : <ChevronDown size={"16"} />}
         </button>
         {showListingOptions ? (
-          <div className="flex flex-col pl-10">
+          <div className="flex flex-col pl-6 sm:pl-10">
             <button
               onClick={() => {
                 setActiveSideBar("pending_listings");
@@ -143,15 +138,15 @@ export default function SideBar({
                 activeSideBar === "pending_listings" ? "text-[#46cfb6]" : ""
               }`}
             >
-              Pending Requests{" "}
-              <span className="text-sm bg-green-600/10 text-white px-2 py-0.5 rounded-md">
+              <span className="text-sm sm:text-base">Pending Requests</span>
+              <span className="text-xs sm:text-sm bg-green-600/10 text-white px-2 py-0.5 rounded-md">
                 {adminKPIs.listings}
               </span>
             </button>
           </div>
         ) : null}
       </div>
-
+  
       <button
         onClick={() => {
           setShowSponsorOptions(false);
@@ -162,10 +157,10 @@ export default function SideBar({
           activeSideBar === "rewards" ? "bg-green-600/10" : ""
         }`}
       >
-        <DollarSign size={"14"} />
-        Manage Rewards
+        <DollarSign size={"16"} />
+        <span className="text-sm sm:text-base">Manage Rewards</span>
       </button>
-
+  
       <button
         onClick={() => {
           setShowSponsorOptions(false);
@@ -176,43 +171,15 @@ export default function SideBar({
           activeSideBar === "transaction_history" ? "bg-green-600/10" : ""
         }`}
       >
-        <FileClock size={"14"} />
-        Transaction History
+        <FileClock size={"16"} />
+        <span className="text-sm sm:text-base">Transaction History</span>
       </button>
     </>
   );
 
   return (
     <>
-      {/* Mobile Overlay */}
-      {isOpen && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black/50 z-40"
-          onClick={onClose}
-        />
-      )}
-
-      {/* Mobile Sidebar */}
-      <div
-        className={`
-          lg:hidden fixed inset-y-0 left-0 w-[80%] max-w-[300px] bg-primary_dark z-50
-          transform transition-transform duration-300 ease-in-out
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-        `}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 p-2 hover:bg-green-600/10 rounded-md"
-        >
-          <X size={24} />
-        </button>
-        <div className="h-full overflow-y-auto pt-16 px-4">
-          <SidebarContent />
-        </div>
-      </div>
-
-      {/* Desktop Sidebar */}
-      <div className="hidden lg:flex flex-col p-4 gap-2 w-[20%] h-full text-sm border-r border-border_dark">
+      <div className="admin-sidebar lg:flex flex-col p-4 gap-2 w-full h-full text-sm border-r border-border_dark overflow-y-auto">
         <SidebarContent />
       </div>
     </>

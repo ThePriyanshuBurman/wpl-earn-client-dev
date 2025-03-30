@@ -2,14 +2,13 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
-import { useEffect, useState, createContext } from "react";
+import { useEffect } from "react";
 import { useUserStore } from "../store";
 import axios from "axios";
 import { api_paths, paths } from "@/lib/urls";
 import AdminNavbar from "@/components/wpl/common/AdminNavBar";
 import { Toaster } from "@/components/ui/sonner";
 import NextTopLoader from "nextjs-toploader";
-import React from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,24 +20,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-interface SidebarContextType {
-  sidebarOpen: boolean;
-  toggleSidebar: () => void;
-  closeSidebar: () => void;
-}
-
-export const SidebarContext = createContext<SidebarContextType>({
-  sidebarOpen: false,
-  toggleSidebar: () => {},
-  closeSidebar: () => {},
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const updateUserDetails = useUserStore(
     (state: any) => state.updateUserDetails
   );
@@ -76,15 +62,6 @@ export default function RootLayout({
     }
   });
 
-  const toggleSidebar = () => setSidebarOpen(prev => !prev);
-  const closeSidebar = () => setSidebarOpen(false);
-
-  const sidebarContextValue = {
-    sidebarOpen,
-    toggleSidebar,
-    closeSidebar,
-  };
-
   return (
     <html lang="en">
       <title>WPL Earn</title>
@@ -98,15 +75,8 @@ export default function RootLayout({
           alt=""
           className="absolute top-0 z-0 h-screen"
         />
-        {/* // This code creates a context provider for the sidebar, allowing components within it to access the sidebar's open/close state and toggle functionality.
-        // It renders the AdminNavbar component, which includes a button to toggle the sidebar.
-        // The children prop is rendered within a flex container that takes up the full width and height of the screen, with a top padding of 8vh. */}
-        <SidebarContext.Provider value={sidebarContextValue}>
-          <AdminNavbar toggleSidebar={toggleSidebar} />
-          <div className="flex w-screen pt-[8vh] h-full z-20 pb-10 md:pb-0">
-            {children}
-          </div>
-        </SidebarContext.Provider>
+        {/* <AdminNavbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} /> */}
+        <div className="flex w-screen pt-[8vh] h-full z-20">{children}</div>
         {/* <Footer /> */}
       </body>
     </html>

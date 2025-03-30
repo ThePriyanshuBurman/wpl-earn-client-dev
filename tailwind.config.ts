@@ -70,8 +70,18 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         marquee: "marquee var(--duration) infinite linear",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+        "border-glow": "borderGlow 3s ease-in-out infinite",
+        "slide-down": "slideDown 0.3s ease-out",
       },
       keyframes: {
+        borderGlow: {
+          "0%, 100%": { borderColor: "rgba(255, 255, 255, 0.2)" },
+          "50%": { borderColor: "rgba(255, 255, 255, 0.8)" },
+        },
+        slideDown: {
+          "0%": { opacity: "0", transform: "translateY(-10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
         grid: {
           "0%": {
             transform: "translateY(-50%)",
