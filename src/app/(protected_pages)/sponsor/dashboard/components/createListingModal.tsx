@@ -16,9 +16,14 @@ export default function CreateListingModal({
 
   return (
     <Modal open={open} close={close}>
-      <div className="flex flex-col md:flex-row gap-6 md:gap-12 h-full w-[90vw] md:w-[50vw] p-4 md:p-6">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-12 h-full w-full max-w-[90vw] md:max-w-[50vw] p-4 md:p-6">
+        {/* Bounty Section */}
         <div className="flex flex-col justify-between w-full text-center md:text-left">
-          <img src="/images/png/bounty-img.png" alt="Bounty" className="w-full max-w-xs mx-auto md:mx-0" />
+          <img
+            src="/images/png/bounty-img.png"
+            alt="Bounty"
+            className="w-full max-w-[250px] mx-auto md:mx-0"
+          />
           <div className="flex flex-col gap-2">
             <p className="font-polysansbulky gradient-text text-lg md:text-xl">
               Host a Work Competition
@@ -34,14 +39,22 @@ export default function CreateListingModal({
             </PrimaryButton>
           </Link>
         </div>
-        
-        <div className="hidden md:block h-full border-[0.5px] border-border_dark"></div>
-        <div className="block md:hidden w-full border-t-[0.5px] border-border_dark my-4"></div>
   
-        <div className="flex flex-col gap-6 w-full text-center md:text-left">
-          <img src="/images/png/grant-img.png" alt="Grant" className="w-full max-w-xs mx-auto md:mx-0" />
+        {/* Divider - Responsive */}
+        <div className="border-[0.5px] border-border_dark w-full md:hidden"></div>
+        <div className="hidden md:block h-full border-[0.5px] border-border_dark"></div>
+  
+        {/* Grant Section */}
+        <div className="flex flex-col justify-between w-full text-center md:text-left">
+          <img
+            src="/images/png/grant-img.png"
+            alt="Grant"
+            className="w-full max-w-[250px] mx-auto md:mx-0"
+          />
           <div className="flex flex-col gap-2">
-            <p className="font-polysansbulky gradient-text text-lg md:text-xl">Create A Grant</p>
+            <p className="font-polysansbulky gradient-text text-lg md:text-xl">
+              Create A Grant
+            </p>
             <p className="text-sm text-secondary_text_dark">
               All participants complete your scope of work, and the best
               submission(s) are rewarded. Get multiple options to choose from.
