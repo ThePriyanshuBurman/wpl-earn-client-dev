@@ -15,6 +15,11 @@ export default function Page() {
   // const [openCreateListingModal, setOpenCreateListingModal] = useState(false);
   const [sponsorState, setSponsorState] = useState(null);
   const [blacklistModal, setBlacklistModal] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar visibility
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   useEffect(() => {
     const _sponsorDetails = localStorage.getItem("userDetails");
