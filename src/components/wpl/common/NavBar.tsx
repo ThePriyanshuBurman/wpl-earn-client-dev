@@ -44,30 +44,22 @@ export default function NavBar() {
         {/* Desktop Links (Hidden on Small Screens) */}
         <div className="hidden sm:flex items-center gap-8 text-sm w-max">
           <Link href={paths.bounties}>
-            <button
-              className={pathname === paths.bounties ? "gradient-text" : "hover:brightness-75 transition-all"}
-            >
+            <button className={pathname === paths.bounties ? "gradient-text" : "hover:brightness-75 transition-all"}>
               Bounties
             </button>
           </Link>
           <Link href={paths.grants}>
-            <button
-              className={pathname === paths.grants ? "gradient-text" : "hover:brightness-75 transition-all"}
-            >
+            <button className={pathname === paths.grants ? "gradient-text" : "hover:brightness-75 transition-all"}>
               Grants
             </button>
           </Link>
           <Link href={paths.wpl_program}>
-            <button
-              className={pathname === "/wpl-program" ? "gradient-text" : "hover:brightness-75 transition-all"}
-            >
+            <button className={pathname === "/wpl-program" ? "gradient-text" : "hover:brightness-75 transition-all"}>
               WPL Program
             </button>
           </Link>
           <Link href={paths.leaderboard}>
-            <button
-              className={pathname === "/leaderboard" ? "gradient-text" : "hover:brightness-75 transition-all"}
-            >
+            <button className={pathname === "/leaderboard" ? "gradient-text" : "hover:brightness-75 transition-all"}>
               Leaderboard
             </button>
           </Link>
@@ -91,16 +83,10 @@ export default function NavBar() {
             </div>
           ) : (
             <>
-              <button
-                onClick={() => setOpenLoginModal(true)}
-                className="hover:brightness-75 transition-all text-sm"
-              >
+              <button onClick={() => setOpenLoginModal(true)} className="hover:brightness-75 transition-all text-sm">
                 Login
               </button>
-              <PrimaryButton
-                onClick={() => setOpenSignUpModal(true)}
-                className="py-2 rounded-2xl text-sm ml-2"
-              >
+              <PrimaryButton onClick={() => setOpenSignUpModal(true)} className="py-2 rounded-2xl text-sm ml-2">
                 Sign Up
               </PrimaryButton>
             </>
@@ -108,62 +94,38 @@ export default function NavBar() {
         </div>
 
         {/* Hamburger Menu (Only on Small Screens) */}
-        <button
-          className="block sm:hidden text-3xl focus:outline-none z-50"
-          onClick={() => setOpenMenu(!openMenu)}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" className="fill-current">
-            <path
-              d="M3 6h18M3 12h18M3 18h18"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+        <button onClick={() => setOpenMenu(!openMenu)} className="block sm:hidden text-3xl focus:outline-none z-50 transition-transform duration-300">
+          {openMenu ? (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
         </button>
 
-        {/* Mobile Dropdown Menu (Right-Aligned & Left-Aligned Text) */}
-        {openMenu && (
-          <div className="absolute top-[100%] right-0 w-[250px] bg-secondary_dark border border-border_dark flex flex-col gap-4 py-4 px-6 sm:hidden text-left rounded-lg transition-all ease-in-out duration-300 transform opacity-100 z-50">
-            <Link href={paths.bounties} onClick={() => setOpenMenu(false)}>
-              Bounties
-            </Link>
-            <Link href={paths.grants} onClick={() => setOpenMenu(false)}>
-              Grants
-            </Link>
-            <Link href={paths.wpl_program} onClick={() => setOpenMenu(false)}>
-              WPL Program
-            </Link>
-            <Link href={paths.leaderboard} onClick={() => setOpenMenu(false)}>
-              Leaderboard
-            </Link>
+        {/* Mobile Dropdown Menu (Slide from Right) */}
+        <div className={`fixed top-0 right-0 w-64 bg-secondary_dark shadow-lg rounded-lg transition-transform duration-300 transform ${openMenu ? 'translate-x-0' : 'translate-x-full'} sm:hidden`}>
+          <div className="flex flex-col p-4 gap-4">
+            <Link href={paths.bounties} onClick={() => setOpenMenu(false)} className="pt-2">Bounties</Link>
+            <Link href={paths.grants} onClick={() => setOpenMenu(false)}>Grants</Link>
+            <Link href={paths.wpl_program} onClick={() => setOpenMenu(false)}>WPL Program</Link>
+            <Link href={paths.leaderboard} onClick={() => setOpenMenu(false)}>Leaderboard</Link>
 
-            {/* Login & Sign Up Inside Hamburger Menu */}
             {!userDetails && (
               <>
-                <button
-                  onClick={() => {
-                    setOpenLoginModal(true);
-                    setOpenMenu(false);
-                  }}
-                  className="hover:brightness-75 transition-all text-sm"
-                >
+                <button onClick={() => { setOpenLoginModal(true); setOpenMenu(false); }} className="text-green-700 hover:text-white border border-green-700 transition-all py-2 rounded-lg">
                   Login
                 </button>
-                <PrimaryButton
-                  onClick={() => {
-                    setOpenSignUpModal(true);
-                    setOpenMenu(false);
-                  }}
-                  className="py-2 rounded-2xl text-sm"
-                >
+                <PrimaryButton onClick={() => { setOpenSignUpModal(true); setOpenMenu(false); }} className="py-2 rounded-2xl text-sm">
                   Sign Up
                 </PrimaryButton>
               </>
             )}
           </div>
-        )}
+        </div>
       </nav>
     </>
   );
