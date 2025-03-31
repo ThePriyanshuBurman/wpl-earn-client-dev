@@ -10,14 +10,19 @@ import {
   Users,
 } from "lucide-react";
 import { useEffect } from "react";
+import { paths } from "@/lib/urls";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function SideBar({
+
   activeSideBar,
   setActiveSideBar,
 }: {
   activeSideBar: string;
   setActiveSideBar: any;
 }) {
+  const pathname = usePathname();
   return (
     <div className="flex flex-col p-4 gap-2 w-[18%] text-sm border-r border-border_dark">
       <button
@@ -65,8 +70,6 @@ export default function SideBar({
         <BookUser size={"14"} />
         Details
       </button>
-
-    
       <button
         onClick={() => {
           setActiveSideBar("help");
