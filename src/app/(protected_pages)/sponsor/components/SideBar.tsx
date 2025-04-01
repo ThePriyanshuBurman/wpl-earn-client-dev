@@ -115,7 +115,7 @@ export default function SideBar({
   return (
     <>
       {/* Toggle Button */}
-      <div className="text-center">
+      <div className="text-left pt-4">
         <button
           className="text-white bg-secondary_dark hover:bg-secondary_dark  font-medium rounded-lg text-sm px-5 py-2.5"
           type="button"
