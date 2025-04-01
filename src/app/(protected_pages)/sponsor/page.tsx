@@ -9,18 +9,13 @@ import Notification from "./components/Notifications";
 import Help from "./components/Help";
 import { Modal } from "@/components/ui/Modal";
 import TransactionTable from "./components/TransactionTable";
-import NavBarProtected from "@/components/wpl/common/NavBarProtected";
 
 export default function Page() {
   const [activeSideBar, setActiveSideBar] = useState("listing");
+  const [showDrawer, setShowDrawer] = useState(false);
   // const [openCreateListingModal, setOpenCreateListingModal] = useState(false);
   const [sponsorState, setSponsorState] = useState(null);
   const [blacklistModal, setBlacklistModal] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar visibility
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
 
   useEffect(() => {
     const _sponsorDetails = localStorage.getItem("userDetails");
@@ -60,21 +55,16 @@ export default function Page() {
           </Modal>
         )
       }
-      <div className="flex w-full h-full">
-        {/* Navbar */}
-      <NavBarProtected toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
-
-      {/* Sidebar */}
-      <div
-        className={`fixed top-[8vh] left-0 h-[92vh] w-64 transform transition-transform duration-300 ease-in-out z-40 bg-secondary_dark lg:bg-transparent
-          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
-          lg:translate-x-0 lg:static lg:h-full lg:w-64`} // Changed w-80 to w-64 to match ml-64
-      >
+      <div className="flex flex-col w-full h-full self-start">
         <SideBar
+          
           activeSideBar={activeSideBar}
           setActiveSideBar={setActiveSideBar}
+          showDrawer={showDrawer}
+          setShowDrawer={setShowDrawer}
+          
         />
-      </div>
+      
         {activeSideBar === "listing" ? (
           <SponsorListing />
         ) : activeSideBar === "rewards" ? (
