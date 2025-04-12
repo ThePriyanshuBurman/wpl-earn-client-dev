@@ -3,46 +3,95 @@ import { cn } from "@/lib/utils";
 
 const reviews = [
   {
-    name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
-    profileImg: "https://avatar.vercel.sh/jack",
+    name: "Puppy",
+    userid: "#1",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
     img: "/wolfs/1.png",
   },
   {
-    name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
-    profileImg: "https://avatar.vercel.sh/jill",
+    name: "Redwolf",
+    userid: "#2",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
     img: "/wolfs/2.png",
   },
   {
-    name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    profileImg: "https://avatar.vercel.sh/john",
+    name: "Articwolf",
+    userid: "#3",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
     img: "/wolfs/3.png",
   },
   {
-    name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    profileImg: "https://avatar.vercel.sh/jane",
+    name: "Graywolf",
+    userid: "#4",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
     img: "/wolfs/4.png",
   },
   {
-    name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    profileImg: "https://avatar.vercel.sh/jenny",
+    name: "Celestialwolf",
+    userid: "#5",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
     img: "/wolfs/5.png",
   },
   {
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    profileImg: "https://avatar.vercel.sh/james",
+    name: "Firewolf",
+    userid: "#6",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
     img: "/wolfs/6.png",
+  },
+  {
+    name: "Shadowwolf",
+    userid: "#7",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
+    img: "/wolfs/7.png",
+  },
+  {
+    name: "Icewolf",
+    userid: "#8",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
+    img: "/wolfs/8.png",
+  },
+  {
+    name: "Thunderwolf",
+    userid: "#9",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
+    img: "/wolfs/9.png",
+  },
+  {
+    name: "Warg",
+    userid: "#10",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
+    img: "/wolfs/10.png",
+  },
+  {
+    name: "Werewolf",
+    userid: "#11",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
+    img: "/wolfs/11.png",
+  },
+  {
+    name: "Fenrir",
+    userid: "#12",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
+    img: "/wolfs/12.png",
+  },
+  {
+    name: "Direwolf",
+    userid: "#13",
+    // body: "I've never seen anything like this before. It's amazing. I love it.",
+    // profileImg: "https://avatar.vercel.sh/jack",
+    img: "/wolfs/13.png",
   },
 ];
 
@@ -50,16 +99,12 @@ const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
 const ReviewCard = ({
-  profileImg,
   name,
-  username,
-  body,
+  userid,
   img,
 }: {
-  profileImg: string;
   name: string;
-  username: string;
-  body: string;
+  userid: string;
   img: string;
 }) => {
   return (
@@ -72,26 +117,27 @@ const ReviewCard = ({
             // light styles
             "border-gray-950/[.1] bg-secondary_dark hover:secondary_dark/[.05]",
             // dark styles
-            "dark:border-gray-50/[.1] bg-secondary_dark dark:hover:secondary_dark/[.15]"
+            "dark:border-gray-50/[.1] bg-secondary_dark dark:hover:secondary_dark/[.15]",
+            "bg-[url('/wolfs/background.png')] bg-cover bg-center",
           )}
         >
           <div className="flex flex-row items-center gap-2">
             <div className="flex flex-col">
-              <figcaption className="text-sm font-medium dark:text-white">
+            <p className="text-xl font-medium dark:text-white/40 self-start pt-3">{userid}</p>
+              <figcaption className="text-2xl font-medium dark:text-white">
                 {name}
               </figcaption>
-              <p className="text-xs font-medium dark:text-white/40">{username}</p>
             </div>
           </div>
 
-          <blockquote className="mt-2 text-sm">{body}</blockquote>
+          {/* <blockquote className="mt-2 text-sm">{body}</blockquote> */}
 
           <div className="mt-3 relative">
             <img src={img} alt="wolf" className="rounded-md" />
-            <div className="absolute inset-0 bg-emerald-500/20 rounded-md"></div>
+            <div className="absolute  bg-emerald-500/20 rounded-md"></div>
           </div>
 
-          <div className="absolute inset-0 bg-emerald-500/10 rounded-xl pointer-events-none"></div>
+          <div className="absolute bg-emerald-500/10 rounded-xl pointer-events-none"></div>
         </figure>
 
         {/* Back of card */}
@@ -99,7 +145,8 @@ const ReviewCard = ({
           className={cn(
             "absolute inset-0 h-full w-64 rounded-xl border p-4 [transform:rotateY(180deg)] [backface-visibility:hidden]",
             "border-gray-950/[.1] bg-secondary_dark",
-            "dark:border-gray-50/[.1] bg-secondary_dark"
+            "dark:border-gray-50/[.1] bg-secondary_dark",
+            "bg-[url('/wolfs/background.png')] bg-cover bg-center",
           )}
         >
           <div className="flex flex-col gap-4">
@@ -116,7 +163,7 @@ const ReviewCard = ({
               </div>
             </div>
           </div>
-          <div className="absolute inset-0 bg-emerald-500/10 rounded-xl pointer-events-none"></div>
+          <div className="absolute bg-emerald-500/10 rounded-xl pointer-events-none"></div>
         </div>
       </div>
     </div>
@@ -128,13 +175,13 @@ export default function MarqueeDemo() {
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
       <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
+          <ReviewCard key={review.userid} {...review} />
         ))}
       </Marquee>
       <div className="hidden md:block">
         <Marquee reverse pauseOnHover className="[--duration:20s]">
           {secondRow.map((review) => (
-            <ReviewCard key={review.username} {...review} />
+            <ReviewCard key={review.userid} {...review} />
           ))}
         </Marquee>
       </div>

@@ -111,7 +111,7 @@ export default function Page() {
           <div className="flex flex-col gap-4 w-full lg:w-[65%]">
             <BountyList />
           </div>
-          <div className="flex flex-col gap-6 w-full lg:w-[35%]">
+          <div className="hidden lg:flex flex-col gap-6 w-full lg:w-[35%]">
             <StatsCard />
             <HowItsWorkCard />
             <div className="flex flex-col gap-6 bg-secondary_dark border border-border_dark backdrop-blur-sm p-4 rounded-lg">
