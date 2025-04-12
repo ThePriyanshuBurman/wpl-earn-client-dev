@@ -7,7 +7,7 @@ import { paths } from "@/lib/urls";
 import { useUserStore } from "@/app/store";
 import NotificationDropdown from "../home/NotificationDropdown";
 import Link from "next/link";
-import { Menu, X } from "lucide-react"; 
+import { Menu, X } from "lucide-react";
 import { PrimaryButton } from "@/components/wpl/components/button";
 
 interface AdminNavbarProps {
@@ -43,6 +43,10 @@ export default function NavBarProtected({ toggleSidebar, isSidebarOpen }: AdminN
     setIsMenuOpen((prev) => !prev);
   };
 
+  const getLinkClass = (path: string) => {
+    return pathname === path ? "text-green-500 font-semibold" : "text-white";
+  };
+
   return (
     <nav className="flex justify-between w-full px-[8%] py-[0.5%] font-medium text-[16px] z-50 fixed top-0 backdrop-filter backdrop-blur-md text-primary_text_dark">
       {/* Conditional Button: Only Show if Path is /sponsor */}
@@ -62,11 +66,19 @@ export default function NavBarProtected({ toggleSidebar, isSidebarOpen }: AdminN
       </Link>
 
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center gap-6">
-        <Link href={paths.bounties} className={pathname === paths.bounties ? "gradient-text" : ""}>Bounties</Link>
-        <Link href={paths.grants} className={pathname === paths.grants ? "gradient-text" : ""}>Grants</Link>
-        <Link href={paths.wpl_program} className={pathname === paths.wpl_program ? "gradient-text" : ""}>WPL Program</Link>
-        <Link href={paths.leaderboard} className={pathname === paths.leaderboard ? "gradient-text" : ""}>Leaderboard</Link>
+      <div className="hidden md:flex items-center gap-6 py-6">
+        <Link href={paths.bounties} className={getLinkClass(paths.bounties)}>
+          Bounties
+        </Link>
+        <Link href={paths.grants} className={getLinkClass(paths.grants)}>
+          Grants
+        </Link>
+        <Link href={paths.wpl_program} className={getLinkClass(paths.wpl_program)}>
+          WPL Program
+        </Link>
+        <Link href={paths.leaderboard} className={getLinkClass(paths.leaderboard)}>
+          Leaderboard
+        </Link>
       </div>
 
       {/* Authentication Buttons (Hidden on /sponsor path) */}
@@ -84,7 +96,7 @@ export default function NavBarProtected({ toggleSidebar, isSidebarOpen }: AdminN
             onClick={() => {
               setOpenSignUpModal(true);
             }}
-            className="py-2 rounded-2xl text-sm ml-2"
+            className="px-1 py-0 rounded-3xl text-xs ml-2 sm:text-xs md:text-sm w-full sm:py-2 md:py-2 sm:px-2 md:px-4"
           >
             Sign Up
           </PrimaryButton>
@@ -109,16 +121,16 @@ export default function NavBarProtected({ toggleSidebar, isSidebarOpen }: AdminN
           </button>
 
           {/* Navigation Links */}
-          <Link href={paths.bounties} className="py-2 text-lg hover:text-green-400" onClick={toggleMenu}>
+          <Link href={paths.bounties} className={`py-2 text-lg ${pathname === paths.bounties ? "text-green-400" : "text-white"}`} onClick={toggleMenu}>
             Bounties
           </Link>
-          <Link href={paths.grants} className="py-2 text-lg hover:text-green-400" onClick={toggleMenu}>
+          <Link href={paths.grants} className={`py-2 text-lg ${pathname === paths.grants ? "text-green-400" : "text-white"}`} onClick={toggleMenu}>
             Grants
           </Link>
-          <Link href={paths.wpl_program} className="py-2 text-lg hover:text-green-400" onClick={toggleMenu}>
+          <Link href={paths.wpl_program} className={`py-2 text-lg ${pathname === paths.wpl_program ? "text-green-400" : "text-white"}`} onClick={toggleMenu}>
             WPL Program
           </Link>
-          <Link href={paths.leaderboard} className="py-2 text-lg hover:text-green-400" onClick={toggleMenu}>
+          <Link href={paths.leaderboard} className={`py-2 text-lg ${pathname === paths.leaderboard ? "text-green-400" : "text-white"}`} onClick={toggleMenu}>
             Leaderboard
           </Link>
 

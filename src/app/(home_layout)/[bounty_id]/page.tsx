@@ -21,7 +21,7 @@ import { transformDescription } from "@/lib/utils";
 
 export default function Page() {
   const params = useParams();
-  const slug = params.slug;
+  const bountyid = params.bounty_id;
   const [bountyDetails, setBountyDetails] = useState<any>({});
   const [bountyId, setBountyId] = useState<string>("");
   const [userPOW, setUserPOW] = useState<any>([]);
@@ -43,7 +43,7 @@ export default function Page() {
     setLoading(true);
     let token = localStorage.getItem("token");
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}${api_paths.bounty_detail}?slug=${slug}`,
+      `${process.env.NEXT_PUBLIC_API_URL}${api_paths.bounty_detail}?bountyid=${bountyid}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -30,7 +30,7 @@ export default function Page() {
                 href="https://form.typeform.com/to/jPgPdA8l"
                 target="_blank"
               >
-                <PrimaryButton className="px-6 sm:px-8 md:px-10 py-3 !rounded-full">
+                <PrimaryButton className="px-6 sm:px-8 md:px-10 py-3 !rounded-full sm:text-xs md:text-sm sm:py-2.5 md:py-2.5">
                   Join the Pack
                 </PrimaryButton>
               </Link>

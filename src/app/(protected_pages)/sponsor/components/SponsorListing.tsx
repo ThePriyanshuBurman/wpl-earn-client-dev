@@ -138,11 +138,11 @@ export default function SponsorListing() {
               </p>
               <div className="w-full md:w-max">
                 <PrimaryButton
-                  className="w-full md:w-auto"
+                  className="w-full md:w-auto md:py-2 md:px-3"
                   onClick={() => setOpenCreateListingModal(true)}
                 >
                   <Plus size={"14"} />
-                  <p>Create New Listing</p>
+                  <p className="md:text-sm">Create New Listing</p>
                 </PrimaryButton>
               </div>
             </div>

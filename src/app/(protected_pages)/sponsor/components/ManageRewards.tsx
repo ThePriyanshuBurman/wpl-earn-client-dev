@@ -10,6 +10,7 @@ import { api_paths } from "@/lib/urls";
 import { useUserStore } from "@/app/store";
 import PageLoading from "@/components/wpl/components/PageLoading";
 import ConnectToCopperX from "@/app/(admin_pages)/admin/components/ConnectToCopperX";
+import { SecondaryModalButton } from "@/components/wpl/components/button/SecondaryModalButton";
 
 export default function ManageRewards() {
   const [activeTab, setActiveTab] = useState("activity");
@@ -166,7 +167,7 @@ export default function ManageRewards() {
                   <Card>
                     <div className="flex flex-col gap-1">
                       <p className="text-sm font-normal text-gray-300">
-                        Total Rewarded
+                        Total Disbursed
                       </p>
                       <p className="text-2xl sm:text-3xl font-polysansbulky font-[550] gradient-text">
                         ${totalDisbursed}
@@ -198,26 +199,50 @@ export default function ManageRewards() {
                   </Card> */}
                 </div>
               </div>
-  
-              {/* My Listings Section */}
               <div className="flex flex-col">
-                {/* <p className="font-polysansbulky">My Listings</p> */}
-                <div className="flex flex-wrap items-center justify-between w-full border-b border-border_dark gap-4">
-                  <Tabs items={items} active={activeTab} onClick={setActiveTab} />
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-4">
-                    {/* <div className="w-[180px]">
-                      <SelectWpl
-                        options={statusOptions}
-                        placeholder="Select Status"
-                      />
-                    </div> */}
-                    <div className="w-full sm:w-[280px] md:w-[320px]">
-                      <Input placeholder="search" />
-                    </div>
-                  </div>
+            <div className="flex items-center justify-between w-full border-b border-border_dark py-2">
+              <Tabs
+                items={items}
+                active={activeTab}
+                onClick={setActiveTab}
+              />
+              <div className="flex items-center gap-4">
+                <div className="w-[280px]">
+                  <Input 
+                    placeholder="Search bounties..." 
+                    value={searchTerm}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+                  />
                 </div>
-                <MyActivityTable loading={loading} bountyTableData={bountyTableData} />
               </div>
+            </div>
+            
+            <DeclaredBountyTable
+              loading={loading}
+              bountyTableData={filteredBounties}
+            />
+            
+            {!loading && bountyTableData.length === 0 && (
+              <div className="mt-8 bg-secondary_dark/40 p-6 rounded-lg border border-border_dark">
+                <h3 className="text-xl font-polysansbulky gradient-text mb-3">Welcome to Manage Rewards</h3>
+                <p className="text-secondary_text_dark mb-4">You don't have any closed bounties yet. To start sending rewards, you need to:</p>
+                
+                <ol className="list-decimal pl-5 mb-4 space-y-2 text-gray-300">
+                  <li>Create bounties from the Listing tab</li>
+                  <li>Wait for submissions and select winners</li>
+                  <li>Close the bounty to make it appear here</li>
+                  <li>Send rewards to winners through this page</li>
+                </ol>
+                
+                <SecondaryModalButton 
+                  onClick={() => window.location.href = "/sponsor"}
+                >
+                  Go to Listings
+                </SecondaryModalButton>
+              </div>
+            )}
+          </div>
+              {/* My Listings Section */}
             </div>
           </>
         )}

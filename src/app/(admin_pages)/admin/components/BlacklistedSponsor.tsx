@@ -109,7 +109,7 @@ export default function BlacklistedSponsors() {
             Blacklisted Sponsors List
           </p>
           <div className="w-full sm:w-max">
-            <PrimaryButton onClick={() => setOpenBlacklistSponsorModal(true)}>
+            <PrimaryButton onClick={() => setOpenBlacklistSponsorModal(true)} className="md:text-sm md:px-3 md:py-2">
               <p>BlackList Sponsor</p>
             </PrimaryButton>
           </div>

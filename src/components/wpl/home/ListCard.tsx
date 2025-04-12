@@ -133,7 +133,7 @@ export function ListCardDarkFlip({
                 </div>
                 <div className="flex justify-between w-full m-0 p-0">
                   <div className="flex flex-col gap-1 w-full">
-                    <p className="font-normal text-sm sm:text-[17px] truncate">
+                    <p className="font-normal text-sm sm:text-base md:text-[17px] truncate flex-wrap">
                       {data.title}
                     </p>
                     <div className="flex justify-between items-center">
