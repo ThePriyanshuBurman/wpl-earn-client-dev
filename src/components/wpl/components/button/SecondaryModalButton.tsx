@@ -10,7 +10,7 @@ interface SecondaryModalButtonProps extends ButtonHTMLAttributes<HTMLButtonEleme
   variant?: "default" | "subtle" | "highlight";
 }
 
-const SecondaryModalButton = ({
+export const SecondaryModalButton = ({
   children,
   loading = false,
   icon = null,
@@ -53,4 +53,4 @@ const SecondaryModalButton = ({
   );
 };
 
-export default SecondaryModalButton; 
+// export default SecondaryModalButton; 

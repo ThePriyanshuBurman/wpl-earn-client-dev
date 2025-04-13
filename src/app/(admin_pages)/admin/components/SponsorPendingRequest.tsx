@@ -127,6 +127,7 @@ export default function ({ refreshKPIs }: { refreshKPIs?: () => void }) {
         }
         close={() => setOpenRejectSponsorModal(false)}
       />
+  
       <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-4 sm:px-6 md:px-8">
         <div className="flex flex-col gap-4">
           <p className="text-xl sm:text-2xl font-polysansbulky gradient-text py-1.5">
@@ -138,18 +139,18 @@ export default function ({ refreshKPIs }: { refreshKPIs?: () => void }) {
           <div className="flex flex-wrap items-center justify-between w-full border-b border-border_dark gap-4">
             <Tabs items={items} active={activeTab} onClick={setActiveTab} />
             <div className="w-full sm:w-[320px]">
-              <Input placeholder="search" />
+              <Input placeholder="Search by name or url" />
             </div>
           </div>
   
           <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 text-sm text-secondary_text_dark p-4 border-b border-border_dark">
-              <p className="truncate">Company Name</p>
-              <p className="truncate">Company URL</p>
-              <p className="truncate">Twitter</p>
-              <p className="truncate">Application Date</p>
-              <p className="truncate">Details</p>
-              <p className="truncate">Action</p>
+            <div className="flex items-center gap-8 w-full text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+              <p className="w-full sm:w-[20%]">Company Name</p>
+              <p className="w-full sm:w-[20%]">Company URL</p>
+              <p className="w-full sm:w-[20%]">Twitter</p>
+              <p className="w-full sm:w-[20%]">Application Date</p>
+              <p className="w-full sm:w-[10%]">Details</p>
+              <p className="w-full sm:w-[10%]">Action</p>
             </div>
   
             <div className="flex flex-col gap-4 w-full font-polysansbulky">
@@ -158,50 +159,43 @@ export default function ({ refreshKPIs }: { refreshKPIs?: () => void }) {
                   <PageLoading />
                 </div>
               ) : tableData?.length ? (
-                tableData.map((c, i) => {
-                  return (
-                    <div
-                      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 w-full p-4 text-sm items-center"
-                      key={i}
-                    >
-                      <p className="truncate">{c.companyName}</p>
-                      <p className="truncate">{c.companyUrl}</p>
-                      <p className="truncate">{c.companyTwitter}</p>
-                      <p>{moment(new Date(c.createdAt)).format("DD MMM YY")}</p>
+                tableData.map((c, i) => (
+                  <div className="flex items-center gap-10 w-full p-4 text-sm" key={i}>
+                    <p className="w-full sm:w-[30%] truncate">{c.companyName}</p>
+                    <p className="w-full sm:w-[30%] truncate">{c.companyUrl}</p>
+                    <p className="w-full sm:w-[30%] truncate">{c.companyTwitter}</p>
+                    <p className="w-full sm:w-[30%]">{moment(new Date(c.createdAt)).format("DD MMM YY")}</p>
   
-                      <div className="flex justify-center">
-                        <Link href={`${paths.sponsor_details}/${c.id}`} target="_blank">
-                          <button className="text-sky-500 hover:underline">View</button>
-                        </Link>
-                      </div>
-  
-                      <div className="flex flex-wrap items-center gap-2 text-xs justify-center">
-                        <button
-                          onClick={() => {
-                            setSelectedSponsor(c);
-                            setOpenConfirmModal(true);
-                          }}
-                          className="text-green-500 border border-green-500 rounded-lg px-2 py-1"
-                        >
-                          Approve
-                        </button>
-                        <button
-                          onClick={() => {
-                            setSelectedSponsor(c);
-                            setOpenRejectSponsorModal(true);
-                          }}
-                          className="text-red-500 border border-red-500 rounded-lg px-2 py-1"
-                        >
-                          Reject
-                        </button>
-                      </div>
+                    <div className="w-full sm:w-[10%] flex">
+                      <Link href={`${paths.sponsor_details}/${c.id}`} target="_blank">
+                        <button className="text-sky-500 hover:underline">View</button>
+                      </Link>
                     </div>
-                  );
-                })
+  
+                    <div className="w-full sm:w-[10%] flex items-center gap-4 text-xs">
+                      <button
+                        onClick={() => {
+                          setSelectedSponsor(c);
+                          setOpenConfirmModal(true);
+                        }}
+                        className="w-max text-green-500 border border-green-500 rounded-lg px-2 py-1"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedSponsor(c);
+                          setOpenRejectSponsorModal(true);
+                        }}
+                        className="w-max text-red-500 border border-red-500 rounded-lg px-2 py-1"
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  </div>
+                ))
               ) : (
-                <div className="p-4 flex w-full">
-                  <p>No Data found!!</p>
-                </div>
+                <div className="p-4 flex w-full">No Data found!!</div>
               )}
             </div>
           </div>

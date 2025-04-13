@@ -156,7 +156,7 @@ export default function TransactionTable() {
       </div>
   
       <div className="flex flex-col w-full h-full bg-secondary_dark rounded-md overflow-x-auto">
-        <div className="flex items-center w-full p-4 border-b border-border_dark text-secondary_text_dark text-xs sm:text-sm font-semibold flex-wrap">
+        <div className="min-w-[600px] flex items-center gap-4 w-full text-xs sm:text-sm text-secondary_text_dark p-4 border-b border-border_dark">
           <p className="w-full sm:w-3/12 pr-2">Transaction ID</p>
           <p className="w-full sm:w-3/12 pl-6">From</p>
           <p className="w-full sm:w-3/12 pl-1">To</p>
@@ -165,7 +165,7 @@ export default function TransactionTable() {
           <p className="w-full sm:w-2/12">Date</p>
         </div>
   
-        <div className="flex flex-col w-full font-polysansbulky overflow-auto max-h-[500px]">
+        <div className="flex flex-col gap-4 w-full font-polysansbulky overflow-auto max-h-[500px]">
           {loading ? (
             <div className="p-4 flex w-full">
               <PageLoading />
@@ -174,7 +174,7 @@ export default function TransactionTable() {
             transactionData.map((transaction) => (
               <div
                 key={transaction.transactionId}
-                className="flex items-center w-full p-4 text-xs sm:text-sm hover:bg-gray-800/50 border-b border-border_dark/50 flex-wrap"
+                className="min-w-[600px] flex items-center gap-4 w-full p-4 text-xs sm:text-sm hover:bg-gray-800/50 border-b border-border_dark/50 flex-wrap"
               >
                 <div className="w-full sm:w-3/12 pr-2">
                   <span
@@ -211,11 +211,7 @@ export default function TransactionTable() {
                 </div>
                 <p className="w-full sm:w-2/12 pl-0.5 flex items-center gap-2">
                   <img
-                    src={
-                      transaction.denomination === "USDC"
-                        ? "/images/png/usdc.png"
-                        : "/images/png/strk-icon.png"
-                    }
+                    src={transaction.denomination === "USDC" ? "/images/png/usdc.png" : "/images/png/strk-icon.png"}
                     className="h-4"
                     alt=""
                   />
@@ -223,15 +219,7 @@ export default function TransactionTable() {
                 </p>
                 <p className="w-full sm:w-2/12 text-xs font-normal truncate">
                   <span
-                    className={`px-2 py-1 rounded-md ${
-                      transaction.status === "SUCCESS"
-                        ? "bg-green-500/20 text-green-400"
-                        : transaction.status === "PENDING"
-                        ? "bg-yellow-500/20 text-yellow-400"
-                        : transaction.status === "INITIATED"
-                        ? "bg-blue-500/20 text-blue-400"
-                        : "bg-red-500/20 text-red-400"
-                    }`}
+                    className={`px-2 py-1 rounded-md ${transaction.status === "SUCCESS" ? "bg-green-500/20 text-green-400" : transaction.status === "PENDING" ? "bg-yellow-500/20 text-yellow-400" : transaction.status === "INITIATED" ? "bg-blue-500/20 text-blue-400" : "bg-red-500/20 text-red-400"}`}
                   >
                     {transaction.status}
                   </span>

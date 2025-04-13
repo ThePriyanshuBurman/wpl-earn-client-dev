@@ -76,7 +76,7 @@ export default function RootLayout({
           className="absolute top-0 z-0 h-screen"
         />
         {/* <AdminNavbar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} /> */}
-        <div className="flex w-screen pt-[8vh] h-full z-20">{children}</div>
+        <div className="flex w-full pt-[8vh] h-full z-20">{children}</div>
         {/* <Footer /> */}
       </body>
     </html>

@@ -43,7 +43,7 @@ export default function ManageListings({ refreshKPIs }: { refreshKPIs?: () => vo
   const getAdminListings = async (search: string = "") => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}${api_paths.admin_listing}?filter=all&search=${encodeURIComponent(search)}`,
         {
@@ -152,11 +152,12 @@ export default function ManageListings({ refreshKPIs }: { refreshKPIs?: () => vo
 
   return (
     <div className="flex flex-col gap-4 z-20 w-full h-max pb-[2%] text-white py-4 px-4 sm:px-6 md:px-8">
+      {/* Heading Section */}
       <div className="flex flex-col gap-4">
         <p className="text-lg sm:text-xl md:text-2xl font-polysansbulky gradient-text py-1.5">
           All Listings
         </p>
-  
+    
         {/* KPI Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           <Card>
@@ -211,7 +212,7 @@ export default function ManageListings({ refreshKPIs }: { refreshKPIs?: () => vo
           </Card>
         </div>
       </div>
-  
+    
       {/* Filter Section */}
       <div className="flex flex-col md:flex-row items-center justify-between w-full border-b border-border_dark gap-4">
         <Tabs items={items} active={activeTab} onClick={setActiveTab} />
@@ -233,20 +234,20 @@ export default function ManageListings({ refreshKPIs }: { refreshKPIs?: () => vo
           </div>
         </div>
       </div>
-  
+    
       {/* Table Section */}
       <div className="flex flex-col w-full h-full overflow-auto bg-secondary_dark rounded-md">
         {activeTab === "bounties" ? (
           <>
             {/* Table Header */}
-            <div className="hidden md:flex items-center gap-4 w-full text-xs sm:text-sm text-secondary_text_dark p-4 border-b border-border_dark">
-              <p className="w-full">Title</p>
-              <p className="w-full">Posted by</p>
-              <p className="w-full">Rewards</p>
-              <p className="w-full">End Date</p>
-              <p className="w-full">Created At</p>
-              <p className="w-full">Status</p>
-              <p className="w-full">Actions</p>
+            <div className="flex items-center gap-4 w-full text-xs sm:text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+              <p className="w-1/5">Title</p>
+              <p className="w-1/5">Posted by</p>
+              <p className="w-1/5">Rewards</p>
+              <p className="w-1/5">End Date</p>
+              <p className="w-1/5">Created At</p>
+              <p className="w-1/5">Status</p>
+              <p className="w-1/5">Actions</p>
             </div>
             {/* Table Data */}
             <div className="flex flex-col gap-4 w-full font-polysansbulky">
@@ -286,14 +287,14 @@ export default function ManageListings({ refreshKPIs }: { refreshKPIs?: () => vo
         ) : (
           <>
             {/* Grants Table Header */}
-            <div className="hidden md:flex items-center gap-4 w-full text-xs sm:text-sm text-secondary_text_dark p-4 border-b border-border_dark">
-              <p className="w-full">Title</p>
-              <p className="w-full">Organization</p>
-              <p className="w-full">Avg Grant Size</p>
-              <p className="w-full">Approved Amount</p>
-              <p className="w-full">Created At</p>
-              <p className="w-full">Status</p>
-              <p className="w-full">Actions</p>
+            <div className="flex items-center gap-4 w-full text-xs sm:text-sm text-secondary_text_dark p-4 border-b border-border_dark">
+              <p className="w-1/5">Title</p>
+              <p className="w-1/5">Organization</p>
+              <p className="w-1/5">Avg Grant Size</p>
+              <p className="w-1/5">Approved Amount</p>
+              <p className="w-1/5">Created At</p>
+              <p className="w-1/5">Status</p>
+              <p className="w-1/5">Actions</p>
             </div>
             {/* Grants Table Data */}
             <div className="flex flex-col gap-4 w-full font-polysansbulky">
@@ -303,10 +304,28 @@ export default function ManageListings({ refreshKPIs }: { refreshKPIs?: () => vo
                 grantTableData.map((c, i) => (
                   <div className="flex flex-wrap md:flex-nowrap items-center gap-4 w-full p-4 text-xs sm:text-sm" key={i}>
                     <p className="w-full md:w-auto truncate">{c.title}</p>
-                    <p className="w-full md:w-auto truncate text-sky-500">{c.orgHandle}</p>
-                    <p className="w-full md:w-auto truncate">{c.avgGrantSize} {c.prizeCurrency}</p>
-                    <p className="w-full md:w-auto">{moment(c.createdAt).format("DD MMM YY")}</p>
+                    <p className="w-full md:w-auto truncate text-sky-500">
+                      <Link
+                        href={`${paths.sponsor_public_profile}/${c?.sponsor?.companyUserName}`}
+                        target="_blank"
+                        className="hover:underline"
+                      >
+                        {c?.sponsor?.companyName}
+                      </Link>
+                    </p>
+                    <p className="w-full md:w-auto truncate">
+                      {c.rewards} {c.denomination}
+                    </p>
+                    <p className="w-full md:w-auto truncate">{c.approvedAmount}</p>
+                    <p className="w-full md:w-auto truncate">
+                      {moment(c.createdAt).format("DD MMM YY")}
+                    </p>
                     <p className="w-full md:w-auto">{renderStatus(c.state)}</p>
+                    <div className="w-full md:w-auto flex">
+                      <Link href={`${paths.grant_details}/${c.id}?type=id`} target="_blank">
+                        <button className="text-sky-500 hover:underline">View</button>
+                      </Link>
+                    </div>
                   </div>
                 ))
               ) : (

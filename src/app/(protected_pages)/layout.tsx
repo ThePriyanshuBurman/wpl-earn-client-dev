@@ -77,7 +77,7 @@ export default function RootLayout({
           className="absolute top-0 z-0"
         />
         <NavBarProtected />
-        <div className="flex pt-[8vh] w-screen min-h-screen z-10">
+        <div className="flex pt-[8vh] w-full min-h-screen z-10">
           {children}
         </div>
         <Footer />

@@ -17,6 +17,7 @@ export default function ManageRewards() {
   const [isCopperxAccountExists, setIsCopperxAccountExists] =
     useState<boolean>(true);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   const userDetails = useUserStore((state) => state.userDetails);
   const [copperxWalletBalance, setCopperxWalletBalance] = useState<{[k:string]: any}>({
     USDCWallet: 0.0,
@@ -25,6 +26,9 @@ export default function ManageRewards() {
   });
   const [totalDisbursed, setTotalDisbursed] = useState<any>(0);
   const [bountyTableData, setBountyTableData] = useState<any[]>([]);
+  const filteredBounties = bountyTableData.filter((bounty) => 
+    bounty?.title?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   let statusOptions = [
     { label: "All", value: "all" },
@@ -200,24 +204,25 @@ export default function ManageRewards() {
                 </div>
               </div>
               <div className="flex flex-col">
-            <div className="flex items-center justify-between w-full border-b border-border_dark py-2">
-              <Tabs
-                items={items}
-                active={activeTab}
-                onClick={setActiveTab}
-              />
-              <div className="flex items-center gap-4">
-                <div className="w-[280px]">
-                  <Input 
-                    placeholder="Search bounties..." 
-                    value={searchTerm}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
+              <div className="w-full border-b border-border_dark py-2">
+  <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+    <Tabs
+      items={items}
+      active={activeTab}
+      onClick={setActiveTab}
+    />
+    <div className="w-full lg:w-[580px] flex justify-center lg:justify-end">
+      <Input 
+        placeholder="Search bounties..." 
+        value={searchTerm}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+      />
+    </div>
+  </div>
+</div>
+
             
-            <DeclaredBountyTable
+            <MyActivityTable
               loading={loading}
               bountyTableData={filteredBounties}
             />
