@@ -132,90 +132,98 @@ export function ListCardDarkFlip({
                   </div>
                 </div>
                 <div className="flex justify-between w-full m-0 p-0">
-                  <div className="flex flex-col gap-1 w-full">
-                    <p className="font-normal text-sm sm:text-base md:text-[17px] truncate flex-wrap">
-                      {data.title}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-1">
-                        <p className="text-[10px] sm:text-sm text-secondary_text_dark">
-                          by{" "}
-                          <Link
-                            href={`/profile/sponsor/${data?.sponsor?.companyUserName}`}
-                            className="hover:text-white hover:underline"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            {data?.sponsor?.companyUserName}
-                          </Link>
+                  <div className="flex justify-between w-full m-0 p-0">
+                    <div className="flex flex-col gap-1 w-full">
+
+                      {/* Title + Reward (on large screens only) */}
+                      <div className="flex justify-between items-center">
+                        <p className="font-normal text-[13px] sm:text-base md:text-lg lg:text-xl truncate">
+                          {data.title}
                         </p>
-                        {data?.sponsor?.status === "VERIFIED" && (
+
+                        {/* Reward beside title on sm+ screens */}
+                        <div className="hidden sm:flex items-center gap-1 sm:gap-2 bg-primary_dark border border-border_dark px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg">
                           <img
-                            src="/images/png/verified.png"
-                            className="h-3 sm:h-[14px] w-auto object-contain"
+                            src={
+                              data?.denomination === "USDC"
+                                ? "/images/png/usdc.png"
+                                : "/images/png/strk-icon.png"
+                            }
+                            className="h-3 sm:h-4 w-auto object-contain"
                             alt=""
                           />
-                        )}
-                      </div>
-                      <div className="hidden sm:flex items-center gap-1 sm:gap-2 bg-primary_dark border border-border_dark px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg">
-                        <img
-                          src={
-                            data?.denomination === "USDC"
-                              ? "/images/png/usdc.png"
-                              : "/images/png/strk-icon.png"
-                          }
-                          className="h-3 sm:h-4 w-auto object-contain"
-                          alt=""
-                        />
-                        {data?.denomination === "USDC" ? (
                           <p className="font-medium text-xs sm:text-sm">
-                            {data.rewards} USDC
+                            {data.rewards} {data.denomination}
                           </p>
-                        ) : (
-                          <p className="font-medium text-xs sm:text-sm">
-                            {data.rewards} STRK
+                        </div>
+                      </div>
+
+                      {/* Sponsor and verified */}
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-1">
+                          <p className="text-[10px] sm:text-sm text-secondary_text_dark">
+                            by{" "}
+                            <Link
+                              href={`/profile/sponsor/${data?.sponsor?.companyUserName}`}
+                              className="hover:text-white hover:underline"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {data?.sponsor?.companyUserName}
+                            </Link>
                           </p>
-                        )}
+                          {data?.sponsor?.status === "VERIFIED" && (
+                            <img
+                              src="/images/png/verified.png"
+                              className="h-3 sm:h-[14px] w-auto object-contain"
+                              alt="Verified"
+                            />
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex flex-wrap gap-1 sm:gap-2">
-                      <div className="flex items-center text-yellow-400 border border-yellow-500/10 rounded-lg text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 gap-1 sm:gap-2">
-                        <Sparkles size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
-                        <p className="hidden sm:block">Bounty</p>
-                      </div>
-                      <div className="flex items-center gap-1 sm:gap-2 bg-primary_dark border border-border_dark text-secondary_text_dark text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg w-max">
-                        {data?.state === "CLOSED" ? (
-                          <>Closed</>
-                        ) : (
-                          <>
-                            <Clock size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
-                            <span className="hidden sm:inline-block">Due</span>{" "}
-                            {moment(data?.endDate).fromNow()}
-                          </>
-                        )}
-                      </div>
-                      <div className="flex sm:hidden items-center gap-1 sm:gap-2 bg-primary_dark border border-border_dark text-secondary_text_dark text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg">
-                        <img
-                          src={
-                            data?.denomination === "USDC"
-                              ? "/images/png/usdc.png"
-                              : "/images/png/strk-icon.png"
-                          }
-                          className="h-3 sm:h-4 w-auto object-contain"
-                          alt=""
-                        />
-                        {data?.denomination === "USDC" ? (
-                          <p className="font-medium text-[10px] sm:text-sm">
-                            {data.rewards} USDC
+
+                      {/* Tags section */}
+                      <div className="flex flex-wrap gap-1 sm:gap-2">
+
+                        {/* Bounty */}
+                        <div className="flex items-center text-yellow-400 border border-yellow-500/10 rounded-lg text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 gap-1 sm:gap-2">
+                          <Sparkles size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
+                          <p className="hidden sm:block">Bounty</p>
+                        </div>
+
+                        {/* Due */}
+                        <div className="flex items-center gap-1 sm:gap-2 bg-primary_dark border border-border_dark text-secondary_text_dark text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg w-max">
+                          {data?.state === "CLOSED" ? (
+                            <>Closed</>
+                          ) : (
+                            <>
+                              <Clock size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
+                              <span className="hidden sm:inline-block">Due</span>{" "}
+                              {moment(data?.endDate).fromNow()}
+                            </>
+                          )}
+                        </div>
+
+                        {/* Reward on mobile (only show here if small screen) */}
+                        <div className="flex sm:hidden items-center gap-1 sm:gap-2 bg-primary_dark border border-border_dark text-secondary_text_dark text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg">
+                          <img
+                            src={
+                              data?.denomination === "USDC"
+                                ? "/images/png/usdc.png"
+                                : "/images/png/strk-icon.png"
+                            }
+                            className="h-3 w-auto object-contain"
+                            alt=""
+                          />
+                          <p className="font-medium text-[10px]">
+                            {data.rewards} {data.denomination}
                           </p>
-                        ) : (
-                          <p className="font-medium text-[10px] sm:text-sm">
-                            {data.rewards} STRK
-                          </p>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-1 sm:gap-2 bg-primary_dark border border-border_dark text-secondary_text_dark text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg w-max">
-                        <FileCheck size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
-                        {data?.submissionCount} <span className="hidden sm:inline">submission</span>
+                        </div>
+
+                        {/* Submission count */}
+                        <div className="flex items-center gap-1 sm:gap-2 bg-primary_dark border border-border_dark text-secondary_text_dark text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg w-max">
+                          <FileCheck size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
+                          {data?.submissionCount} <span className="hidden sm:inline">submission</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -277,41 +285,55 @@ export function ListCardLightFlip({
                 </div>
                 <div className="flex justify-between w-full m-0 p-0">
                   <div className="flex flex-col gap-1 w-full">
+                    {/* Title + Price on sm+ screens */}
                     <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-1">
-                        <p className="text-[10px] sm:text-sm text-gray-500">
-                          {data.protocol}
-                        </p>
-                        <img
-                          src="/png/verified.png"
-                          className="h-3 sm:h-[14px]"
-                          alt=""
-                        />
-                      </div>
-                      <div className="hidden sm:flex items-center gap-1 sm:gap-2 light-glassmorphism px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg">
-                        <img
-                          src="/png/strk-icon.png"
-                          className="h-3 sm:h-4 w-auto"
-                          alt=""
-                        />
-                        <p className="font-medium text-xs sm:text-sm">
-                          {data.price} STRK
-                        </p>
+                      <p className="font-normal text-sm sm:text-[17px] truncate">
+                        {data.name}
+                      </p>
+
+                      {/* Right side: Protocol + Verified + Price on large screens */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
+                          <p className="text-[10px] sm:text-sm text-gray-500">
+                            {data.protocol}
+                          </p>
+                          <img
+                            src="/png/verified.png"
+                            className="h-3 sm:h-[14px]"
+                            alt=""
+                          />
+                        </div>
+
+                        {/* Price next to title on large screens */}
+                        <div className="hidden sm:flex items-center gap-1 sm:gap-2 light-glassmorphism px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg">
+                          <img
+                            src="/png/strk-icon.png"
+                            className="h-3 sm:h-4 w-auto"
+                            alt=""
+                          />
+                          <p className="font-medium text-xs sm:text-sm">
+                            {data.price} STRK
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    <p className="font-normal text-sm sm:text-[17px] truncate">
-                      {data.name}
-                    </p>
+
+                    {/* Tags section */}
                     <div className="flex flex-wrap gap-1 sm:gap-2">
+                      {/* Bounty tag */}
                       <div className="flex items-center text-yellow-500 border border-yellow-500/50 rounded-lg text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 gap-1 sm:gap-2">
                         <Sparkles size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
                         <p className="hidden sm:block">Bounty</p>
                       </div>
+
+                      {/* Due date */}
                       <div className="flex items-center gap-1 sm:gap-2 light-glassmorphism text-gray-500 text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg w-max">
                         <Clock size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
                         <span className="hidden sm:inline-block">Due</span>{" "}
                         {data?.endDate ? moment(data?.endDate).fromNow() : "N/A"}
                       </div>
+
+                      {/* Price on mobile screens */}
                       <div className="flex sm:hidden items-center gap-1 sm:gap-2 light-glassmorphism text-gray-500 text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg">
                         <img
                           src="/png/strk-icon.png"
@@ -322,20 +344,27 @@ export function ListCardLightFlip({
                           {data.price} STRK
                         </p>
                       </div>
+
+                      {/* Comments */}
                       <div className="flex items-center gap-1 sm:gap-2 light-glassmorphism text-gray-500 text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg w-max">
                         <MessageSquareText size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
                         34 comments
                       </div>
+
+                      {/* Submissions */}
                       <div className="flex items-center gap-1 sm:gap-2 light-glassmorphism text-gray-500 text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg w-max">
                         <FileCheck size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
                         29 <span className="hidden sm:inline">submission</span>
                       </div>
+
+                      {/* Duration */}
                       <div className="flex items-center gap-1 sm:gap-2 light-glassmorphism text-gray-500 text-[10px] sm:text-[13px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg w-max">
                         <CalendarClock size={10} className="sm:size-[12px] inline-block mr-1 sm:mr-0" />
                         2 weeks
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
